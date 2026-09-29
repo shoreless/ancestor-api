@@ -114,7 +114,7 @@ ranks:
       [DRAFT] Fog, and then a street. The fog does not lift so much as agree, stall by stall, to be a market.
     missions:
       - {id: r1-own-hawkers, type: own, generator: street-hawkers, amount: 10}
-      - {id: r1-collect, type: collect, amount: 500}
+      - {id: r1-collect, type: collect, amount: 1500}
       - {id: r1-zoom, type: zoom, amount: 1}
 
   - rank: 2
@@ -123,8 +123,8 @@ ranks:
     story: >-
       [DRAFT] Before dawn, a voice calls the price of cakes. The mind, not quite asleep, answers it.
     missions:
-      - {id: r2-own-stalls, type: own, generator: market-stalls, amount: 5}
-      - {id: r2-collect, type: collect, amount: 5000}
+      - {id: r2-own-stalls, type: own, generator: market-stalls, amount: 10}
+      - {id: r2-collect, type: collect, amount: 6.0e4}
       - {id: r2-level, type: level_subagent, subagent: any, amount: 2}
       - {id: r2-zoom, type: zoom, amount: 3}
 
@@ -136,9 +136,9 @@ ranks:
       [DRAFT] The canal is brown and slow and full of boats. The mind has the feeling, faint and specific,
       of having stood on this bank before.
     missions:
-      - {id: r3-own-wharves, type: own, generator: canal-wharves, amount: 3}
+      - {id: r3-own-wharves, type: own, generator: canal-wharves, amount: 6}
       - {id: r3-automate, type: automate, generator: street-hawkers}
-      - {id: r3-collect, type: collect, amount: 5.0e4}
+      - {id: r3-collect, type: collect, amount: 6.0e5}
       - {id: r3-glitch, type: spot_glitch, amount: 1}
       - {id: r3-capsules, type: open_capsules, amount: 3}
 
@@ -149,10 +149,10 @@ ranks:
       [DRAFT] Lanterns come on down the length of the street. Someone calls a name the mind almost knows.
     missions:
       - {id: r4-own-night, type: own, generator: night-markets, amount: 1}
-      - {id: r4-collect, type: collect, amount: 1.0e6}
+      - {id: r4-collect, type: collect, amount: 2.0e8}
       - {id: r4-zoom, type: zoom, amount: 10}
       - {id: r4-level, type: level_subagent, subagent: any, amount: 4}
-      - {id: r4-own-stalls, type: own, generator: market-stalls, amount: 50}
+      - {id: r4-own-stalls, type: own, generator: market-stalls, amount: 80}
       - {id: r4-automate, type: automate, generator: canal-wharves}
       - {id: r4-glitch, type: spot_glitch, amount: 2}
       - {id: r4-capsules, type: open_capsules, amount: 5}
@@ -163,14 +163,14 @@ ranks:
     story: >-
       [DRAFT] The market thins toward morning. The mind feels itself surfacing, or something like it.
     missions:
-      - {id: r5-own-wharves, type: own, generator: canal-wharves, amount: 50}
-      - {id: r5-collect, type: collect, amount: 1.0e8}
+      - {id: r5-own-wharves, type: own, generator: canal-wharves, amount: 120}
+      - {id: r5-collect, type: collect, amount: 1.0e11}
       - {id: r5-glitch, type: spot_glitch, amount: 3}
       - {id: r5-level-server, type: level_subagent, subagent: tea-house-server, amount: 3}
       - {id: r5-zoom, type: zoom, amount: 20}
-      - {id: r5-own-night, type: own, generator: night-markets, amount: 10}
-      - {id: r5-own-hawkers, type: own, generator: street-hawkers, amount: 500}
-      - {id: r5-capsules, type: open_capsules, amount: 8}
+      - {id: r5-own-night, type: own, generator: night-markets, amount: 20}
+      - {id: r5-own-hawkers, type: own, generator: street-hawkers, amount: 3000}
+      - {id: r5-capsules, type: open_capsules, amount: 10}
       - {id: r5-level-any, type: level_subagent, subagent: any, amount: 5}
 
 migrations: []
