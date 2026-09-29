@@ -387,6 +387,12 @@ def build_core(c: Checker, raw: dict, era_ids: set[str]) -> dict:
             "sources": c.sourced(where, g),
         })
     lo, hi = raw.get("glitch_interval_seconds", [180, 480])
+    if not 0 < lo <= hi:
+        c.err(pid, "glitch_interval_seconds must be [low, high] with 0 < low <= high")
+    lifetime = float(raw.get("glitch_lifetime_seconds", 45))
+    chance = float(raw.get("hint_chance", 0.0))
+    if not 0 <= chance <= 1:
+        c.err(pid, "hint_chance must be between 0 and 1")
     return {
         "schemaVersion": SCHEMA_VERSION,
         "id": pid,
@@ -394,6 +400,9 @@ def build_core(c: Checker, raw: dict, era_ids: set[str]) -> dict:
         "title": raw.get("title", "Core"),
         "status": raw.get("status", "DRAFT"),
         "glitchIntervalSeconds": [lo, hi],
+        "glitchLifetimeSeconds": lifetime,
+        "glitchReward": {"clarity": big(raw.get("glitch_reward", {}).get("clarity", 0))},
+        "hintChance": chance,
         "glitches": glitches,
         "hints": [{"id": h["id"], "text": h["text"]} for h in raw.get("hints", [])],
         "sources": cited_sources(c, before),

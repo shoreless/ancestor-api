@@ -13,7 +13,12 @@ kind: core
 title: Core
 status: DRAFT
 
+# One glitch every 3–8 minutes of active play. Unreported, it fades after its lifetime. Reporting gives a small
+# Clarity reward and a log entry; hint_chance is the chance that entry also carries one of the hints below.
 glitch_interval_seconds: [180, 480]
+glitch_lifetime_seconds: 45
+glitch_reward: {clarity: 15}
+hint_chance: 0.2
 
 glitches:
   - id: glitch.wristwatch

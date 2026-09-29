@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 8,
-  "sha256": "cdec142328a0f517ca9ca42173b129e0f8ad792e2854f8adbd8e80b6af4127af",
-  "builtAt": "2026-09-29T04:18:25Z",
+  "contentVersion": 9,
+  "sha256": "dc818d36f51cd660ce803686fa1ea62533e0c8de77226831a10ac10f6c537334",
+  "builtAt": "2026-09-29T04:53:35Z",
   "packs": [
     {
       "id": "core",
       "kind": "core",
       "title": "Core",
       "file": "packs/core.json",
-      "sha256": "2068c2f26bcaedb9e38e2459acd848a74a5e1fec40c8538f1d4456eeef3381a7",
-      "bytes": 1146,
+      "sha256": "fa52be2a09543e7cbb0acc15dd37eb966b467174c6b3a18f7913c63c8ec33d3f",
+      "bytes": 1224,
       "draft": 4,
       "verified": 0
     },
