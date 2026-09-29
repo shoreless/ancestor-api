@@ -185,6 +185,7 @@ def build_ranks(c: Checker, pid: str, raw: list, gen_ids: set[str], subagent_ids
                 c.err(where, f"guarantees unknown subagent {s!r}")
         ranks.append({
             "rank": r["rank"],
+            "title": r.get("title", ""),
             "required": required,
             "guarantees": r.get("guarantees", []),
             "story": str(r["story"]).strip(),
@@ -279,6 +280,28 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
         if len(parts) not in (1, 3):
             c.err(f"{pid} look", f"{{{token}}} must be {{id}} or {{id:singular:plural}}")
 
+    caps = raw.get("capsules", {})
+    capsules = None
+    if caps:
+        def capsule(name: str) -> dict:
+            cfg = caps[name]
+            for key in ("clarity", "attention"):
+                lo, hi = cfg[key]
+                if not 0 <= lo <= hi:
+                    c.err(f"{pid} capsules.{name}", f"{key} must be [low, high] with 0 <= low <= high")
+            if not 0 <= cfg.get("card_chance", 1.0) <= 1:
+                c.err(f"{pid} capsules.{name}", "card_chance must be between 0 and 1")
+            return {"clarity": cfg["clarity"], "attention": cfg["attention"],
+                    "cards": int(cfg.get("cards", 0)), "cardChance": float(cfg.get("card_chance", 1.0))}
+        weights = caps.get("rarity_weights", {})
+        for rarity in weights:
+            if rarity not in RARITIES - {"legendary"}:
+                c.err(f"{pid} capsules", f"rarity_weights can't include {rarity!r}")
+        capsules = {"rankScale": float(caps.get("rank_scale", 1.0)), "rarityWeights": weights,
+                    "small": capsule("small"), "large": capsule("large")}
+    else:
+        c.err(pid, "needs capsules")
+
     lc = subs.get("level_cost", {})
     return {
         "schemaVersion": SCHEMA_VERSION,
@@ -294,6 +317,7 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
         "start": build_start(c, pid, raw.get("start", {}), raw["currency"]["id"], gen_ids),
         "generators": generators,
         "maxActiveMissions": raw.get("max_active_missions", 3),
+        "capsules": capsules,
         "ranks": build_ranks(c, pid, raw["ranks"], gen_ids, subagent_ids, skip_slack=True),
         "levelCost": {
             "clarityBase": big(lc.get("clarity_base", 40)),

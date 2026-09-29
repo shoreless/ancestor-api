@@ -79,14 +79,26 @@ generators:
 #   own (generator, amount) · collect (amount of currency since rank start) · zoom (amount of distinct people)
 #   level_subagent (subagent or "any", amount = level) · spot_glitch (amount) · open_capsules (amount)
 #   automate (generator)
+# title: what the player is called once they reach the rank ("...giving you the title of Light Sleeper").
 # Ranks 1–3: required == available. From rank 4: available == required + 3, so slow missions can be skipped.
 # guarantees: subagents the rank-up capsule always contains, so no required mission waits on luck
 #   (rank 2 levels a subagent and rank 3 automates hawkers, so the first card comes at rank 1).
 
 max_active_missions: 3
 
+# Capsules: each mission gives a small one, each rank-up a large one (plus that rank's guarantees).
+#   clarity, attention: [low, high], rolled uniformly, then scaled by rank_scale^(rank - 1)
+#   cards: draws from the subagent pool; card_chance is the chance each draw happens at all
+#   rarity_weights: relative odds of drawing each rarity (legendary cards come only from events)
+capsules:
+  rank_scale: 1.6
+  rarity_weights: {common: 80, rare: 20}
+  small: {clarity: [5, 15], attention: [3, 8], cards: 1, card_chance: 0.5}
+  large: {clarity: [40, 80], attention: [20, 40], cards: 2, card_chance: 1.0}
+
 ranks:
   - rank: 1
+    title: Sleepwalker
     required: 3
     guarantees: [sesame-cake-seller]
     story: >-
@@ -97,6 +109,7 @@ ranks:
       - {id: r1-zoom, type: zoom, amount: 1}
 
   - rank: 2
+    title: Daydreamer
     required: 4
     story: >-
       [DRAFT] Before dawn, a voice calls the price of cakes. The mind, not quite asleep, answers it.
@@ -107,6 +120,7 @@ ranks:
       - {id: r2-zoom, type: zoom, amount: 3}
 
   - rank: 3
+    title: Light Sleeper
     required: 5
     guarantees: [tea-house-server]
     story: >-
@@ -120,6 +134,7 @@ ranks:
       - {id: r3-capsules, type: open_capsules, amount: 3}
 
   - rank: 4
+    title: Lucid Dreamer
     required: 5
     story: >-
       [DRAFT] Lanterns come on down the length of the street. Someone calls a name the mind almost knows.
@@ -134,6 +149,7 @@ ranks:
       - {id: r4-capsules, type: open_capsules, amount: 5}
 
   - rank: 5
+    title: Waking Mind
     required: 6
     story: >-
       [DRAFT] The market thins toward morning. The mind feels itself surfacing, or something like it.

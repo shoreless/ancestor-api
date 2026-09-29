@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 3,
-  "sha256": "0b6bbed2b3d220af11b49cb520a1d4d3ba33b3784ce917fcaffd03df85fd03e0",
-  "builtAt": "2026-09-29T02:57:23Z",
+  "contentVersion": 4,
+  "sha256": "fcb16d63cc4de0a98fb6fbe4d1320913375dc4035e2ccc3c75af64f8ad067491",
+  "builtAt": "2026-09-29T03:10:48Z",
   "packs": [
     {
       "id": "core",
@@ -19,8 +19,8 @@
       "kind": "era",
       "title": "Kaifeng",
       "file": "packs/era-kaifeng-1120.json",
-      "sha256": "1f2942232e83cfea0b0115906869f6012083abab8214a0f134c1aa13d598f050",
-      "bytes": 11479,
+      "sha256": "92c22c968f5b0861267490c3622deecc8443e2322b334edc888f5e6e3c2d3d41",
+      "bytes": 11808,
       "draft": 29,
       "verified": 0
     },
@@ -29,8 +29,8 @@
       "kind": "event",
       "title": "Lantern Night",
       "file": "packs/event-lantern-night.json",
-      "sha256": "38b0826db5dc24463a2fdca0ccf685560e9cd68ac4dac8b86a2f35dd1832ae64",
-      "bytes": 3055,
+      "sha256": "c337aa88cf74be5f1571264e074005abaf9180825cae6292635fe2dbdcf450c1",
+      "bytes": 3110,
       "draft": 1,
       "verified": 0
     }
