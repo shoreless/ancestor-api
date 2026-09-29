@@ -20,10 +20,11 @@ currency:
 
 attention_per_second: 0.8
 
-# The room description under the scene, Infocom-style. {generator-id} becomes that tier's current count.
+# The room description under the scene, Infocom-style. {generator-id} becomes that tier's current count;
+# {generator-id:singular:plural} becomes the count and the noun that agrees with it ("1 hawker", "36 hawkers").
 look: >-
-  [DRAFT] Dusk. {street-hawkers} hawkers cry their wares below the Iron Pagoda. {market-stalls} stalls
-  have their awnings up, and a barge noses toward the wharf.
+  [DRAFT] Dusk. {street-hawkers:hawker cries:hawkers cry} their wares below the Iron Pagoda.
+  {market-stalls:stall has its awning:stalls have their awnings} up, and a barge noses toward the wharf.
 
 start:
   cash: 10

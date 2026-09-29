@@ -273,8 +273,11 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
 
     look = " ".join(str(raw.get("look", "")).split())
     for token in re.findall(r"\{([^}]*)\}", look):
-        if token not in gen_ids:
-            c.err(f"{pid} look", f"{{{token}}} is not a generator id")
+        parts = token.split(":")
+        if parts[0] not in gen_ids:
+            c.err(f"{pid} look", f"{{{token}}} doesn't start with a generator id")
+        if len(parts) not in (1, 3):
+            c.err(f"{pid} look", f"{{{token}}} must be {{id}} or {{id:singular:plural}}")
 
     lc = subs.get("level_cost", {})
     return {
