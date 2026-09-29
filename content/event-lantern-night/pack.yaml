@@ -10,7 +10,11 @@ title: Lantern Night
 subtitle: The Lantern Festival, Kaifeng
 status: DRAFT
 era: era-kaifeng-1120
+# No server: the event begins for each player when they first reach this main-game rank, then runs for
+# duration_days of real time. After that it becomes a memory, playable any time with no clock.
+starts_at_rank: 3
 duration_days: 5
+max_active_missions: 2
 naming_source: {source: dmhl, locator: "[VERIFY] the Lantern Festival"}
 
 currency:

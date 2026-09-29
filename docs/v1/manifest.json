@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 9,
-  "sha256": "dc818d36f51cd660ce803686fa1ea62533e0c8de77226831a10ac10f6c537334",
-  "builtAt": "2026-09-29T04:53:35Z",
+  "contentVersion": 10,
+  "sha256": "ac89e4bef79949b28b0c78e1939368f2badfca4a4bb51254b40223792ba0308e",
+  "builtAt": "2026-09-29T05:10:27Z",
   "packs": [
     {
       "id": "core",
@@ -29,8 +29,8 @@
       "kind": "event",
       "title": "Lantern Night",
       "file": "packs/event-lantern-night.json",
-      "sha256": "2a92fe4040c3eeb011c0a93689d8b11d5535f7fc2d3648eef974862ca2b34529",
-      "bytes": 3138,
+      "sha256": "ae41c2a7408c11e9d6cd509abcf7c182517b3713150413b7d30ea8522649b533",
+      "bytes": 3177,
       "draft": 1,
       "verified": 0
     }

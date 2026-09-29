@@ -346,6 +346,8 @@ def build_event(c: Checker, raw: dict, era_ids: set[str]) -> dict:
     generators = build_generators(c, pid, raw["generators"], set())
     gen_ids = {g["id"] for g in generators}
     reward = build_subagent(c, pid, raw["reward"]["subagent"], gen_ids)
+    if not 4 <= raw.get("duration_days", 5) <= 7:
+        c.err(pid, "duration_days should be 4–7 (spec §6.3)")
     if reward["rarity"] != "legendary":
         c.err(pid, "the event reward must be a legendary subagent")
     return {
@@ -357,6 +359,8 @@ def build_event(c: Checker, raw: dict, era_ids: set[str]) -> dict:
         "status": raw.get("status", "DRAFT"),
         "era": raw["era"],
         "durationDays": raw.get("duration_days", 5),
+        "startsAtRank": raw.get("starts_at_rank", 1),
+        "maxActiveMissions": raw.get("max_active_missions", 2),
         "namingSource": naming,
         "currency": {"id": raw["currency"]["id"], "name": raw["currency"]["name"]},
         "attentionPerSecond": float(raw["attention_per_second"]),
