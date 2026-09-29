@@ -84,6 +84,7 @@ function render() {
   const out = [];
   for (const p of packs) {
     out.push(`<h2>${esc(p.title)}${p.subtitle ? ` <span class="dim">· ${esc(p.subtitle)}</span>` : ""}</h2><p class="dim">${esc(p.id)} · ${p.kind}</p>`);
+    if (p.look) out.push(`<p class="story">${esc(p.look)}</p>`);
     if (p.kind === "era" || p.kind === "event") {
       out.push(generators(p), ranks(p));
     }

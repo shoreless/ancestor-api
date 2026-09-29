@@ -20,6 +20,11 @@ currency:
 
 attention_per_second: 0.8
 
+# The room description under the scene, Infocom-style. {generator-id} becomes that tier's current count.
+look: >-
+  [DRAFT] Dusk. {street-hawkers} hawkers cry their wares below the Iron Pagoda. {market-stalls} stalls
+  have their awnings up, and a barge noses toward the wharf.
+
 start:
   cash: 10
   attention: 5

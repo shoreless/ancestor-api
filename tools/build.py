@@ -14,6 +14,7 @@ Output:
 
 import hashlib
 import json
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -270,6 +271,11 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
         if not any(f["kind"] == "today" and o["id"] in f["appliesTo"] for f in fragments):
             c.err(f"{pid} occupation {o['id']}", "has no 'today' fragment, so zoom can't resolve anyone")
 
+    look = " ".join(str(raw.get("look", "")).split())
+    for token in re.findall(r"\{([^}]*)\}", look):
+        if token not in gen_ids:
+            c.err(f"{pid} look", f"{{{token}}} is not a generator id")
+
     lc = subs.get("level_cost", {})
     return {
         "schemaVersion": SCHEMA_VERSION,
@@ -281,6 +287,7 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
         "namingSource": naming,
         "currency": {"id": raw["currency"]["id"], "name": raw["currency"]["name"]},
         "attentionPerSecond": float(raw["attention_per_second"]),
+        "look": look,
         "start": build_start(c, pid, raw.get("start", {}), raw["currency"]["id"], gen_ids),
         "generators": generators,
         "maxActiveMissions": raw.get("max_active_missions", 3),
