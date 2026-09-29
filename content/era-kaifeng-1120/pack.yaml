@@ -30,7 +30,7 @@ look: >-
 # with cash × cash_growth_per_rank^(rank − 1), so rebuilding is noticeably faster each time (spec §3.5).
 start:
   cash: 10
-  cash_growth_per_rank: 8
+  cash_growth_per_rank: 5
   attention: 5
   generators: {street-hawkers: 1}
 

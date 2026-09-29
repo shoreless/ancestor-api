@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "contentVersion": 7,
-  "sha256": "8cf0b26073e902a898f16cb5da13397f2cc0f5a67a2cc10d05e91fc17ec313ff",
-  "builtAt": "2026-09-29T04:18:01Z",
+  "contentVersion": 8,
+  "sha256": "cdec142328a0f517ca9ca42173b129e0f8ad792e2854f8adbd8e80b6af4127af",
+  "builtAt": "2026-09-29T04:18:25Z",
   "packs": [
     {
       "id": "core",
@@ -19,7 +19,7 @@
       "kind": "era",
       "title": "Kaifeng",
       "file": "packs/era-kaifeng-1120.json",
-      "sha256": "859fb9cc5dd997741cd9fdef032e770fc8a123263dafbbad1409c330b102a49b",
+      "sha256": "8f414eae6396d338a1a33cf9216117b852115a58cf37fa6419916a01f630f708",
       "bytes": 11880,
       "draft": 29,
       "verified": 0
