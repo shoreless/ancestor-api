@@ -225,7 +225,11 @@ def build_subagent(c: Checker, pid: str, s: dict, gen_ids: set[str]) -> dict:
 def cited_sources(c: Checker, before: set[str]) -> dict:
     """The sources this pack cites, so each pack stands alone."""
     ids = c.cited - before
-    return {sid: {k: c.sources[sid].get(k) for k in ("title", "author", "year", "url", "note")} for sid in sorted(ids)}
+    def fields(src: dict) -> dict:
+        out = {k: src.get(k) for k in ("title", "author", "url", "note")}
+        out["year"] = str(src["year"]) if src.get("year") is not None else None
+        return out
+    return {sid: fields(c.sources[sid]) for sid in sorted(ids)}
 
 
 def build_era(c: Checker, folder: Path, raw: dict) -> dict:
