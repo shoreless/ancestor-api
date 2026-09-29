@@ -81,8 +81,9 @@ generators:
 #   automate (generator)
 # title: what the player is called once they reach the rank ("...giving you the title of Light Sleeper").
 # Ranks 1–3: required == available. From rank 4: available == required + 3, so slow missions can be skipped.
-# guarantees: subagents the rank-up capsule always contains, so no required mission waits on luck
-#   (rank 2 levels a subagent and rank 3 automates hawkers, so the first card comes at rank 1).
+# guarantees: cards the rank-up capsule always contains, so no required mission waits on luck. Rank 2 levels a
+#   subagent and rank 3 automates hawkers, so rank 1 gives the sesame-cake seller twice: once to find her, once
+#   as the spare card her first level needs.
 
 max_active_missions: 3
 
@@ -105,7 +106,7 @@ ranks:
   - rank: 1
     title: Sleepwalker
     required: 3
-    guarantees: [sesame-cake-seller]
+    guarantees: [sesame-cake-seller, sesame-cake-seller]
     story: >-
       [DRAFT] Fog, and then a street. The fog does not lift so much as agree, stall by stall, to be a market.
     missions:
