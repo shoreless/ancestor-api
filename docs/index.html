@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ancestor-api</title>
+<meta name="description" content="Content for the Ancestor Android game: every pack, its people and its sources, for review.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=VT323&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0E0C0A;--panel:#1A1712;--line:#3B342A;--text:#EADFC8;--dim:#A89C85;--amber:#F2B84B;--jade:#3FA37F;--red:#D9503A}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:14px/1.6 "IBM Plex Mono",monospace}
+header{position:sticky;top:0;background:var(--amber);color:var(--bg);font:20px/1 VT323,monospace;padding:8px 16px;display:flex;justify-content:space-between;gap:12px;z-index:1}
+main{max-width:860px;margin:0 auto;padding:16px}
+h1,h2,h3{font-family:VT323,monospace;font-weight:400;color:var(--amber);margin:24px 0 8px}
+h1{font-size:34px}h2{font-size:28px;border-bottom:1px solid var(--line);padding-bottom:4px}h3{font-size:22px}
+a{color:var(--amber)}
+p{margin:6px 0}
+.dim{color:var(--dim)}
+.prompt{font:22px VT323,monospace;color:var(--amber)}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--dim);font-weight:400}
+.num{text-align:right;font-variant-numeric:tabular-nums}
+.badge{display:inline-block;font:16px/1 VT323,monospace;padding:2px 6px;margin-right:6px}
+.DRAFT{background:#D9A35A;color:var(--bg)}.VERIFIED{background:var(--jade);color:var(--bg)}
+.card{background:var(--panel);border:1px solid var(--line);padding:10px 12px;margin:8px 0}
+.src{font-size:12px;color:var(--dim)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.filters button{font:18px VT323,monospace;background:transparent;color:var(--text);border:1px solid var(--line);padding:4px 12px;cursor:pointer;min-height:36px}
+.filters button[aria-pressed=true]{background:var(--amber);color:var(--bg);border-color:var(--amber)}
+.story{font-style:italic}
+.hint{color:#FF7CC0}
+@media (max-width:600px){main{padding:12px 16px}td,th{padding:6px 4px}}
+</style>
+</head>
+<body>
+<header><span>ANCESTOR-API</span><span id="ver">LOADING…</span></header>
+<main>
+<p class="prompt">&gt; EXAMINE CONTENT</p>
+<p>Every pack the Ancestor app loads, laid out for review. Nothing ships as fact until it is marked
+<span class="badge VERIFIED">VERIFIED</span> with a source. Raw JSON: <a href="v1/manifest.json">v1/manifest.json</a>.</p>
+<div class="filters" role="group" aria-label="Show">
+<button type="button" data-f="all" aria-pressed="true">ALL</button>
+<button type="button" data-f="DRAFT" aria-pressed="false">DRAFT ONLY</button>
+<button type="button" data-f="VERIFIED" aria-pressed="false">VERIFIED ONLY</button>
+</div>
+<div id="out"><p class="dim">Loading packs…</p></div>
+</main>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let filter = "all";
+let packs = [];
+
+function srcs(item, pack) {
+  const refs = item.sources || [];
+  if (!refs.length) return `<div class="src">No source yet.</div>`;
+  return refs.map(r => {
+    const s = pack.sources[r.source] || {};
+    return `<div class="src">Source: ${esc(s.title || r.source)}${s.author ? ", " + esc(s.author) : ""} · ${esc(r.locator)}</div>`;
+  }).join("");
+}
+const shown = item => filter === "all" || item.status === filter;
+function statused(item, pack, body) {
+  if (!shown(item)) return "";
+  return `<div class="card"><span class="badge ${item.status}">${item.status}</span>${body}${srcs(item, pack)}</div>`;
+}
+
+function generators(p) {
+  return `<h3>Generator chain</h3><table><tr><th>Tier</th><th>Generator</th><th class="num">Base cost</th><th class="num">Growth</th><th class="num">Cycle (s)</th><th class="num">Wakes at</th><th>People</th></tr>` +
+    p.generators.map(g => `<tr><td>${g.tier}</td><td>${esc(g.name)}</td><td class="num">${g.baseCost}</td><td class="num">×${g.costGrowth}</td><td class="num">${g.cycleSeconds}</td><td class="num">${g.unlockAt ?? "—"}</td><td>${esc(g.people.join(", "))}</td></tr>`).join("") + `</table>`;
+}
+function ranks(p) {
+  return `<h3>Ranks</h3>` + p.ranks.map(r => `<div class="card"><b>Rank ${r.rank}</b> · ${r.required} of ${r.missions.length} missions${r.guarantees?.length ? ` · capsule guarantees ${esc(r.guarantees.join(", "))}` : ""}
+    <p class="story">${esc(r.story)}</p><p class="dim">${r.missions.map(m => esc(`${m.type} ${m.generator || m.subagent || ""} ${m.type === "automate" ? "" : m.amount}`.replace(/\s+/g, " "))).join(" · ")}</p></div>`).join("");
+}
+function subagents(list, p) {
+  return list.map(s => `<h3>${esc(s.name)} <span class="dim">· ${s.rarity} · ${esc(s.effect.type)} ${esc(s.effect.generator || s.effect.scope || "")}</span></h3>` +
+    s.pages.map(pg => statused(pg, p, `<b>Lv ${pg.level} · ${esc(pg.title)}</b><p>${esc(pg.text)}</p>`)).join("")).join("");
+}
+
+function render() {
+  const out = [];
+  for (const p of packs) {
+    out.push(`<h2>${esc(p.title)}${p.subtitle ? ` <span class="dim">· ${esc(p.subtitle)}</span>` : ""}</h2><p class="dim">${esc(p.id)} · ${p.kind}</p>`);
+    if (p.kind === "era" || p.kind === "event") {
+      out.push(generators(p), ranks(p));
+    }
+    if (p.kind === "era") {
+      out.push(`<h3>Subagents</h3>`, subagents(p.subagents, p));
+      out.push(`<h3>People</h3>`);
+      for (const o of p.occupations) {
+        out.push(`<p><b>${esc(o.name)}</b> <span class="dim">age ${o.age[0]}–${o.age[1]}</span></p>`);
+        out.push(p.fragments.filter(f => f.appliesTo.includes(o.id)).map(f => statused(f, p, `<span class="dim">${f.kind}</span> ${esc(f.text)}`)).join(""));
+      }
+      out.push(`<p><b>Any occupation</b></p>`, p.fragments.filter(f => !f.appliesTo.length).map(f => statused(f, p, `<span class="dim">${f.kind}</span> ${esc(f.text)}`)).join(""));
+    }
+    if (p.kind === "event") out.push(`<h3>Reward</h3>`, subagents([p.reward], p));
+    if (p.kind === "core") {
+      out.push(`<h3>Glitches</h3>`, p.glitches.map(g => statused(g, p, `<b>${esc(g.object)}</b><p>${esc(g.why)}</p>`)).join(""));
+      if (filter === "all") out.push(`<h3>Hints</h3>`, p.hints.map(h => `<p class="hint">${esc(h.text)}</p>`).join(""));
+    }
+  }
+  document.getElementById("out").innerHTML = out.join("");
+}
+
+document.querySelectorAll(".filters button").forEach(b => b.addEventListener("click", () => {
+  filter = b.dataset.f;
+  document.querySelectorAll(".filters button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  render();
+}));
+
+(async () => {
+  try {
+    const m = await (await fetch("v1/manifest.json", {cache: "no-cache"})).json();
+    const draft = m.packs.reduce((n, p) => n + p.draft, 0), verified = m.packs.reduce((n, p) => n + p.verified, 0);
+    document.getElementById("ver").textContent = `V${m.contentVersion} · ${verified} VERIFIED · ${draft} DRAFT`;
+    packs = await Promise.all(m.packs.map(async e => (await fetch("v1/" + e.file)).json()));
+    const order = {era: 0, event: 1, core: 2};
+    packs.sort((a, b) => order[a.kind] - order[b.kind]);
+    render();
+  } catch (e) {
+    document.getElementById("out").innerHTML = `<p>It is too dark to see. (${esc(e.message)})</p>`;
+  }
+})();
+</script>
+</body>
+</html>

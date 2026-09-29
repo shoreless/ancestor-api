@@ -1,0 +1,46 @@
+# Core pack: shared across eras. ALL DRAFT.
+#
+# glitches: anachronisms placed in the scene or a line of text. Players report them for a reward.
+#   object:  what appears ("a wristwatch")
+#   why:     the glitch-log explanation; it is a factual claim, so it needs a source before VERIFIED
+#   eras:    era ids it may appear in; empty means any
+#
+# hints: rare, ambiguous glitch-log lines that brush against the simulation thread. Not history,
+# so no sources; keep them few.
+
+id: core
+kind: core
+title: Core
+status: DRAFT
+
+glitch_interval_seconds: [180, 480]
+
+glitches:
+  - id: glitch.wristwatch
+    object: a wristwatch
+    why: "[DRAFT] Wristwatches appear only centuries later."
+    status: DRAFT
+    sources: []
+  - id: glitch.chili
+    object: a basket of chili peppers
+    why: "[DRAFT] Chili peppers came from the Americas and reached China only in the late Ming."
+    status: DRAFT
+    sources: []
+  - id: glitch.potatoes
+    object: a sack of potatoes
+    why: "[DRAFT] Potatoes are an American crop, unknown in China for centuries yet."
+    status: DRAFT
+    sources: []
+  - id: glitch.bicycle
+    object: a bicycle leaning on a post
+    why: "[DRAFT] The bicycle is a nineteenth-century European invention."
+    status: DRAFT
+    sources: []
+
+hints:
+  - id: hint.stall-before
+    text: "you have stood at this stall before. the cakes were warmer then."
+  - id: hint.same-face
+    text: "the porter has the boatman's face. the mind looks away before it can be sure."
+  - id: hint.counting
+    text: "someone is counting. not the hawkers. something further up."

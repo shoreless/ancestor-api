@@ -1,0 +1,89 @@
+# Subagents: ordinary people of the era, never famous figures. They persist through sleep. ALL DRAFT.
+#   rarity:  common | rare | legendary (legendary is event-only)
+#   effect:  automate (generator, speed_per_level) | multiply (scope: era, per_level) | bonus_chance (per_level)
+#   level_cost: Clarity = clarity_base * clarity_growth^(level-1); cards = cards_base * 2^(level-2) from level 2
+#   pages:   one life page per level, revealed on reaching it. Each needs sources before it can be VERIFIED.
+
+level_cost:
+  clarity_base: 40
+  clarity_growth: 1.8
+  cards_base: 1
+
+subagents:
+  - id: sesame-cake-seller
+    name: The sesame-cake seller
+    rarity: common
+    effect: {type: automate, generator: street-hawkers, speed_per_level: 0.12}
+    pages:
+      - level: 1
+        title: Ingredients
+        status: DRAFT
+        text: "[DRAFT] What goes into the cakes, where she buys it, and what it costs this week."
+        sources: [{source: dmhl, locator: "[VERIFY] food stalls and cake sellers"}]
+      - level: 2
+        title: The pre-dawn start
+        status: DRAFT
+        text: "[DRAFT] When she rises, what she carries to the stall, and who she passes on the way."
+        sources: [{source: dmhl, locator: "[VERIFY] the morning markets"}]
+      - level: 3
+        title: What a day earns
+        status: DRAFT
+        text: "[DRAFT] A good day's takings in strings of cash, and what that buys."
+        sources: []
+      - level: 4
+        title: Family
+        status: DRAFT
+        text: "[DRAFT] Who she feeds at home, and who helps at the stall."
+        sources: []
+
+  - id: barge-tracker
+    name: The barge tracker on the Bian canal
+    rarity: common
+    effect: {type: automate, generator: canal-wharves, speed_per_level: 0.12}
+    pages:
+      - level: 1
+        title: The work
+        status: DRAFT
+        text: "[DRAFT] Hauling a grain barge upstream on a towrope: the rope, the path, the weight."
+        sources: [{source: qingming, locator: "[VERIFY] trackers hauling boats near the bridge"}]
+      - level: 2
+        title: Pay
+        status: DRAFT
+        text: "[DRAFT] How trackers were paid, and by whom."
+        sources: []
+      - level: 3
+        title: Seasons
+        status: DRAFT
+        text: "[DRAFT] What the canal is like in flood, in drought, and when it freezes."
+        sources: []
+      - level: 4
+        title: Songs
+        status: DRAFT
+        text: "[DRAFT] Work songs sung to keep the pull in time."
+        sources: []
+
+  - id: tea-house-server
+    name: The tea-house server
+    rarity: rare
+    effect: {type: multiply, scope: era, per_level: 0.10}
+    pages:
+      - level: 1
+        title: Customers
+        status: DRAFT
+        text: "[DRAFT] Who comes in, and when: merchants, officials' clerks, neighbours."
+        sources: [{source: dmhl, locator: "[VERIFY] tea houses"}]
+      - level: 2
+        title: Gossip
+        status: DRAFT
+        text: "[DRAFT] What people are talking about this month."
+        sources: []
+      - level: 3
+        title: Hours
+        status: DRAFT
+        text: "[DRAFT] When the tea house opens and closes, and when she eats."
+        sources: []
+      - level: 4
+        title: The price of tea
+        status: DRAFT
+        text: "[DRAFT] What a bowl costs, and what the good tea costs."
+        sources: []

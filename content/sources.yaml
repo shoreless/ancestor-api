@@ -1,0 +1,28 @@
+# Every source a fragment may cite. Fragments cite {source: <id>, locator: "..."}.
+#   title, author, year: as the source gives them; year is a number or a short string ("c. 1147").
+#   url: a stable link to a catalogue record or edition, when one exists.
+#   note: what this source is good for, and its limits.
+
+dmhl:
+  title: "Dongjing Meng Hua Lu (東京夢華錄, Dreams of Splendour of the Eastern Capital)"
+  author: Meng Yuanlao (孟元老)
+  year: "preface c. 1147"
+  note: >-
+    A memoir of Kaifeng's daily life written after the city fell to the Jin in 1127. The core source for
+    markets, trades, food and festivals. Pick one edition or translation and cite it consistently.
+
+qingming:
+  title: "Along the River During the Qingming Festival (清明上河圖)"
+  author: attributed to Zhang Zeduan (張擇端)
+  year: "12th century"
+  note: >-
+    Handscroll, Palace Museum, Beijing. The visual reference for streets, trades, boats and crowds.
+    Cite by scroll section.
+
+gernet:
+  title: "Daily Life in China on the Eve of the Mongol Invasion, 1250–1276"
+  author: Jacques Gernet
+  year: 1962
+  note: >-
+    Social history of Southern Song Hangzhou, not Kaifeng. Use only for things that plausibly carried
+    over, and say so in the fragment.

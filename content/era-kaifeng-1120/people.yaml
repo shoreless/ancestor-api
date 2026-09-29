@@ -1,0 +1,92 @@
+# People: the curated, sourced fragments zoom-in assembles individuals from. Never free-generated. ALL DRAFT.
+#
+# A zoomed person = one name + an age in the occupation's range + one "today" line for their occupation
+# + one detail (food, worry, pleasure or weather). {name} in text is replaced with their name.
+#
+#   kind:        name | today | food | worry | pleasure | weather
+#   applies_to:  occupation ids; empty means any occupation
+#   sources:     required for VERIFIED, except names, which may lean on the pack's naming_source
+#
+# Volume target before VERIFIED ships (so repeats don't break the illusion in the journal):
+#   40+ names, 8+ "today" lines per occupation, 30+ details.
+
+occupations:
+  - {id: hawker, name: Street hawker, age: [14, 64]}
+  - {id: stallholder, name: Stallholder, age: [20, 68]}
+  - {id: porter, name: Porter, age: [16, 50]}
+  - {id: boatman, name: Boatman, age: [16, 60]}
+  - {id: night-crowd, name: Night-market goer, age: [12, 75]}
+
+fragments:
+  # Names. [VERIFY] Commoners were often known by surname plus birth order (e.g. "Second Wang").
+  - {id: kaifeng.name.wang-er, kind: name, text: Wang Er, status: DRAFT}
+  - {id: kaifeng.name.zhang-san, kind: name, text: Zhang San, status: DRAFT}
+  - {id: kaifeng.name.li-si, kind: name, text: Li Si, status: DRAFT}
+  - {id: kaifeng.name.liu-da, kind: name, text: Liu Da, status: DRAFT}
+  - {id: kaifeng.name.chen-qi, kind: name, text: Chen Qi, status: DRAFT}
+  - {id: kaifeng.name.zhao-wu, kind: name, text: Zhao Wu, status: DRAFT}
+
+  # Today
+  - id: kaifeng.today.hawker.sold-out
+    kind: today
+    applies_to: [hawker]
+    text: "Up before the fourth watch to fire the griddle; sold out before the morning drum."
+    status: DRAFT
+    sources: [{source: dmhl, locator: "[VERIFY] watches, drums and the morning markets"}]
+  - id: kaifeng.today.hawker.calling
+    kind: today
+    applies_to: [hawker]
+    text: "Has walked the same lane since dawn, calling the price in a voice everyone knows."
+    status: DRAFT
+    sources: [{source: dmhl, locator: "[VERIFY] hawkers' street cries"}]
+  - id: kaifeng.today.stallholder.awning
+    kind: today
+    applies_to: [stallholder]
+    text: "Put the awning up twice this morning; the wind took it the first time."
+    status: DRAFT
+    sources: [{source: qingming, locator: "[VERIFY] stall awnings"}]
+  - id: kaifeng.today.porter.grain
+    kind: today
+    applies_to: [porter]
+    text: "Carried sacks of grain from a barge to a warehouse until the light went."
+    status: DRAFT
+    sources: [{source: qingming, locator: "[VERIFY] porters unloading at the wharf"}]
+  - id: kaifeng.today.boatman.bridge
+    kind: today
+    applies_to: [boatman]
+    text: "Lowered the mast to pass under the bridge, to shouting from the crowd above."
+    status: DRAFT
+    sources: [{source: qingming, locator: "[VERIFY] the boat at the Rainbow Bridge"}]
+  - id: kaifeng.today.crowd.lanterns
+    kind: today
+    applies_to: [night-crowd]
+    text: "Came out after dark with a cousin to eat, look at the lanterns and be seen."
+    status: DRAFT
+    sources: [{source: dmhl, locator: "[VERIFY] the night markets"}]
+
+  # Details
+  - id: kaifeng.worry.flour
+    kind: worry
+    text: "Flour is dear this week, and the barges from the south are late."
+    status: DRAFT
+    sources: []
+  - id: kaifeng.worry.rent
+    kind: worry
+    text: "The rent is due, and the landlord's man has already been round once."
+    status: DRAFT
+    sources: []
+  - id: kaifeng.pleasure.storyteller
+    kind: pleasure
+    text: "Plans to spend the evening at the entertainment quarter, listening to a storyteller."
+    status: DRAFT
+    sources: [{source: dmhl, locator: "[VERIFY] the entertainment quarters (wazi)"}]
+  - id: kaifeng.food.noodles
+    kind: food
+    text: "Ate a bowl of noodles standing up, between customers."
+    status: DRAFT
+    sources: []
+  - id: kaifeng.weather.dust
+    kind: weather
+    text: "The wind is up from the north, and there is dust in everything."
+    status: DRAFT
+    sources: []
