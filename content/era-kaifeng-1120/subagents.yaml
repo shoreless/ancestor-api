@@ -87,3 +87,55 @@ subagents:
         status: DRAFT
         text: "[DRAFT] What a bowl costs, and what the good tea costs."
         sources: []
+
+  - id: noodle-stall-keeper
+    name: The noodle-stall keeper
+    rarity: common
+    effect: {type: automate, generator: market-stalls, speed_per_level: 0.12}
+    pages:
+      - level: 1
+        title: The broth
+        status: DRAFT
+        text: "[DRAFT] What goes in the pot, and how long it has been going."
+        sources: [{source: dmhl, locator: "[VERIFY] noodle and soup shops"}]
+      - level: 2
+        title: Regulars
+        status: DRAFT
+        text: "[DRAFT] Who eats here every day, and what they order."
+        sources: []
+      - level: 3
+        title: Rent and rivals
+        status: DRAFT
+        text: "[DRAFT] What the stall costs, and the shop across the lane."
+        sources: []
+      - level: 4
+        title: Closing up
+        status: DRAFT
+        text: "[DRAFT] What happens to the stall at night."
+        sources: []
+
+  - id: storyteller
+    name: The storyteller of the entertainment quarter
+    rarity: common
+    effect: {type: automate, generator: night-markets, speed_per_level: 0.12}
+    pages:
+      - level: 1
+        title: The stage
+        status: DRAFT
+        text: "[DRAFT] Where she tells her stories, and to whom."
+        sources: [{source: dmhl, locator: "[VERIFY] the entertainment quarters (wazi)"}]
+      - level: 2
+        title: The tales
+        status: DRAFT
+        text: "[DRAFT] Which stories the crowd asks for, and which she prefers."
+        sources: []
+      - level: 3
+        title: The takings
+        status: DRAFT
+        text: "[DRAFT] How a storyteller is paid."
+        sources: []
+      - level: 4
+        title: After the lamps
+        status: DRAFT
+        text: "[DRAFT] Where she goes when the quarter closes."
+        sources: []

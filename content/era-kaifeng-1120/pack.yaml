@@ -82,11 +82,12 @@ generators:
 #   own (generator, amount) · collect (amount of currency since rank start) · zoom (amount of distinct people)
 #   level_subagent (subagent or "any", amount = level) · spot_glitch (amount) · open_capsules (amount)
 #   automate (generator)
+#   gives: cards the task's chest always holds. Early tasks hand out each tier's automating subagent, so tapping
+#   is only needed for a tier's first minute (the AdVenture Ages rhythm).
 # title: what the player is called once they reach the rank ("...giving you the title of Light Sleeper").
 # Ranks 1–3: required == available. From rank 4: available == required + 3, so slow missions can be skipped.
 # guarantees: cards the rank-up capsule always contains, so no required mission waits on luck. Rank 2 levels a
-#   subagent and rank 3 automates hawkers, so rank 1 gives the sesame-cake seller twice: once to find her, once
-#   as the spare card her first level needs.
+#   subagent, so rank 1's rank-up gives the sesame-cake seller's spare card (her first card comes from a task).
 
 max_active_missions: 3
 
@@ -108,21 +109,23 @@ capsules:
 ranks:
   - rank: 1
     title: Sleepwalker
-    required: 3
-    guarantees: [sesame-cake-seller, sesame-cake-seller]
+    required: 4
+    guarantees: [sesame-cake-seller]
     story: >-
       [DRAFT] Fog, and then a street. The fog does not lift so much as agree, stall by stall, to be a market.
     missions:
+      - {id: r1-first-hawkers, type: own, generator: street-hawkers, amount: 3, gives: [sesame-cake-seller]}
       - {id: r1-own-hawkers, type: own, generator: street-hawkers, amount: 10}
-      - {id: r1-collect, type: collect, amount: 1500}
+      - {id: r1-collect, type: collect, amount: 6000}
       - {id: r1-zoom, type: zoom, amount: 1}
 
   - rank: 2
     title: Daydreamer
-    required: 4
+    required: 5
     story: >-
       [DRAFT] Before dawn, a voice calls the price of cakes. The mind, not quite asleep, answers it.
     missions:
+      - {id: r2-first-stall, type: own, generator: market-stalls, amount: 1, gives: [noodle-stall-keeper]}
       - {id: r2-own-stalls, type: own, generator: market-stalls, amount: 10}
       - {id: r2-collect, type: collect, amount: 6.0e4}
       - {id: r2-level, type: level_subagent, subagent: any, amount: 2}
@@ -136,8 +139,8 @@ ranks:
       [DRAFT] The canal is brown and slow and full of boats. The mind has the feeling, faint and specific,
       of having stood on this bank before.
     missions:
+      - {id: r3-first-wharf, type: own, generator: canal-wharves, amount: 1, gives: [barge-tracker]}
       - {id: r3-own-wharves, type: own, generator: canal-wharves, amount: 6}
-      - {id: r3-automate, type: automate, generator: street-hawkers}
       - {id: r3-collect, type: collect, amount: 6.0e5}
       - {id: r3-glitch, type: spot_glitch, amount: 1}
       - {id: r3-capsules, type: open_capsules, amount: 3}
@@ -148,12 +151,12 @@ ranks:
     story: >-
       [DRAFT] Lanterns come on down the length of the street. Someone calls a name the mind almost knows.
     missions:
-      - {id: r4-own-night, type: own, generator: night-markets, amount: 1}
+      - {id: r4-own-night, type: own, generator: night-markets, amount: 1, gives: [storyteller]}
       - {id: r4-collect, type: collect, amount: 2.0e8}
       - {id: r4-zoom, type: zoom, amount: 10}
       - {id: r4-level, type: level_subagent, subagent: any, amount: 4}
       - {id: r4-own-stalls, type: own, generator: market-stalls, amount: 80}
-      - {id: r4-automate, type: automate, generator: canal-wharves}
+      - {id: r4-own-wharves, type: own, generator: canal-wharves, amount: 30}
       - {id: r4-glitch, type: spot_glitch, amount: 2}
       - {id: r4-capsules, type: open_capsules, amount: 5}
 
@@ -164,7 +167,7 @@ ranks:
       [DRAFT] The market thins toward morning. The mind feels itself surfacing, or something like it.
     missions:
       - {id: r5-own-wharves, type: own, generator: canal-wharves, amount: 120}
-      - {id: r5-collect, type: collect, amount: 1.0e11}
+      - {id: r5-collect, type: collect, amount: 1.5e12}
       - {id: r5-glitch, type: spot_glitch, amount: 3}
       - {id: r5-level-server, type: level_subagent, subagent: tea-house-server, amount: 3}
       - {id: r5-zoom, type: zoom, amount: 20}

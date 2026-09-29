@@ -169,12 +169,16 @@ def build_ranks(c: Checker, pid: str, raw: list, gen_ids: set[str], subagent_ids
                 c.err(mw, f"unknown subagent {m.get('subagent')!r}")
             if m["type"] != "automate" and float(m.get("amount", 0)) <= 0:
                 c.err(mw, "amount must be positive")
+            for g in m.get("gives", []):
+                if g not in subagent_ids:
+                    c.err(mw, f"gives unknown subagent {g!r}")
             missions.append({
                 "id": m["id"],
                 "type": m["type"],
                 "generator": m.get("generator"),
                 "subagent": m.get("subagent"),
                 "amount": big(m.get("amount", 1)),
+                "gives": m.get("gives", []),
             })
         available = len(missions)
         required = r["required"]
