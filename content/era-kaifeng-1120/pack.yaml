@@ -86,6 +86,11 @@ generators:
 
 max_active_missions: 3
 
+# Zoom-in: noticing one person in a crowd. A small Clarity reward the first time each person is seen; the reward is
+# kept small on purpose so zooming feels like noticing, never grinding.
+zoom:
+  clarity: 2
+
 # Capsules: each mission gives a small one, each rank-up a large one (plus that rank's guarantees).
 #   clarity, attention: [low, high], rolled uniformly, then scaled by rank_scale^(rank - 1)
 #   cards: draws from the subagent pool; card_chance is the chance each draw happens at all

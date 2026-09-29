@@ -318,6 +318,7 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
         "generators": generators,
         "maxActiveMissions": raw.get("max_active_missions", 3),
         "capsules": capsules,
+        "zoom": {"clarity": big(raw.get("zoom", {}).get("clarity", 0))},
         "ranks": build_ranks(c, pid, raw["ranks"], gen_ids, subagent_ids, skip_slack=True),
         "levelCost": {
             "clarityBase": big(lc.get("clarity_base", 40)),
