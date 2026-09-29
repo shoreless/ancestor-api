@@ -136,8 +136,12 @@ def build_start(c: Checker, pid: str, raw: dict, currency_id: str, gen_ids: set[
     for gid in raw.get("generators", {}):
         if gid not in gen_ids:
             c.err(pid, f"start lists unknown generator {gid!r}")
+    growth = float(raw.get(f"{currency_id}_growth_per_rank", 1.0))
+    if growth < 1:
+        c.err(pid, f"start.{currency_id}_growth_per_rank must be at least 1")
     return {
         "currency": big(raw.get(currency_id, 0)),
+        "currencyGrowthPerRank": growth,
         "attention": big(raw.get("attention", 0)),
         "generators": {k: big(v) for k, v in raw.get("generators", {}).items()},
     }

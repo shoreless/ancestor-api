@@ -26,8 +26,11 @@ look: >-
   [DRAFT] Dusk. {street-hawkers:hawker cries:hawkers cry} their wares below the Iron Pagoda.
   {market-stalls:stall has its awning:stalls have their awnings} up, and a barge noses toward the wharf.
 
+# How each day begins, on first launch and after every sleep. Cash resets on sleep, but each rank's day starts
+# with cash × cash_growth_per_rank^(rank − 1), so rebuilding is noticeably faster each time (spec §3.5).
 start:
   cash: 10
+  cash_growth_per_rank: 8
   attention: 5
   generators: {street-hawkers: 1}
 
