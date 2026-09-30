@@ -91,6 +91,10 @@ attention_upgrades:
   cost_growth: 4
   per_level: 0.5
 
+# Remembered people write back (spec v2 §14.2): the first letter some hours after someone is kept, then one
+# every few hours, one waiting at a time. Clarity per letter is times the rank; each also brings a small chest.
+follow_ups: {first_after_minutes: 120, every_minutes: [180, 480], clarity: 20}
+
 zoom:
   clarity: 2
 

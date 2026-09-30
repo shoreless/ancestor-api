@@ -90,3 +90,20 @@ fragments:
     text: "The wind is up from the north, and there is dust in everything."
     status: DRAFT
     sources: []
+
+  # Follow-ups (spec v2 §14.2): an ordinary next day, true to the memoir's city. [VERIFY] against the Dongjing Meng Hua Lu.
+  - {id: kaifeng.later.hawker, kind: later, applies_to: [hawker], status: DRAFT,
+     sources: [{source: dmhl, locator: "[VERIFY] daily life of this trade"}],
+     text: "Called the price of cakes again the next morning, before the drum, in the same voice everyone knows."}
+  - {id: kaifeng.later.stallholder, kind: later, applies_to: [stallholder], status: DRAFT,
+     sources: [{source: dmhl, locator: "[VERIFY] daily life of this trade"}],
+     text: "Kept the awning up all day this time; a neighbour lent a stone to weigh it down."}
+  - {id: kaifeng.later.porter, kind: later, applies_to: [porter], status: DRAFT,
+     sources: [{source: dmhl, locator: "[VERIFY] daily life of this trade"}],
+     text: "Carried grain again at the wharf, and was paid a little extra because a barge came in late."}
+  - {id: kaifeng.later.boatman, kind: later, applies_to: [boatman], status: DRAFT,
+     sources: [{source: dmhl, locator: "[VERIFY] daily life of this trade"}],
+     text: "Took the boat under the Rainbow Bridge again, mast lowered in good time, and nobody shouted."}
+  - {id: kaifeng.later.night-crowd, kind: later, applies_to: [night-crowd], status: DRAFT,
+     sources: [{source: dmhl, locator: "[VERIFY] daily life of this trade"}],
+     text: "Went back to the night market the next evening, to the same stall, for the same bowl."}

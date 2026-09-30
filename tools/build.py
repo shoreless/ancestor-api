@@ -28,7 +28,7 @@ SCHEMA_VERSION = 2
 
 STATUSES = {"DRAFT", "VERIFIED"}
 MISSION_TYPES = {"own", "collect", "zoom", "level_subagent", "spot_glitch", "open_capsules", "automate"}
-FRAGMENT_KINDS = {"name", "today", "food", "worry", "pleasure", "weather"}
+FRAGMENT_KINDS = {"name", "today", "food", "worry", "pleasure", "weather", "later"}
 RARITIES = {"common", "rare", "legendary"}
 EFFECTS = {"automate", "multiply", "bonus_chance"}
 
@@ -338,11 +338,18 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
             "kind": f["kind"],
             "text": str(f["text"]).strip(),
             **({"place": f["place"]} if f.get("place") else {}),
+            **({"after": f["after"]} if f.get("after") else {}),
             **({"reply": str(f["reply"]).strip()} if f.get("reply") else {}),
             "appliesTo": f.get("applies_to", []),
             "status": f.get("status", "DRAFT"),
             "sources": c.sourced(where, f, exempt=f["kind"] == "name" and naming is not None),
         })
+    today_ids = {f["id"] for f in fragments if f["kind"] == "today"}
+    for f in fragments:
+        if f.get("after") and f["after"] not in today_ids:
+            c.err(f"{pid} fragment {f['id']}", f"follows up unknown request {f['after']!r}")
+        if f["kind"] == "later" and not f.get("after") and not f["appliesTo"]:
+            c.err(f"{pid} fragment {f['id']}", "a later line needs `after` (a request) or applies_to (who it fits)")
     for o in occupations:
         if not any(f["kind"] == "name" and (not f["appliesTo"] or o["id"] in f["appliesTo"]) for f in fragments):
             c.err(f"{pid} occupation {o['id']}", "has no name that fits it, so zoom can't resolve anyone")
@@ -408,6 +415,7 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
         "milestones": milestones,
         "attentionUpgrades": attention_upgrades,
         "zoom": {"clarity": big(raw.get("zoom", {}).get("clarity", 0))},
+        "followUps": follow_ups(c, pid, raw.get("follow_ups")),
         "ranks": build_ranks(c, pid, raw["ranks"], gen_ids, subagent_ids, skip_slack=True),
         "levelCost": {
             "clarityBase": big(lc.get("clarity_base", 40)),
@@ -422,6 +430,16 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
         "event": event,
         "migrations": raw.get("migrations", []),
     }
+
+
+def follow_ups(c: Checker, pid: str, raw: dict | None) -> dict | None:
+    """How often remembered people write back (spec v2 §14.2)."""
+    if not raw:
+        return None
+    lo, hi = raw["every_minutes"]
+    if not 0 < lo <= hi:
+        c.err(f"{pid} follow_ups", "every_minutes must be [low, high] with 0 < low <= high")
+    return {"firstAfterMinutes": float(raw["first_after_minutes"]), "everyMinutes": [lo, hi], "clarity": big(raw.get("clarity", 0))}
 
 
 def build_event_info(c: Checker, pid: str, raw: dict | None, gen_ids: set[str]) -> dict | None:

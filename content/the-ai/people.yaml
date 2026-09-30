@@ -275,3 +275,87 @@ fragments:
   - {id: ai.weather.fog, kind: weather, status: DRAFT, text: "The fog is so thick they can't see the building across the street."}
   - {id: ai.weather.monsoon, kind: weather, status: DRAFT, text: "The monsoon has started, and the street outside is a river."}
   - {id: ai.weather.wind, kind: weather, status: DRAFT, text: "The wind is rattling the windows, and the cat is under the bed."}
+
+  # Follow-ups (spec v2 §14.2): what someone remembered writes back, hours or days later. Composites, like the rest.
+  - {id: ai.later.student.essay, kind: later, after: ai.today.student.essay, status: DRAFT,
+     text: "Wrote back a week later: the essay got a B+, and the teacher wrote \"a real argument\" in the margin."}
+  - {id: ai.later.student.war, kind: later, after: ai.today.student.war, status: DRAFT,
+     text: "Came back the next evening: slept nine hours, then read the short version on the bus and found it interesting after all."}
+  - {id: ai.later.student.derivative, kind: later, after: ai.today.student.derivative, status: DRAFT,
+     text: "Wrote back: the hill idea worked, and they explained it to a friend using a skateboard ramp."}
+  - {id: ai.later.student.abroad, kind: later, after: ai.today.student.abroad, status: DRAFT,
+     text: "Wrote back months later: they got the scholarship, and started the letter with the moment, as suggested."}
+  - {id: ai.later.student.exam, kind: later, after: ai.today.student.exam, status: DRAFT,
+     text: "Wrote back after the exam: slept five hours, remembered more than expected, and thinks it went fine."}
+  - {id: ai.later.programmer.typo, kind: later, after: ai.today.programmer.typo, status: DRAFT,
+     text: "Came back a week later with a new error, and said this time they checked the spelling first."}
+  - {id: ai.later.programmer.regex, kind: later, after: ai.today.programmer.regex, status: DRAFT,
+     text: "Wrote back: they can read the pattern now, and added a comment explaining it for the next person."}
+  - {id: ai.later.programmer.legacy, kind: later, after: ai.today.programmer.legacy, status: DRAFT,
+     text: "Wrote back: the \"do not touch\" code was load-bearing after all. They added tests before touching it."}
+  - {id: ai.later.programmer.interview, kind: later, after: ai.today.programmer.interview, status: DRAFT,
+     text: "Wrote back: the real interview asked for a URL shortener too, and they'd already thought about collisions."}
+  - {id: ai.later.parent.dragon, kind: later, after: ai.today.parent.dragon, status: DRAFT,
+     text: "Wrote back: the dragon story is requested every night now, and the candle has become a plot point."}
+  - {id: ai.later.parent.fractions, kind: later, after: ai.today.parent.fractions, status: DRAFT,
+     text: "Wrote back: their daughter asked why, and they explained it before she could ask twice."}
+  - {id: ai.later.parent.fever, kind: later, after: ai.today.parent.fever, status: DRAFT,
+     text: "Wrote back in the morning: the fever broke overnight, and the doctor said calling was the right thing."}
+  - {id: ai.later.parent.lunchbox, kind: later, after: ai.today.parent.lunchbox, status: DRAFT,
+     text: "Wrote back: four of the five were eaten. The fifth came home untouched, as expected."}
+  - {id: ai.later.nurse.plain-words, kind: later, after: ai.today.nurse.plain-words, status: DRAFT,
+     text: "Wrote back after the shift: the family understood, and thanked them for being straight with them."}
+  - {id: ai.later.nurse.dosage, kind: later, after: ai.today.nurse.dosage, status: DRAFT,
+     text: "Wrote back: the numbers matched, and they've pinned the working above the station for night shifts."}
+  - {id: ai.later.nurse.handover, kind: later, after: ai.today.nurse.handover, status: DRAFT,
+     text: "Wrote back: the ward uses the one-page handover now, and nobody has asked for the old one."}
+  - {id: ai.later.teacher.lesson, kind: later, after: ai.today.teacher.lesson, status: DRAFT,
+     text: "Wrote back: the class argued for twenty minutes about where rain goes, which counts as interested."}
+  - {id: ai.later.teacher.report, kind: later, after: ai.today.teacher.report, status: DRAFT,
+     text: "Wrote back: parents said the reports sounded like their own children for once."}
+  - {id: ai.later.teacher.quiet, kind: later, after: ai.today.teacher.quiet, status: DRAFT,
+     text: "Wrote back weeks later: the quiet student handed in a written answer three pages long."}
+  - {id: ai.later.writer.eulogy, kind: later, after: ai.today.writer.eulogy, status: DRAFT,
+     text: "Wrote back after the funeral: people laughed at the story about the burnt biscuits, which is what she would have wanted."}
+  - {id: ai.later.writer.chapter, kind: later, after: ai.today.writer.chapter, status: DRAFT,
+     text: "Wrote back: chapter nine is finished, and the villain is the most interesting person in the book now."}
+  - {id: ai.later.writer.complaint, kind: later, after: ai.today.writer.complaint, status: DRAFT,
+     text: "Wrote back: the landlord fixed the heating within the week, and the reply was polite."}
+  - {id: ai.later.writer.poem, kind: later, after: ai.today.writer.poem, status: DRAFT,
+     text: "Wrote back: they kept the last line, and their partner read it twice."}
+  - {id: ai.later.shopkeeper.sign, kind: later, after: ai.today.shopkeeper.sign, status: DRAFT,
+     text: "Wrote back: customers have been reading the sign aloud, which they take as a good sign."}
+  - {id: ai.later.shopkeeper.stock, kind: later, after: ai.today.shopkeeper.stock, status: DRAFT,
+     text: "Wrote back: it was column D. It was always going to be column D."}
+  - {id: ai.later.shopkeeper.review, kind: later, after: ai.today.shopkeeper.review, status: DRAFT,
+     text: "Wrote back: the reviewer came back in person and bought something."}
+  - {id: ai.later.retiree.camera, kind: later, after: ai.today.retiree.camera, status: DRAFT,
+     text: "Wrote back: the grandson saw them on the second try, and they talked for an hour."}
+  - {id: ai.later.retiree.history, kind: later, after: ai.today.retiree.history, status: DRAFT,
+     text: "Wrote back with an old photograph of the street, and a correction to one of the dates."}
+  - {id: ai.later.retiree.letter, kind: later, after: ai.today.retiree.letter, status: DRAFT,
+     text: "Wrote back: the old friend answered within a week, starting \"You won't believe how glad I am.\""}
+  - {id: ai.later.commuter.late, kind: later, after: ai.today.commuter.late, status: DRAFT,
+     text: "Wrote back: the manager replied \"no problem, thanks for letting me know\", and they're catching the earlier train now."}
+  - {id: ai.later.commuter.language, kind: later, after: ai.today.commuter.language, status: DRAFT,
+     text: "Wrote back from the trip: obrigado worked every single time."}
+  - {id: ai.later.commuter.podcast, kind: later, after: ai.today.commuter.podcast, status: DRAFT,
+     text: "Wrote back: they spent the whole traffic jam thinking about the dark sky, and missed their exit."}
+  - {id: ai.later.farmer.rain, kind: later, after: ai.today.farmer.rain, status: DRAFT,
+     text: "Wrote back after the season: planted a little late, and the rain came after all."}
+  - {id: ai.later.farmer.price, kind: later, after: ai.today.farmer.price, status: DRAFT,
+     text: "Wrote back: they sold half and stored half, which let them sleep either way."}
+  - {id: ai.later.farmer.goat, kind: later, after: ai.today.farmer.goat, status: DRAFT,
+     text: "Wrote back: the vet came, it was a stone in the hoof, and the goat is eating again."}
+  - {id: ai.later.driver.route, kind: later, after: ai.today.driver.route, status: DRAFT,
+     text: "Wrote back: checked the tyres, and the car is using less fuel. Boring worked."}
+  - {id: ai.later.driver.night, kind: later, after: ai.today.driver.night, status: DRAFT,
+     text: "Wrote back: the skeleton joke got a laugh from a very tired passenger at four in the morning."}
+  - {id: ai.later.driver.licence, kind: later, after: ai.today.driver.licence, status: DRAFT,
+     text: "Wrote back: brought both documents, and it took ten minutes instead of two trips."}
+  - {id: ai.later.newcomer.form, kind: later, after: ai.today.newcomer.form, status: DRAFT,
+     text: "Wrote back: the form went through, and they did the last three boxes on their own."}
+  - {id: ai.later.newcomer.recipe, kind: later, after: ai.today.newcomer.recipe, status: DRAFT,
+     text: "Wrote back: it wasn't quite their mother's, but the smell was right, and that was enough."}
+  - {id: ai.later.newcomer.friend, kind: later, after: ai.today.newcomer.friend, status: DRAFT,
+     text: "Wrote back months later: they joined a Sunday football game, and two of the players are friends now."}

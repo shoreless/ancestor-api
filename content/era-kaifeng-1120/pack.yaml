@@ -139,6 +139,10 @@ attention_upgrades:
 
 # Zoom-in: noticing one person in a crowd. A small Clarity reward the first time each person is seen; the reward is
 # kept small on purpose so zooming feels like noticing, never grinding.
+# Remembered people write back (spec v2 §14.2): the first letter some hours after someone is kept, then one
+# every few hours, one waiting at a time. Clarity per letter is times the rank; each also brings a small chest.
+follow_ups: {first_after_minutes: 60, every_minutes: [120, 360], clarity: 15}
+
 zoom:
   clarity: 2
 

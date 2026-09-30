@@ -162,3 +162,26 @@ fragments:
   - {id: od.pleasure.anticlea.2, kind: pleasure, applies_to: [anticlea], status: DRAFT,
      sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}],
      text: "Told him Penelope still waited for him, and Telemachus still kept his lands."}
+
+  # Follow-ups (spec v2 §14.2): a remembered character's next moment in the poem.
+  - {id: od.later.nausicaa, kind: later, applies_to: [nausicaa], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Stood by a pillar as he left the bath, and asked him to remember her, since he owed her his life. He said he would pray to her like a goddess."}
+  - {id: od.later.arete, kind: later, applies_to: [arete], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Gave him a fine cloak and a chest for his gifts, and told him to tie the lid down tight so no one could rob him on the voyage."}
+  - {id: od.later.demodocus, kind: later, applies_to: [demodocus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Sang of Ares and Aphrodite caught in Hephaestus's net, and the hall laughed."}
+  - {id: od.later.alcinous, kind: later, applies_to: [alcinous], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 13"}],
+     text: "Sent him home asleep in a Phaeacian ship. As it sailed back into harbour, Poseidon turned it to stone."}
+  - {id: od.later.elpenor, kind: later, applies_to: [elpenor], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 12"}],
+     text: "Was buried on Circe's shore, as he asked, with his oar planted on the mound."}
+  - {id: od.later.eurylochus, kind: later, applies_to: [eurylochus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 12"}],
+     text: "Died with the rest of the crew when Zeus struck the ship, for the Sun-god's cattle."}
+  - {id: od.later.rower, kind: later, applies_to: [rower], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 12"}],
+     text: "Never came home: after the Sun-god's cattle, a thunderbolt broke the ship, and only Odysseus lived."}
