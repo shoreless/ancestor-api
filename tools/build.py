@@ -419,6 +419,9 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
         "attentionUpgrades": attention_upgrades,
         "zoom": {"clarity": big(raw.get("zoom", {}).get("clarity", 0))},
         "followUps": follow_ups(c, pid, raw.get("follow_ups")),
+        "ability": ({"name": raw["ability"]["name"], "blurb": " ".join(str(raw["ability"]["blurb"]).split()),
+                     "minutes": float(raw["ability"]["minutes"]), "rechargeMinutes": float(raw["ability"]["recharge_minutes"]),
+                     "factor": float(raw["ability"].get("factor", 2))} if raw.get("ability") else None),
         "ranks": build_ranks(c, pid, raw["ranks"], gen_ids, subagent_ids, skip_slack=True),
         "levelCost": {
             "clarityBase": big(lc.get("clarity_base", 40)),

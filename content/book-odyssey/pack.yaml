@@ -115,6 +115,9 @@ attention_upgrades:
 # every few hours, one waiting at a time. Clarity per letter is times the rank; each also brings a small chest.
 follow_ups: {first_after_minutes: 60, every_minutes: [120, 360], clarity: 15}
 
+# The world's one active ability (spec v2 §14.6): a burst with a long recharge, never needed for a task.
+ability: {name: "Tell me, O Muse", blurb: "The hall hangs on every word: everything runs twice as fast for 10 minutes. (The poem's first words, in Butler.)", minutes: 10, recharge_minutes: 240, factor: 2}
+
 zoom:
   clarity: 2
 
