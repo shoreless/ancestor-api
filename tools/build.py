@@ -385,7 +385,10 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
     if ms:
         if ms["counts"] != sorted(ms["counts"]):
             c.err(f"{pid} milestones", "counts must rise")
-        milestones = {"counts": ms["counts"], "clarity": big(ms["clarity"]), "growth": float(ms.get("growth", 1.0))}
+        speed = ms.get("speed_up_at", [])
+        if any(n not in ms["counts"] for n in speed):
+            c.err(f"{pid} milestones", "speed_up_at must be milestone counts")
+        milestones = {"counts": ms["counts"], "clarity": big(ms["clarity"]), "growth": float(ms.get("growth", 1.0)), "speedUpAt": speed}
     au = raw.get("attention_upgrades")
     attention_upgrades = {"baseCost": big(au["base_cost"]), "costGrowth": float(au["cost_growth"]),
                           "perLevel": float(au["per_level"])} if au else None

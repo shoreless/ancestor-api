@@ -103,6 +103,8 @@ milestones:
   counts: [10, 25, 50, 100, 250, 500, 1000, 2500]
   clarity: 5
   growth: 1.6
+  # Owning these counts also doubles the tier's speed, each time (spec v2 §14.4): a jump you can see.
+  speed_up_at: [100, 500, 2500]
 
 attention_upgrades:
   base_cost: 200
@@ -195,7 +197,7 @@ ranks:
       [DRAFT] {songs:song:songs} sung, and the Phaeacian ship has gone. On Ithaca an old beggar sits by the swineherd's fire, and a dog lifts its head.
     required: 5
     # A spare card for Medon, so chapter 5's "level Medon to 3" never waits hours on rare draws.
-    guarantees: [medon]
+    guarantees: [medon, medon]
     story: >-
       [DRAFT] Home, but as a beggar. The swineherd Eumaeus feeds him without knowing him. At the palace an old dog,
       lying neglected on a dung heap, knows him at once, lowers his ears, and dies.
@@ -233,12 +235,12 @@ ranks:
       sources: [{source: butler-odyssey, locator: "[VERIFY] Book 21 (the bow), Book 23 (the bed)"}]
     missions:
       - {id: od5-own-feasts, type: own, generator: feasts, amount: 1.2e4}
-      - {id: od5-collect, type: collect, amount: 1.0e13}
+      - {id: od5-collect, type: collect, amount: 3.0e13}
       - {id: od5-glitch, type: spot_glitch, amount: 4}
       - {id: od5-level-medon, type: level_subagent, subagent: medon, amount: 3}
       - {id: od5-zoom, type: zoom, amount: 12}
       - {id: od5-own-hall, type: own, generator: the-hall, amount: 200}
-      - {id: od5-own-listeners, type: own, generator: listeners, amount: 8.0e7}
+      - {id: od5-own-listeners, type: own, generator: listeners, amount: 2.0e8}
       - {id: od5-capsules, type: open_capsules, amount: 18}
       - {id: od5-level-any, type: level_subagent, subagent: any, amount: 4}
 

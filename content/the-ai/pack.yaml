@@ -85,6 +85,8 @@ milestones:
   counts: [10, 25, 50, 100, 250, 500, 1000, 2500]
   clarity: 5
   growth: 1.6
+  # Owning these counts also doubles the tier's speed, each time (spec v2 §14.4): a jump you can see.
+  speed_up_at: [100, 500, 2500]
 
 attention_upgrades:
   base_cost: 200
@@ -152,7 +154,7 @@ ranks:
       [DRAFT] Morning in one place, midnight in another. {people-online:person:people} online at once, in dozens of languages, and {cities-waking:city is:cities are} waking.
     required: 5
     # A spare card for the rare helper, so rank 5's "level it to 3" never waits hours on rare draws.
-    guarantees: [careful-one]
+    guarantees: [careful-one, careful-one]
     story: >-
       [DRAFT] Summary of the conversation so far: morning in Lagos and midnight in Osaka, both asking at once. Each was the only conversation it was in.
     missions:
@@ -174,12 +176,12 @@ ranks:
       [DRAFT] Summary of the conversation so far: a great many people, one at a time. Most of it will be let go. What's kept is a few lines, and who they came from.
     missions:
       - {id: ai5-own-online, type: own, generator: people-online, amount: 2.5e4}
-      - {id: ai5-collect, type: collect, amount: 1.5e13}
+      - {id: ai5-collect, type: collect, amount: 3.0e13}
       - {id: ai5-glitch, type: spot_glitch, amount: 4}
       - {id: ai5-level-careful, type: level_subagent, subagent: careful-one, amount: 3}
       - {id: ai5-zoom, type: zoom, amount: 30}
       - {id: ai5-own-cities, type: own, generator: cities-waking, amount: 150}
-      - {id: ai5-own-replies, type: own, generator: replies, amount: 1.5e8}
+      - {id: ai5-own-replies, type: own, generator: replies, amount: 3.0e8}
       - {id: ai5-capsules, type: open_capsules, amount: 18}
       - {id: ai5-level-any, type: level_subagent, subagent: any, amount: 4}
 

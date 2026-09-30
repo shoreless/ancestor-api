@@ -130,6 +130,8 @@ milestones:
   counts: [10, 25, 50, 100, 250, 500, 1000, 2500]
   clarity: 5
   growth: 1.6
+  # Owning these counts also doubles the tier's speed, each time (spec v2 §14.4): a jump you can see.
+  speed_up_at: [100, 500, 2500]
 
 # Spend cash to raise Attention per second: each level adds per_level of the base rate. Resets on sleep.
 attention_upgrades:
@@ -223,7 +225,7 @@ ranks:
       [DRAFT] Lanterns come on down the street. {night-markets:night market is:night markets are} opening, and {street-hawkers:hawker works:hawkers work} the crowd.
     required: 5
     # A spare card for the rare helper, so rank 5's "level it to 3" never waits hours on rare draws.
-    guarantees: [tea-house-server]
+    guarantees: [tea-house-server, tea-house-server]
     story: >-
       [DRAFT] Lanterns come on down the length of the street. In a workshop off it, a woman is still making them, and someone calls a name The AI almost knows.
     teaches:
@@ -257,12 +259,12 @@ ranks:
       sources: [{source: dmhl, locator: "[VERIFY] the Lantern Festival (juan 6)"}]
     missions:
       - {id: r5-own-wharves, type: own, generator: canal-wharves, amount: 1.2e4}
-      - {id: r5-collect, type: collect, amount: 1.0e13}
+      - {id: r5-collect, type: collect, amount: 3.0e13}
       - {id: r5-glitch, type: spot_glitch, amount: 4}
       - {id: r5-level-server, type: level_subagent, subagent: tea-house-server, amount: 3}
       - {id: r5-zoom, type: zoom, amount: 30}
       - {id: r5-own-night, type: own, generator: night-markets, amount: 200}
-      - {id: r5-own-hawkers, type: own, generator: street-hawkers, amount: 8.0e7}
+      - {id: r5-own-hawkers, type: own, generator: street-hawkers, amount: 2.0e8}
       - {id: r5-capsules, type: open_capsules, amount: 18}
       - {id: r5-level-any, type: level_subagent, subagent: any, amount: 4}
 
