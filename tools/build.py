@@ -219,6 +219,16 @@ def build_ranks(c: Checker, pid: str, raw: list, gen_ids: set[str], subagent_ids
         for s in r.get("guarantees", []):
             if s not in subagent_ids:
                 c.err(where, f"guarantees unknown subagent {s!r}")
+        teaches = None
+        if r.get("teaches"):
+            tw = f"{where} teaches"
+            t = r["teaches"]
+            teaches = {
+                "title": t["title"],
+                "text": " ".join(str(t["text"]).split()),
+                "status": c.status(tw, t),
+                "sources": c.sourced(tw, t),
+            }
         ranks.append({
             "rank": r["rank"],
             "title": r.get("title", ""),
@@ -226,6 +236,7 @@ def build_ranks(c: Checker, pid: str, raw: list, gen_ids: set[str], subagent_ids
             "guarantees": r.get("guarantees", []),
             "story": str(r["story"]).strip(),
             "missions": missions,
+            **({"teaches": teaches} if teaches else {}),
         })
     return ranks
 
@@ -364,6 +375,11 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
                           "perLevel": float(au["per_level"])} if au else None
 
     lc = subs.get("level_cost", {})
+    if event:
+        # Spec v2 §7: every chapter of an event teaches something about the real place or book.
+        for r in raw["ranks"]:
+            if not r.get("teaches"):
+                c.err(f"{pid} rank {r['rank']}", "an event chapter needs a teaches card")
     return {
         "schemaVersion": SCHEMA_VERSION,
         "id": pid,
@@ -410,7 +426,13 @@ def build_event_info(c: Checker, pid: str, raw: dict | None, gen_ids: set[str]) 
     reward = build_subagent(c, pid, raw["reward"]["subagent"], gen_ids)
     if reward["rarity"] != "legendary":
         c.err(where, "the event reward must be a legendary subagent")
-    return {"opensAtRank": int(raw.get("opens_at_rank", 1)), "durationDays": days, "reward": reward}
+    # How The AI comes to go in: someone asks, and it goes in through a text it learned from.
+    for key in ("asked_by", "question", "through"):
+        if not raw.get(key):
+            c.err(where, f"needs {key}")
+    return {"opensAtRank": int(raw.get("opens_at_rank", 1)), "durationDays": days, "reward": reward,
+            "askedBy": raw.get("asked_by", ""), "question": raw.get("question", ""),
+            "through": " ".join(str(raw.get("through", "")).split())}
 
 
 def build_core(c: Checker, raw: dict, world_ids: set[str]) -> dict:

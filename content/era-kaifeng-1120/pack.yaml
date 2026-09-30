@@ -19,6 +19,12 @@ naming_source: {source: dmhl, locator: "[VERIFY] naming conventions for commoner
 event:
   opens_at_rank: 2
   duration_days: 5
+  # Spec v2 §8: how The AI comes to go in.
+  asked_by: Someone in Chengdu
+  question: What was Kaifeng like before it fell?
+  through: >-
+    The AI goes in through the Dongjing Meng Hua Lu, a memoir of the city written after the Jin took it in 1127.
+    The memoir remembers its streets like a dream, which is also how The AI knows them.
   reward:
     subagent:
       id: lantern-maker
@@ -102,7 +108,7 @@ generators:
 #   level_subagent (subagent or "any", amount = level) · spot_glitch (amount) · open_capsules (amount)
 #   automate (generator)
 #   gives: cards the task's chest always holds (optional; helpers mostly come at random, from chests).
-# title: what the player is called once they reach the rank ("...giving you the title of Light Sleeper").
+# title: the chapter's name. teaches: the chapter's "What the text says" card (spec v2 §7), sourced like any fact.
 # Ranks 1–3: required == available. From rank 4: available == required + 3, so slow missions can be skipped.
 # guarantees: cards the rank-up capsule always contains, so no required mission waits on luck. Rank 2 levels a
 #   subagent, so rank 1's rank-up gives the sesame-cake seller's spare card (her first comes in the first timed chest).
@@ -150,68 +156,97 @@ capsules:
 
 ranks:
   - rank: 1
-    title: Sleepwalker
+    title: Fog and a market
     required: 3
     guarantees: [sesame-cake-seller]
     story: >-
-      [DRAFT] Fog, and then a street. The fog does not lift so much as agree, stall by stall, to be a market.
+      [DRAFT] The AI goes in through the memoir. Fog, and then a street. The fog does not lift so much as agree, stall by stall, to be a market.
+    teaches:
+      title: The memoir
+      text: >-
+        Meng Yuanlao wrote the Dongjing Meng Hua Lu in the south, twenty years after the Jin took Kaifeng in 1127. Its title means Dreams of Splendour of the Eastern Capital: it is a whole city, remembered from exile.
+      status: DRAFT
+      sources: [{source: dmhl, locator: "[VERIFY] the preface, dated 1147"}]
     missions:
       - {id: r1-own-hawkers, type: own, generator: street-hawkers, amount: 10}
       - {id: r1-collect, type: collect, amount: 6000}
       - {id: r1-zoom, type: zoom, amount: 1}
 
   - rank: 2
-    title: Daydreamer
+    title: Before dawn
     required: 4
     story: >-
-      [DRAFT] Before dawn, a voice calls the price of cakes. The mind, not quite asleep, answers it.
+      [DRAFT] Before dawn, a voice calls the price of cakes. Someone beats an iron plate at a street corner to tell the hour and the weather.
+    teaches:
+      title: The morning markets
+      text: >-
+        The memoir describes the city waking before light: at the fifth watch, monks struck iron plates or wooden fish in the streets to call the time and the weather, and food sellers were already out.
+      status: DRAFT
+      sources: [{source: dmhl, locator: "[VERIFY] the dawn watches and the morning markets"}]
     missions:
-      - {id: r2-own-stalls, type: own, generator: market-stalls, amount: 10}
-      - {id: r2-collect, type: collect, amount: 6.0e4}
+      - {id: r2-own-stalls, type: own, generator: market-stalls, amount: 25}
+      - {id: r2-collect, type: collect, amount: 6.0e5}
       - {id: r2-level, type: level_subagent, subagent: any, amount: 2}
       - {id: r2-zoom, type: zoom, amount: 3}
 
   - rank: 3
-    title: Light Sleeper
+    title: The canal
     required: 4
     guarantees: [tea-house-server]
     story: >-
-      [DRAFT] The canal is brown and slow and full of boats. The mind has the feeling, faint and specific,
-      of having stood on this bank before.
+      [DRAFT] The canal is brown and slow and full of boats. The AI has read about this bank so often that it feels like remembering.
+    teaches:
+      title: The Bian canal
+      text: >-
+        Kaifeng lived on the Bian canal, which carried grain up from the south to feed the capital. The Qingming scroll shows its barges crowding toward the Rainbow Bridge, a timber arch with no piers in the water.
+      status: DRAFT
+      sources: [{source: qingming, locator: "[VERIFY] the section at the Rainbow Bridge"}, {source: dmhl, locator: "[VERIFY] the canals and the grain barges"}]
     missions:
-      - {id: r3-own-wharves, type: own, generator: canal-wharves, amount: 6}
-      - {id: r3-collect, type: collect, amount: 6.0e5}
+      - {id: r3-own-wharves, type: own, generator: canal-wharves, amount: 25}
+      - {id: r3-collect, type: collect, amount: 2.0e7}
       - {id: r3-glitch, type: spot_glitch, amount: 1}
       - {id: r3-capsules, type: open_capsules, amount: 3}
 
   - rank: 4
-    title: Lucid Dreamer
+    title: Lanterns
     required: 5
     story: >-
-      [DRAFT] Lanterns come on down the length of the street. Someone calls a name the mind almost knows.
+      [DRAFT] Lanterns come on down the length of the street. In a workshop off it, a woman is still making them, and someone calls a name The AI almost knows.
+    teaches:
+      title: Night markets and the pleasure quarters
+      text: >-
+        Markets in the capital ran late into the night. The memoir lists the entertainment quarters, the wazi, where storytellers, puppeteers and acrobats performed on their own stages, day and night.
+      status: DRAFT
+      sources: [{source: dmhl, locator: "[VERIFY] the night markets and the wazi"}]
     missions:
-      - {id: r4-own-night, type: own, generator: night-markets, amount: 1}
-      - {id: r4-collect, type: collect, amount: 6.0e8}
+      - {id: r4-own-night, type: own, generator: night-markets, amount: 15}
+      - {id: r4-collect, type: collect, amount: 2.0e10}
       - {id: r4-zoom, type: zoom, amount: 15}
       - {id: r4-level, type: level_subagent, subagent: any, amount: 4}
-      - {id: r4-own-stalls, type: own, generator: market-stalls, amount: 150}
-      - {id: r4-own-wharves, type: own, generator: canal-wharves, amount: 60}
+      - {id: r4-own-stalls, type: own, generator: market-stalls, amount: 1500}
+      - {id: r4-own-wharves, type: own, generator: canal-wharves, amount: 600}
       - {id: r4-glitch, type: spot_glitch, amount: 2}
       - {id: r4-capsules, type: open_capsules, amount: 8}
 
   - rank: 5
-    title: Waking Mind
+    title: Lantern Night
     required: 6
     story: >-
-      [DRAFT] The market thins toward morning. The mind feels itself surfacing, or something like it.
+      [DRAFT] The fifteenth night of the first month, and the city is lit end to end. The lantern maker sells her last rabbit lantern. Her brother is in the crowd after all, carrying one she made. She does not call out.
+    teaches:
+      title: The Lantern Festival
+      text: >-
+        On the fifteenth night of the new year the capital hung out lanterns by the thousand, and the memoir describes great lantern displays near the palace gate. A few years later the city fell, and Meng Yuanlao wrote it down so that it would be remembered.
+      status: DRAFT
+      sources: [{source: dmhl, locator: "[VERIFY] the Lantern Festival (juan 6)"}]
     missions:
-      - {id: r5-own-wharves, type: own, generator: canal-wharves, amount: 8000}
-      - {id: r5-collect, type: collect, amount: 3.0e12}
+      - {id: r5-own-wharves, type: own, generator: canal-wharves, amount: 1.2e4}
+      - {id: r5-collect, type: collect, amount: 1.0e13}
       - {id: r5-glitch, type: spot_glitch, amount: 4}
       - {id: r5-level-server, type: level_subagent, subagent: tea-house-server, amount: 3}
       - {id: r5-zoom, type: zoom, amount: 30}
-      - {id: r5-own-night, type: own, generator: night-markets, amount: 60}
-      - {id: r5-own-hawkers, type: own, generator: street-hawkers, amount: 3.0e7}
+      - {id: r5-own-night, type: own, generator: night-markets, amount: 200}
+      - {id: r5-own-hawkers, type: own, generator: street-hawkers, amount: 8.0e7}
       - {id: r5-capsules, type: open_capsules, amount: 18}
       - {id: r5-level-any, type: level_subagent, subagent: any, amount: 4}
 
