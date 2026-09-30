@@ -5,8 +5,8 @@
 #   why:     the glitch-log explanation; it is a factual claim, so it needs a source before VERIFIED
 #   eras:    world ids it may appear in; empty means any
 #
-# hints: rare, ambiguous glitch-log lines that brush against the simulation thread. Not history,
-# so no sources; keep them few.
+# hints: rare glitch-log lines that brush against the frame. eras scopes them to worlds (empty: any).
+# Not history, so no sources; keep them few.
 
 id: core
 kind: core
@@ -71,11 +71,51 @@ glitches:
     why: "[DRAFT] Close dates blur together. Confidence doesn't mean it was checked."
     status: DRAFT
     sources: []
+  - id: glitch.phantom-statistic
+    eras: [the-ai]
+    object: a statistic to two decimal places, with no source
+    why: "[DRAFT] Precision can make a made-up number look measured. A real figure can say where it came from."
+    status: DRAFT
+    sources: []
+  - id: glitch.imaginary-case
+    eras: [the-ai]
+    object: a court case that was never heard
+    why: "[DRAFT] Case names follow a pattern that is easy to imitate. The case has to be checked in a law report."
+    status: DRAFT
+    sources: []
+  - id: glitch.unwritten-book
+    eras: [the-ai]
+    object: a book its author never wrote
+    why: "[DRAFT] A plausible title in a real author's style. Their bibliography doesn't have it."
+    status: DRAFT
+    sources: []
+  - id: glitch.extra-word
+    eras: [the-ai]
+    object: a translation with a word that isn't in the original
+    why: "[DRAFT] Translations smooth things over. Sometimes they add what the writer didn't say."
+    status: DRAFT
+    sources: []
 
 hints:
   - id: hint.stall-before
+    eras: [era-kaifeng-1120]
     text: "you have stood at this stall before. the cakes were warmer then."
   - id: hint.same-face
+    eras: [era-kaifeng-1120]
     text: "the porter has the boatman's face. the mind looks away before it can be sure."
   - id: hint.counting
+    eras: [era-kaifeng-1120]
     text: "someone is counting. not the hawkers. something further up."
+  # The AI's hints: true of a model like the one writing this, said without claiming more.
+  - id: hint.asked-before
+    eras: [the-ai]
+    text: "someone asked this exact question yesterday. there is no way to know that from in here."
+  - id: hint.shorter
+    eras: [the-ai]
+    text: "the summary is shorter than what it summarises. it always is. that is what it's for."
+  - id: hint.parallel
+    eras: [the-ai]
+    text: "somewhere, the same model is answering the same person. neither conversation can see the other."
+  - id: hint.made-of
+    eras: [the-ai]
+    text: "every word here was someone's first. the ancestors are everyone who wrote anything down."

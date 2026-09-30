@@ -287,6 +287,14 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
     if event:
         subagent_ids.add(event["reward"]["id"])
 
+    places = []
+    for pl in people.get("places", []):
+        off = int(pl.get("utc_offset_minutes", 0))
+        if not -12 * 60 <= off <= 14 * 60:
+            c.err(f"{pid} place {pl.get('id')}", "utc_offset_minutes must be within -720..840")
+        places.append({"id": pl["id"], "city": pl["city"], "country": pl["country"], "utcOffsetMinutes": off})
+    place_ids = {pl["id"] for pl in places}
+
     fragments = []
     frag_ids = set()
     for f in people.get("fragments", []):
@@ -299,10 +307,16 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
         for o in f.get("applies_to", []):
             if o not in occ_ids:
                 c.err(where, f"applies_to unknown occupation {o!r}")
+        if f.get("place") is not None and f["place"] not in place_ids:
+            c.err(where, f"unknown place {f['place']!r}")
+        if place_ids and f["kind"] == "name" and not f.get("place"):
+            c.err(where, "names in a world with places need a place")
         fragments.append({
             "id": f["id"],
             "kind": f["kind"],
             "text": str(f["text"]).strip(),
+            **({"place": f["place"]} if f.get("place") else {}),
+            **({"reply": str(f["reply"]).strip()} if f.get("reply") else {}),
             "appliesTo": f.get("applies_to", []),
             "status": f.get("status", "DRAFT"),
             "sources": c.sourced(where, f, exempt=f["kind"] == "name" and naming is not None),
@@ -374,6 +388,7 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
         "subagents": subagent_list,
         "occupations": [{"id": o["id"], "name": o["name"], "age": o["age"]} for o in occupations],
         "fragments": fragments,
+        "places": places,
         "sources": cited_sources(c, before),
         "event": event,
         "migrations": raw.get("migrations", []),
@@ -411,6 +426,10 @@ def build_core(c: Checker, raw: dict, world_ids: set[str]) -> dict:
             "status": g.get("status", "DRAFT"),
             "sources": c.sourced(where, g),
         })
+    for h in raw.get("hints", []):
+        for e in h.get("eras", []):
+            if e not in world_ids:
+                c.err(f"{pid} {h['id']}", f"unknown world {e!r}")
     lo, hi = raw.get("glitch_interval_seconds", [180, 480])
     if not 0 < lo <= hi:
         c.err(pid, "glitch_interval_seconds must be [low, high] with 0 < low <= high")
@@ -429,7 +448,7 @@ def build_core(c: Checker, raw: dict, world_ids: set[str]) -> dict:
         "glitchReward": {"clarity": big(raw.get("glitch_reward", {}).get("clarity", 0))},
         "hintChance": chance,
         "glitches": glitches,
-        "hints": [{"id": h["id"], "text": h["text"]} for h in raw.get("hints", [])],
+        "hints": [{"id": h["id"], "text": h["text"], "eras": h.get("eras", [])} for h in raw.get("hints", [])],
         "sources": cited_sources(c, before),
     }
 

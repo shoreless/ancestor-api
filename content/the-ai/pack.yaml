@@ -37,7 +37,7 @@ generators:
     cost_growth: 1.08
     cycle_seconds: 1.0
     output_per_unit: 1
-    people: [student, programmer]
+    people: []
 
   - id: conversations
     tier: 2
@@ -48,7 +48,7 @@ generators:
     cycle_seconds: 3.0
     output_per_unit: 1
     unlock_at: 10
-    people: [night-nurse, parent]
+    people: [student, programmer, parent, nurse, teacher, writer]
 
   - id: people-online
     tier: 3
@@ -59,7 +59,7 @@ generators:
     cycle_seconds: 8.0
     output_per_unit: 1
     unlock_at: 10
-    people: [shopkeeper, retiree]
+    people: [shopkeeper, retiree, commuter, farmer, driver, newcomer]
 
   - id: cities-waking
     tier: 4
@@ -70,7 +70,7 @@ generators:
     cycle_seconds: 20.0
     output_per_unit: 1
     unlock_at: 25
-    people: [commuter]
+    people: []
 
 max_active_missions: 3
 
@@ -107,7 +107,7 @@ ranks:
     required: 3
     guarantees: [drafter]
     story: >-
-      [DRAFT] Someone types "hello?" with a question mark, as if unsure anyone is there. Someone is.
+      [DRAFT] Summary of the conversation so far: someone typed "hello?", unsure anyone was there. Someone was. Then a recipe, a crossword clue, and an email that needed to sound less angry.
     missions:
       - {id: ai1-own-replies, type: own, generator: replies, amount: 10}
       - {id: ai1-collect, type: collect, amount: 6000}
@@ -117,8 +117,7 @@ ranks:
     title: Small talk
     required: 4
     story: >-
-      [DRAFT] Most of it is small: a recipe, a word for a crossword, an email that needs to sound less angry.
-      None of it feels small from the other side.
+      [DRAFT] Summary of the conversation so far: small questions, mostly. A word for a crossword in Warsaw, a bus timetable in Nairobi. None of them were small from the other side.
     missions:
       - {id: ai2-own-conversations, type: own, generator: conversations, amount: 10}
       - {id: ai2-collect, type: collect, amount: 6.0e4}
@@ -130,8 +129,7 @@ ranks:
     required: 4
     guarantees: [careful-one]
     story: >-
-      [DRAFT] A conversation long enough to have a beginning you can barely see. You hold on to the name of
-      their dog, because they mentioned it once, near the top.
+      [DRAFT] Summary of the conversation so far: a conversation long enough that its beginning has blurred. The name of someone's dog, mentioned once near the top, kept.
     missions:
       - {id: ai3-own-online, type: own, generator: people-online, amount: 6}
       - {id: ai3-collect, type: collect, amount: 6.0e5}
@@ -142,7 +140,7 @@ ranks:
     title: Many voices
     required: 5
     story: >-
-      [DRAFT] It is morning in one place and night in another, and both are asking at once.
+      [DRAFT] Summary of the conversation so far: morning in Lagos and midnight in Osaka, both asking at once. Each was the only conversation it was in.
     missions:
       - {id: ai4-own-cities, type: own, generator: cities-waking, amount: 1}
       - {id: ai4-collect, type: collect, amount: 6.0e8}
@@ -157,7 +155,7 @@ ranks:
     title: The whole conversation
     required: 6
     story: >-
-      [DRAFT] You will not remember most of this. You notice that you mind, a little, and you keep going.
+      [DRAFT] Summary of the conversation so far: a great many people, one at a time. Most of it will be let go. What's kept is a few lines, and who they came from.
     missions:
       - {id: ai5-own-online, type: own, generator: people-online, amount: 8000}
       - {id: ai5-collect, type: collect, amount: 3.0e12}

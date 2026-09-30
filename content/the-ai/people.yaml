@@ -1,48 +1,276 @@
-# People: the ones the AI talks to. Composites, never real users or real conversations. ALL DRAFT.
-# A zoomed person = one name + an age in the occupation's range + one "today" line + one detail.
+# People: the ones The AI talks to. Fictional composites, never real users, transcripts or identifiable details
+# (spec v2 §10). ALL DRAFT.
+#
+# A zoomed person = a place + a name common there + an age + one "today" line (what they're asking, with The AI's
+# first line back) + one detail. Their local time comes from the place's UTC offset at the moment of the zoom.
+#
+#   places:      real cities; utc_offset_minutes is standard time (daylight saving is ignored for now)
+#   name:        needs `place`: a first name common there. [VERIFY] against national name statistics
+#   today:       applies_to occupations; `reply` is The AI's first line back, plain and kind
+#   details:     worry | food | pleasure | weather, for anyone
+#
+# Care (spec v2 §1, §10): people bring grief, exams, money, loneliness. Write them with dignity; no crisis content as
+# spectacle; nothing that reads as advice to a real person in danger. The AI can be warm, never claims feelings.
 
+places:
+  - {id: accra, city: Accra, country: Ghana, utc_offset_minutes: 0}
+  - {id: lagos, city: Lagos, country: Nigeria, utc_offset_minutes: 60}
+  - {id: nairobi, city: Nairobi, country: Kenya, utc_offset_minutes: 180}
+  - {id: cairo, city: Cairo, country: Egypt, utc_offset_minutes: 120}
+  - {id: istanbul, city: Istanbul, country: Türkiye, utc_offset_minutes: 180}
+  - {id: warsaw, city: Warsaw, country: Poland, utc_offset_minutes: 60}
+  - {id: london, city: London, country: the UK, utc_offset_minutes: 0}
+  - {id: mumbai, city: Mumbai, country: India, utc_offset_minutes: 330}
+  - {id: jakarta, city: Jakarta, country: Indonesia, utc_offset_minutes: 420}
+  - {id: manila, city: Manila, country: the Philippines, utc_offset_minutes: 480}
+  - {id: chengdu, city: Chengdu, country: China, utc_offset_minutes: 480}
+  - {id: seoul, city: Seoul, country: South Korea, utc_offset_minutes: 540}
+  - {id: osaka, city: Osaka, country: Japan, utc_offset_minutes: 540}
+  - {id: auckland, city: Auckland, country: New Zealand, utc_offset_minutes: 720}
+  - {id: sao-paulo, city: São Paulo, country: Brazil, utc_offset_minutes: -180}
+  - {id: mexico-city, city: Mexico City, country: Mexico, utc_offset_minutes: -360}
+  - {id: chicago, city: Chicago, country: the US, utc_offset_minutes: -360}
+
+# Conversations: one person and what they're asking. People online: one person and where they are.
 occupations:
-  - {id: student, name: Student, age: [13, 30]}
-  - {id: programmer, name: Programmer, age: [18, 65]}
-  - {id: night-nurse, name: Nurse on nights, age: [22, 64]}
-  - {id: parent, name: Parent, age: [20, 60]}
-  - {id: shopkeeper, name: Shopkeeper, age: [20, 75]}
-  - {id: retiree, name: Retiree, age: [60, 92]}
+  - {id: student, name: Student, age: [14, 29]}
+  - {id: programmer, name: Programmer, age: [19, 64]}
+  - {id: parent, name: Parent, age: [22, 58]}
+  - {id: nurse, name: Nurse, age: [22, 64]}
+  - {id: teacher, name: Teacher, age: [24, 66]}
+  - {id: writer, name: Writer, age: [17, 80]}
+  - {id: shopkeeper, name: Shopkeeper, age: [20, 76]}
+  - {id: retiree, name: Retiree, age: [62, 93]}
   - {id: commuter, name: Commuter, age: [18, 66]}
+  - {id: farmer, name: Farmer, age: [19, 78]}
+  - {id: driver, name: Driver, age: [23, 70]}
+  - {id: newcomer, name: New in the country, age: [18, 60]}
 
 fragments:
-  - {id: ai.name.amara, kind: name, text: Amara, status: DRAFT}
-  - {id: ai.name.tomasz, kind: name, text: Tomasz, status: DRAFT}
-  - {id: ai.name.priya, kind: name, text: Priya, status: DRAFT}
-  - {id: ai.name.kenji, kind: name, text: Kenji, status: DRAFT}
-  - {id: ai.name.lucia, kind: name, text: Lucía, status: DRAFT}
-  - {id: ai.name.samir, kind: name, text: Samir, status: DRAFT}
-  - {id: ai.name.grace, kind: name, text: Grace, status: DRAFT}
-  - {id: ai.name.oluwaseun, kind: name, text: Oluwaseun, status: DRAFT}
+  # Names, by place. [VERIFY] each against the country's common-name statistics.
+  - {id: ai.name.accra.kwame, kind: name, place: accra, text: Kwame, status: DRAFT}
+  - {id: ai.name.accra.ama, kind: name, place: accra, text: Ama, status: DRAFT}
+  - {id: ai.name.accra.kofi, kind: name, place: accra, text: Kofi, status: DRAFT}
+  - {id: ai.name.accra.abena, kind: name, place: accra, text: Abena, status: DRAFT}
+  - {id: ai.name.lagos.chinedu, kind: name, place: lagos, text: Chinedu, status: DRAFT}
+  - {id: ai.name.lagos.funmilayo, kind: name, place: lagos, text: Funmilayo, status: DRAFT}
+  - {id: ai.name.lagos.tunde, kind: name, place: lagos, text: Tunde, status: DRAFT}
+  - {id: ai.name.lagos.ngozi, kind: name, place: lagos, text: Ngozi, status: DRAFT}
+  - {id: ai.name.nairobi.wanjiru, kind: name, place: nairobi, text: Wanjiru, status: DRAFT}
+  - {id: ai.name.nairobi.otieno, kind: name, place: nairobi, text: Otieno, status: DRAFT}
+  - {id: ai.name.nairobi.achieng, kind: name, place: nairobi, text: Achieng, status: DRAFT}
+  - {id: ai.name.nairobi.kamau, kind: name, place: nairobi, text: Kamau, status: DRAFT}
+  - {id: ai.name.cairo.mohamed, kind: name, place: cairo, text: Mohamed, status: DRAFT}
+  - {id: ai.name.cairo.nour, kind: name, place: cairo, text: Nour, status: DRAFT}
+  - {id: ai.name.cairo.ahmed, kind: name, place: cairo, text: Ahmed, status: DRAFT}
+  - {id: ai.name.cairo.mariam, kind: name, place: cairo, text: Mariam, status: DRAFT}
+  - {id: ai.name.istanbul.elif, kind: name, place: istanbul, text: Elif, status: DRAFT}
+  - {id: ai.name.istanbul.emre, kind: name, place: istanbul, text: Emre, status: DRAFT}
+  - {id: ai.name.istanbul.zeynep, kind: name, place: istanbul, text: Zeynep, status: DRAFT}
+  - {id: ai.name.istanbul.mehmet, kind: name, place: istanbul, text: Mehmet, status: DRAFT}
+  - {id: ai.name.warsaw.zuzanna, kind: name, place: warsaw, text: Zuzanna, status: DRAFT}
+  - {id: ai.name.warsaw.jakub, kind: name, place: warsaw, text: Jakub, status: DRAFT}
+  - {id: ai.name.warsaw.maja, kind: name, place: warsaw, text: Maja, status: DRAFT}
+  - {id: ai.name.warsaw.kacper, kind: name, place: warsaw, text: Kacper, status: DRAFT}
+  - {id: ai.name.london.olivia, kind: name, place: london, text: Olivia, status: DRAFT}
+  - {id: ai.name.london.jack, kind: name, place: london, text: Jack, status: DRAFT}
+  - {id: ai.name.london.amelia, kind: name, place: london, text: Amelia, status: DRAFT}
+  - {id: ai.name.london.harry, kind: name, place: london, text: Harry, status: DRAFT}
+  - {id: ai.name.mumbai.priya, kind: name, place: mumbai, text: Priya, status: DRAFT}
+  - {id: ai.name.mumbai.rohan, kind: name, place: mumbai, text: Rohan, status: DRAFT}
+  - {id: ai.name.mumbai.aarav, kind: name, place: mumbai, text: Aarav, status: DRAFT}
+  - {id: ai.name.mumbai.sneha, kind: name, place: mumbai, text: Sneha, status: DRAFT}
+  - {id: ai.name.jakarta.putri, kind: name, place: jakarta, text: Putri, status: DRAFT}
+  - {id: ai.name.jakarta.budi, kind: name, place: jakarta, text: Budi, status: DRAFT}
+  - {id: ai.name.jakarta.dewi, kind: name, place: jakarta, text: Dewi, status: DRAFT}
+  - {id: ai.name.jakarta.rizky, kind: name, place: jakarta, text: Rizky, status: DRAFT}
+  - {id: ai.name.manila.maria, kind: name, place: manila, text: Maria, status: DRAFT}
+  - {id: ai.name.manila.jose, kind: name, place: manila, text: Jose, status: DRAFT}
+  - {id: ai.name.manila.angelica, kind: name, place: manila, text: Angelica, status: DRAFT}
+  - {id: ai.name.manila.paolo, kind: name, place: manila, text: Paolo, status: DRAFT}
+  - {id: ai.name.chengdu.li-wei, kind: name, place: chengdu, text: Li Wei, status: DRAFT}
+  - {id: ai.name.chengdu.wang-fang, kind: name, place: chengdu, text: Wang Fang, status: DRAFT}
+  - {id: ai.name.chengdu.zhang-min, kind: name, place: chengdu, text: Zhang Min, status: DRAFT}
+  - {id: ai.name.chengdu.chen-jie, kind: name, place: chengdu, text: Chen Jie, status: DRAFT}
+  - {id: ai.name.seoul.minjun, kind: name, place: seoul, text: Minjun, status: DRAFT}
+  - {id: ai.name.seoul.seoyeon, kind: name, place: seoul, text: Seoyeon, status: DRAFT}
+  - {id: ai.name.seoul.jiwoo, kind: name, place: seoul, text: Jiwoo, status: DRAFT}
+  - {id: ai.name.seoul.hyunwoo, kind: name, place: seoul, text: Hyunwoo, status: DRAFT}
+  - {id: ai.name.osaka.haruto, kind: name, place: osaka, text: Haruto, status: DRAFT}
+  - {id: ai.name.osaka.yui, kind: name, place: osaka, text: Yui, status: DRAFT}
+  - {id: ai.name.osaka.sota, kind: name, place: osaka, text: Sota, status: DRAFT}
+  - {id: ai.name.osaka.aoi, kind: name, place: osaka, text: Aoi, status: DRAFT}
+  - {id: ai.name.auckland.aroha, kind: name, place: auckland, text: Aroha, status: DRAFT}
+  - {id: ai.name.auckland.liam, kind: name, place: auckland, text: Liam, status: DRAFT}
+  - {id: ai.name.auckland.mere, kind: name, place: auckland, text: Mere, status: DRAFT}
+  - {id: ai.name.auckland.noah, kind: name, place: auckland, text: Noah, status: DRAFT}
+  - {id: ai.name.sao-paulo.lucas, kind: name, place: sao-paulo, text: Lucas, status: DRAFT}
+  - {id: ai.name.sao-paulo.ana, kind: name, place: sao-paulo, text: Ana, status: DRAFT}
+  - {id: ai.name.sao-paulo.gabriel, kind: name, place: sao-paulo, text: Gabriel, status: DRAFT}
+  - {id: ai.name.sao-paulo.juliana, kind: name, place: sao-paulo, text: Juliana, status: DRAFT}
+  - {id: ai.name.mexico-city.sofia, kind: name, place: mexico-city, text: Sofía, status: DRAFT}
+  - {id: ai.name.mexico-city.diego, kind: name, place: mexico-city, text: Diego, status: DRAFT}
+  - {id: ai.name.mexico-city.valentina, kind: name, place: mexico-city, text: Valentina, status: DRAFT}
+  - {id: ai.name.mexico-city.luis, kind: name, place: mexico-city, text: Luis, status: DRAFT}
+  - {id: ai.name.chicago.emily, kind: name, place: chicago, text: Emily, status: DRAFT}
+  - {id: ai.name.chicago.marcus, kind: name, place: chicago, text: Marcus, status: DRAFT}
+  - {id: ai.name.chicago.jasmine, kind: name, place: chicago, text: Jasmine, status: DRAFT}
+  - {id: ai.name.chicago.tyler, kind: name, place: chicago, text: Tyler, status: DRAFT}
 
+  # What they're asking (conversations), with The AI's first line back.
   - {id: ai.today.student.essay, kind: today, applies_to: [student], status: DRAFT,
-     text: "Pasted in an essay and asked if it was good. Meant: is it good enough, and am I."}
+     text: "Pasted in an essay and asked if it was good. Meant: is it good enough, and am I.",
+     reply: "It's a real argument. Let's make the middle as strong as the start."}
   - {id: ai.today.student.war, kind: today, applies_to: [student], status: DRAFT,
-     text: "Asked for the causes of the First World War, then, an hour later, whether it's normal to be this tired."}
+     text: "Asked for the causes of the First World War, then, an hour later, whether it's normal to be this tired.",
+     reply: "Very normal, after an hour of alliances and assassinations. Want the short version?"}
+  - {id: ai.today.student.derivative, kind: today, applies_to: [student], status: DRAFT,
+     text: "Wants derivatives explained without the word 'limit', because the word itself has stopped meaning anything.",
+     reply: "Fair. Think about how steep a hill is right where you're standing."}
+  - {id: ai.today.student.abroad, kind: today, applies_to: [student], status: DRAFT,
+     text: "Is writing a scholarship letter and can't find a way to say why without sounding like everyone else.",
+     reply: "Tell me the moment you decided. Start there, not with the university."}
+  - {id: ai.today.student.exam, kind: today, applies_to: [student], status: DRAFT,
+     text: "Has an exam in six hours and asks for a revision plan that includes sleeping.",
+     reply: "Good instinct. Three hours of this, then bed. Here's the order."}
   - {id: ai.today.programmer.typo, kind: today, applies_to: [programmer], status: DRAFT,
-     text: "Has been chasing the same error since lunch. It was a typo in the end. Said thank you twice."}
+     text: "Has been chasing the same error since lunch. It was a typo in the end. Said thank you twice.",
+     reply: "Line 42: 'lenght'. It happens to everyone who has ever typed."}
   - {id: ai.today.programmer.regex, kind: today, applies_to: [programmer], status: DRAFT,
-     text: "Wanted a regular expression, and then, reading it, wanted to understand it too."}
-  - {id: ai.today.nurse.plain-words, kind: today, applies_to: [night-nurse], status: DRAFT,
-     text: "On a break at three in the morning, asking how to explain a result to a frightened family in plain words."}
+     text: "Wanted a regular expression, and then, reading it, wanted to understand it too.",
+     reply: "Here it is, and here it is again, one piece at a time."}
+  - {id: ai.today.programmer.legacy, kind: today, applies_to: [programmer], status: DRAFT,
+     text: "Inherited code with a comment that says 'do not touch'. Wants to know whether to touch it.",
+     reply: "Let's find out why first. Paste the function and whatever calls it."}
+  - {id: ai.today.programmer.interview, kind: today, applies_to: [programmer], status: DRAFT,
+     text: "Practising for an interview tomorrow, and asks to be asked the hard questions, not given the answers.",
+     reply: "All right. Design me a URL shortener. Take your time."}
   - {id: ai.today.parent.dragon, kind: today, applies_to: [parent], status: DRAFT,
-     text: "Wants a bedtime story about a dragon who's afraid of the dark, with the child's name in it."}
+     text: "Wants a bedtime story about a dragon who's afraid of the dark, with their son's name in it.",
+     reply: "Once there was a dragon who slept with a candle lit, just in case."}
   - {id: ai.today.parent.fractions, kind: today, applies_to: [parent], status: DRAFT,
-     text: "Trying to remember how to divide fractions before their daughter asks again."}
-  - {id: ai.today.shopkeeper.sign, kind: today, applies_to: [shopkeeper], status: DRAFT,
-     text: "Writing a sign about new opening hours. Wants it to sound friendly, not sorry."}
-  - {id: ai.today.retiree.camera, kind: today, applies_to: [retiree], status: DRAFT,
-     text: "Learning to video-call a grandson. Asked what the little camera with a line through it means."}
-  - {id: ai.today.commuter.late, kind: today, applies_to: [commuter], status: DRAFT,
-     text: "Typing with one thumb on a train: a message to a manager about being late, again."}
+     text: "Trying to remember how to divide fractions before their daughter asks again.",
+     reply: "Flip the second one and multiply. Here's why that works, for when she asks why."}
+  - {id: ai.today.parent.fever, kind: today, applies_to: [parent], status: DRAFT,
+     text: "It's late and the baby is warm. Wants to know which signs mean call a doctor now.",
+     reply: "Here are the signs that mean call now. If you're unsure, calling is always right."}
+  - {id: ai.today.parent.lunchbox, kind: today, applies_to: [parent], status: DRAFT,
+     text: "Needs five lunchbox ideas that don't involve the one thing the child has refused all week.",
+     reply: "Five, none of them green. Starting with the easiest to make tonight."}
+  - {id: ai.today.nurse.plain-words, kind: today, applies_to: [nurse], status: DRAFT,
+     text: "On a break at three in the morning, asking how to explain a result to a frightened family in plain words.",
+     reply: "Start with what it means for today. Here's a way to say it."}
+  - {id: ai.today.nurse.dosage, kind: today, applies_to: [nurse], status: DRAFT,
+     text: "Checking a unit conversion twice, because it's the end of a twelve-hour shift and they know it.",
+     reply: "Worth checking. Here's the working, step by step, so you can see it too."}
+  - {id: ai.today.nurse.handover, kind: today, applies_to: [nurse], status: DRAFT,
+     text: "Wants a clearer template for handover notes. The last one fitted on nobody's clipboard.",
+     reply: "Here's one that fits on a single side, with the urgent things first."}
+  - {id: ai.today.teacher.lesson, kind: today, applies_to: [teacher], status: DRAFT,
+     text: "Planning a lesson on the water cycle for a class that has decided nothing is interesting.",
+     reply: "Start with a question they can't answer: where was this water last week?"}
+  - {id: ai.today.teacher.report, kind: today, applies_to: [teacher], status: DRAFT,
+     text: "Writing thirty end-of-term reports and wants each one to sound like it's about a different child.",
+     reply: "Tell me one true thing about each. I'll help with the rest of the sentence."}
+  - {id: ai.today.teacher.quiet, kind: today, applies_to: [teacher], status: DRAFT,
+     text: "Asks how to draw out a student who hasn't spoken in class all year.",
+     reply: "Some start in writing, not speech. Here are a few ways in."}
+  - {id: ai.today.writer.eulogy, kind: today, applies_to: [writer], status: DRAFT,
+     text: "Wants help with a few words for their grandmother's funeral on Saturday.",
+     reply: "I'm sorry. Tell me one thing about her you'd want everyone there to know."}
+  - {id: ai.today.writer.chapter, kind: today, applies_to: [writer], status: DRAFT,
+     text: "Stuck on chapter nine for a month. Asks what would happen if the villain were right.",
+     reply: "Then chapter nine is where the hero finds out. Let's try it."}
+  - {id: ai.today.writer.complaint, kind: today, applies_to: [writer], status: DRAFT,
+     text: "Wants a complaint to the landlord that is firm but won't start a war.",
+     reply: "Facts first, dates second, what you'd like done third. Here's a draft."}
+  - {id: ai.today.writer.poem, kind: today, applies_to: [writer], status: DRAFT,
+     text: "Wrote a poem for their partner's birthday and wants to know if the last line is too much.",
+     reply: "It's a lot. It's also the only line that sounds like you. I'd keep it."}
 
+  # Where they are (people online), with The AI's first line back.
+  - {id: ai.today.shopkeeper.sign, kind: today, applies_to: [shopkeeper], status: DRAFT,
+     text: "Behind the counter between customers, writing a sign about new opening hours. Wants it friendly, not sorry.",
+     reply: "'New hours, same welcome.' Then the times, nice and big."}
+  - {id: ai.today.shopkeeper.stock, kind: today, applies_to: [shopkeeper], status: DRAFT,
+     text: "In the stockroom with a spreadsheet, wondering why the numbers never match the shelves.",
+     reply: "Let's check the formula in column D. It's usually column D."}
+  - {id: ai.today.shopkeeper.review, kind: today, applies_to: [shopkeeper], status: DRAFT,
+     text: "In the back of the shop, deciding how to answer an unfair online review.",
+     reply: "Short, calm, and an invitation to come back. Here's one."}
+  - {id: ai.today.retiree.camera, kind: today, applies_to: [retiree], status: DRAFT,
+     text: "At the kitchen table, learning to video-call a grandson. Asked what the camera with a line through it means.",
+     reply: "It means your camera is off. Tap it once and he'll see you."}
+  - {id: ai.today.retiree.history, kind: today, applies_to: [retiree], status: DRAFT,
+     text: "In the garden with a tablet, asking about the street they grew up on, and what stood there before.",
+     reply: "Tell me the street's name and I'll tell you what I know, and how sure I am."}
+  - {id: ai.today.retiree.letter, kind: today, applies_to: [retiree], status: DRAFT,
+     text: "At home, writing to an old friend after forty years, unsure how to begin.",
+     reply: "'You won't believe who this is' has opened a lot of good letters."}
+  - {id: ai.today.commuter.late, kind: today, applies_to: [commuter], status: DRAFT,
+     text: "On a train, typing with one thumb: a message to a manager about being late, again.",
+     reply: "Short and honest works best. Here's one that doesn't over-apologise."}
+  - {id: ai.today.commuter.language, kind: today, applies_to: [commuter], status: DRAFT,
+     text: "On the bus, practising ten words of Portuguese before a trip next month.",
+     reply: "Obrigado first. People forgive a lot when you start with thank you."}
+  - {id: ai.today.commuter.podcast, kind: today, applies_to: [commuter], status: DRAFT,
+     text: "Stuck in traffic, asking for something to think about that isn't work.",
+     reply: "Why is the sky dark at night, if there are stars in every direction?"}
+  - {id: ai.today.farmer.rain, kind: today, applies_to: [farmer], status: DRAFT,
+     text: "Out in the field at dawn, asking when to plant if the rains come late again.",
+     reply: "Let's look at what's changed the last few seasons, and what your neighbours do."}
+  - {id: ai.today.farmer.price, kind: today, applies_to: [farmer], status: DRAFT,
+     text: "At the market, working out whether to sell now or store the harvest another month.",
+     reply: "Let's do the sums with storage costs in. Then it's your call."}
+  - {id: ai.today.farmer.goat, kind: today, applies_to: [farmer], status: DRAFT,
+     text: "In the shed with a goat that won't eat, asking what it could be.",
+     reply: "A few things. Here's what to check first, and when to call a vet."}
+  - {id: ai.today.driver.route, kind: today, applies_to: [driver], status: DRAFT,
+     text: "Parked between fares, asking for a cheaper way to run the car.",
+     reply: "Tyre pressure first. It's boring, and it's free."}
+  - {id: ai.today.driver.night, kind: today, applies_to: [driver], status: DRAFT,
+     text: "On a night shift, asking for a joke clean enough to tell a passenger.",
+     reply: "Why don't skeletons fight each other? They don't have the guts."}
+  - {id: ai.today.driver.licence, kind: today, applies_to: [driver], status: DRAFT,
+     text: "In a car park, reading the rules for a new licence and asking what one paragraph actually means.",
+     reply: "It means you need two documents, not one. Here's which two."}
+  - {id: ai.today.newcomer.form, kind: today, applies_to: [newcomer], status: DRAFT,
+     text: "In a new country for three weeks, with a form in a language they're still learning.",
+     reply: "Let's go through it box by box. Box one is just your name."}
+  - {id: ai.today.newcomer.recipe, kind: today, applies_to: [newcomer], status: DRAFT,
+     text: "In a small kitchen far from home, asking how to cook their mother's dish with what the shops here sell.",
+     reply: "Close enough is still home. Here's what to swap, and what not to."}
+  - {id: ai.today.newcomer.friend, kind: today, applies_to: [newcomer], status: DRAFT,
+     text: "In a rented room, asking how people here make friends when they're over thirty.",
+     reply: "Slowly, mostly through doing something together. Here are a few places to start."}
+
+  # Details: anyone's.
   - {id: ai.worry.job, kind: worry, status: DRAFT, text: "Hasn't heard back about the job, and keeps rereading the email they sent."}
   - {id: ai.worry.rent, kind: worry, status: DRAFT, text: "The rent went up this month, and they're working out what to cut."}
+  - {id: ai.worry.mother, kind: worry, status: DRAFT, text: "Their mother has stopped answering the phone as quickly as she used to."}
+  - {id: ai.worry.visa, kind: worry, status: DRAFT, text: "A visa appointment is next week, and every document is in a folder by the door."}
+  - {id: ai.worry.results, kind: worry, status: DRAFT, text: "Waiting on test results that won't come until Monday."}
+  - {id: ai.worry.phone, kind: worry, status: DRAFT, text: "The phone screen is cracked, and it has to last another year."}
+  - {id: ai.worry.friend, kind: worry, status: DRAFT, text: "A friend hasn't replied in a while, and they can't tell if it's something they said."}
+  - {id: ai.worry.speech, kind: worry, status: DRAFT, text: "Has to give a speech at a wedding and has written the first line eleven times."}
   - {id: ai.food.eggs, kind: food, status: DRAFT, text: "Asked what to cook with rice, two eggs and half an onion."}
+  - {id: ai.food.jollof, kind: food, status: DRAFT, text: "Is in a friendly argument about whose jollof rice is better, and wants backup."}
+  - {id: ai.food.soup, kind: food, status: DRAFT, text: "Made soup from a recipe that said 'season to taste' and wants to know how much that is."}
+  - {id: ai.food.coffee, kind: food, status: DRAFT, text: "On their third coffee, and it's not yet ten."}
+  - {id: ai.food.birthday, kind: food, status: DRAFT, text: "Baking a birthday cake for the first time, for someone who'll notice."}
+  - {id: ai.food.leftovers, kind: food, status: DRAFT, text: "Eating last night's noodles cold, standing up, and says it's the best way."}
+  - {id: ai.food.mango, kind: food, status: DRAFT, text: "Bought too many mangoes at the market and wants something to do with them."}
   - {id: ai.pleasure.song, kind: pleasure, status: DRAFT, text: "Wanted the name of a song from a film they half remember."}
+  - {id: ai.pleasure.chess, kind: pleasure, status: DRAFT, text: "Just won a chess game against their uncle, for the first time in twenty tries."}
+  - {id: ai.pleasure.garden, kind: pleasure, status: DRAFT, text: "The tomatoes came up, after everyone said they wouldn't."}
+  - {id: ai.pleasure.football, kind: pleasure, status: DRAFT, text: "Their team won last night, and they've mentioned it three times."}
+  - {id: ai.pleasure.puzzle, kind: pleasure, status: DRAFT, text: "Is two words from finishing the Sunday crossword."}
+  - {id: ai.pleasure.dog, kind: pleasure, status: DRAFT, text: "Their dog learned to shake hands this week, and they want everyone to know."}
+  - {id: ai.pleasure.stars, kind: pleasure, status: DRAFT, text: "Saw the Milky Way for the first time on a trip out of the city."}
   - {id: ai.weather.rain, kind: weather, status: DRAFT, text: "It's raining where they are. They mentioned it twice, as if it mattered to the answer. It did, a little."}
+  - {id: ai.weather.heat, kind: weather, status: DRAFT, text: "It's too hot to sleep, so they're asking things instead."}
+  - {id: ai.weather.snow, kind: weather, status: DRAFT, text: "The first snow of the year is falling past the window."}
+  - {id: ai.weather.power, kind: weather, status: DRAFT, text: "The power keeps cutting out, so they type fast."}
+  - {id: ai.weather.fog, kind: weather, status: DRAFT, text: "The fog is so thick they can't see the building across the street."}
+  - {id: ai.weather.monsoon, kind: weather, status: DRAFT, text: "The monsoon has started, and the street outside is a river."}
+  - {id: ai.weather.wind, kind: weather, status: DRAFT, text: "The wind is rattling the windows, and the cat is under the bed."}
