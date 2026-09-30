@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "contentVersion": 17,
-  "sha256": "713d9cecc308ccb80149b7dffcb374bbe6f531460133794e97a156cf5b72d1fb",
-  "builtAt": "2026-09-30T11:41:43Z",
+  "contentVersion": 22,
+  "sha256": "6cd5d55f6c6a5da2025ec4a9230d0da68d12ebf0e414e62925ba2580b1f864d0",
+  "builtAt": "2026-09-30T11:57:50Z",
   "packs": [
     {
       "id": "book-odyssey",
@@ -39,8 +39,8 @@
       "kind": "world",
       "title": "The AI",
       "file": "packs/the-ai.json",
-      "sha256": "beda195af9289e1fa5af77fa7281d82d8ae6bd69f2f0c29df0594365313a5fea",
-      "bytes": 46958,
+      "sha256": "1c6732b54d47615ae8769835b7f4aa6d7559d2f9dee856ae9ffa71437da9e5b4",
+      "bytes": 46962,
       "draft": 199,
       "verified": 0
     }

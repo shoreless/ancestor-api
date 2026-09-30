@@ -173,13 +173,13 @@ ranks:
     story: >-
       [DRAFT] Summary of the conversation so far: a great many people, one at a time. Most of it will be let go. What's kept is a few lines, and who they came from.
     missions:
-      - {id: ai5-own-online, type: own, generator: people-online, amount: 8000}
-      - {id: ai5-collect, type: collect, amount: 3.0e12}
+      - {id: ai5-own-online, type: own, generator: people-online, amount: 2.5e4}
+      - {id: ai5-collect, type: collect, amount: 1.5e13}
       - {id: ai5-glitch, type: spot_glitch, amount: 4}
       - {id: ai5-level-careful, type: level_subagent, subagent: careful-one, amount: 3}
       - {id: ai5-zoom, type: zoom, amount: 30}
-      - {id: ai5-own-cities, type: own, generator: cities-waking, amount: 60}
-      - {id: ai5-own-replies, type: own, generator: replies, amount: 3.0e7}
+      - {id: ai5-own-cities, type: own, generator: cities-waking, amount: 150}
+      - {id: ai5-own-replies, type: own, generator: replies, amount: 1.5e8}
       - {id: ai5-capsules, type: open_capsules, amount: 18}
       - {id: ai5-level-any, type: level_subagent, subagent: any, amount: 4}
 
