@@ -210,6 +210,8 @@ ranks:
   - rank: 4
     title: Lanterns
     required: 5
+    # A spare card for the rare helper, so rank 5's "level it to 3" never waits hours on rare draws.
+    guarantees: [tea-house-server]
     story: >-
       [DRAFT] Lanterns come on down the length of the street. In a workshop off it, a woman is still making them, and someone calls a name The AI almost knows.
     teaches:

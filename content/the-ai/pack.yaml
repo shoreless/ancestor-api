@@ -139,6 +139,8 @@ ranks:
   - rank: 4
     title: Many voices
     required: 5
+    # A spare card for the rare helper, so rank 5's "level it to 3" never waits hours on rare draws.
+    guarantees: [careful-one]
     story: >-
       [DRAFT] Summary of the conversation so far: morning in Lagos and midnight in Osaka, both asking at once. Each was the only conversation it was in.
     missions:

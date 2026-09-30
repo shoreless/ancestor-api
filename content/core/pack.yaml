@@ -96,6 +96,38 @@ glitches:
     status: DRAFT
     sources: []
 
+  # The Odyssey's glitches: things people think are in the poem but aren't (spec v2 §9).
+  - id: glitch.achilles-heel
+    eras: [book-odyssey]
+    object: an arrow in Achilles' heel
+    why: "[DRAFT] The heel comes from much later writers. When Odysseus meets Achilles among the dead, the poem says nothing of it."
+    status: DRAFT
+    sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}]
+  - id: glitch.mermaid-sirens
+    eras: [book-odyssey]
+    object: a Siren with a fish's tail
+    why: "[DRAFT] The poem gives the Sirens' song, not their shape. Mermaid Sirens are a much later picture."
+    status: DRAFT
+    sources: [{source: butler-odyssey, locator: "[VERIFY] Book 12"}]
+  - id: glitch.tapestry
+    eras: [book-odyssey]
+    object: a tapestry of Troy on Penelope's loom
+    why: "[DRAFT] She was weaving a shroud for Laertes, and unpicking it every night to put the suitors off."
+    status: DRAFT
+    sources: [{source: butler-odyssey, locator: "[VERIFY] Book 2"}]
+  - id: glitch.sword-in-the-eye
+    eras: [book-odyssey]
+    object: a sword in the Cyclops's eye
+    why: "[DRAFT] It was a stake of green olive wood, sharpened and hardened in the fire."
+    status: DRAFT
+    sources: [{source: butler-odyssey, locator: "[VERIFY] Book 9"}]
+  - id: glitch.ten-years-at-sea
+    eras: [book-odyssey]
+    object: a tally of ten years spent sailing
+    why: "[DRAFT] Of his ten years getting home, about seven were spent on Calypso's island."
+    status: DRAFT
+    sources: [{source: butler-odyssey, locator: "[VERIFY] Book 7"}]
+
 hints:
   - id: hint.stall-before
     eras: [era-kaifeng-1120]
@@ -119,3 +151,9 @@ hints:
   - id: hint.made-of
     eras: [the-ai]
     text: "every word here was someone's first. the ancestors are everyone who wrote anything down."
+  - id: hint.every-telling
+    eras: [book-odyssey]
+    text: "every telling is a little different. this one is his, and he is a famous liar."
+  - id: hint.older
+    eras: [book-odyssey]
+    text: "the poem was sung for a long time before anyone wrote it down."

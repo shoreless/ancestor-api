@@ -1,0 +1,78 @@
+# Helpers: loyal people of Odysseus's household and of the Phaeacian hall, found in event chests (spec v2 §9).
+# Each page cites its book in Butler's translation. ALL DRAFT.
+
+level_cost:
+  clarity_base: 40
+  clarity_growth: 1.8
+  cards_base: 1
+
+subagents:
+  - id: eumaeus
+    name: Eumaeus the swineherd
+    rarity: common
+    effect: {type: automate, generator: listeners, speed_per_level: 0.12}
+    pages:
+      - {level: 1, title: The swineherd's hut, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 14"}],
+         text: "[DRAFT] He took in an old beggar, fed him, and listened to his long, made-up story, without knowing it was his own master."}
+      - {level: 2, title: His own story, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 15"}],
+         text: "[DRAFT] He was born a king's son on a far island, stolen as a child by Phoenician traders, and sold to Laertes."}
+      - {level: 3, title: The scar, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 21"}],
+         text: "[DRAFT] Shown the old scar, he knew his master, and wept."}
+      - {level: 4, title: Beside him, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 22"}],
+         text: "[DRAFT] He fought beside Odysseus and Telemachus in the hall."}
+
+  - id: phemius
+    name: Phemius the bard
+    rarity: common
+    effect: {type: automate, generator: songs, speed_per_level: 0.12}
+    pages:
+      - {level: 1, title: Singing for the suitors, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 1"}],
+         text: "[DRAFT] He sang for the suitors in Odysseus's hall because they made him. His song was the sad homecoming of the Greeks from Troy."}
+      - {level: 2, title: Penelope's tears, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 1"}],
+         text: "[DRAFT] Penelope came down and asked him to sing something else. Telemachus said a bard should sing what moves him."}
+      - {level: 3, title: Spared, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 22"}],
+         text: "[DRAFT] When the fighting came, he clasped Odysseus's knees and begged; Telemachus said he had sung under force, and he was spared."}
+      - {level: 4, title: Self-taught, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 22"}],
+         text: "[DRAFT] He said no one taught him: a god put every kind of song into his heart."}
+
+  - id: medon
+    name: Medon the herald
+    rarity: rare
+    effect: {type: multiply, scope: era, per_level: 0.10}
+    pages:
+      - {level: 1, title: Overheard, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 4"}],
+         text: "[DRAFT] He overheard the suitors plotting to ambush Telemachus at sea, and told Penelope."}
+      - {level: 2, title: In the hall, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 16"}],
+         text: "[DRAFT] He served the suitors' feasts and kept faith with the household all the same."}
+      - {level: 3, title: Under the chair, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 22"}],
+         text: "[DRAFT] In the fight he hid under a chair wrapped in a fresh oxhide, and Telemachus asked that he be spared."}
+      - {level: 4, title: For peace, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 24"}],
+         text: "[DRAFT] He told the angry Ithacans that he had seen a god standing beside Odysseus."}
+
+  - id: philoetius
+    name: Philoetius the cowherd
+    rarity: common
+    effect: {type: automate, generator: feasts, speed_per_level: 0.12}
+    pages:
+      - {level: 1, title: The cowherd, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 20"}],
+         text: "[DRAFT] He brought a heifer across from the mainland for the suitors' feast, and greeted the ragged beggar kindly."}
+      - {level: 2, title: Missing him, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 20"}],
+         text: "[DRAFT] Seeing the beggar, he thought of his master, perhaps wandering in rags somewhere too, and his eyes filled."}
+      - {level: 3, title: The scar, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 21"}],
+         text: "[DRAFT] He was shown the scar with Eumaeus, and both men wept."}
+      - {level: 4, title: The gate, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 21"}],
+         text: "[DRAFT] He barred the courtyard gates, so no one could leave once the bow was strung."}
+
+  - id: pontonous
+    name: Pontonous the herald
+    rarity: common
+    effect: {type: automate, generator: the-hall, speed_per_level: 0.12}
+    pages:
+      - {level: 1, title: Mixing the wine, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 7"}],
+         text: "[DRAFT] At the king's word he mixed wine for the guests, so they could pour it for the gods."}
+      - {level: 2, title: The bard's chair, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+         text: "[DRAFT] He set a chair for Demodocus against a pillar, and hung the lyre where he could reach it."}
+      - {level: 3, title: Leading him out, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+         text: "[DRAFT] He took the bard by the hand and led him out to the games."}
+      - {level: 4, title: The last cup, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 13"}],
+         text: "[DRAFT] Before the stranger sailed, he mixed one more bowl so everyone could pour for Zeus."}

@@ -26,3 +26,12 @@ gernet:
   note: >-
     Social history of Southern Song Hangzhou, not Kaifeng. Use only for things that plausibly carried
     over, and say so in the fragment.
+
+butler-odyssey:
+  title: "The Odyssey"
+  author: Homer, translated by Samuel Butler
+  year: 1900
+  url: https://www.gutenberg.org/ebooks/1727
+  note: >-
+    Prose translation, public domain. Cite by book ("Book 12"). Butler uses Latin names for the gods and for
+    Odysseus (Ulysses, Minerva, Jove); the game says Odysseus and Athena, and quotes nothing longer than a phrase.

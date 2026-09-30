@@ -1,0 +1,231 @@
+# World pack: The Odyssey, as an event. The first book event (spec v2 §9). ALL DRAFT.
+# Based on the poem only, in Samuel Butler's prose translation (1900, public domain), cited by book. Nothing from any
+# film or adaptation. The chain is the telling: Odysseus narrating his wanderings in the hall of Alcinous (Books 9–12).
+# Balance is Kaifeng's event tuning (1 to 2 hours of mixed play).
+
+id: book-odyssey
+kind: world
+title: The Odyssey
+subtitle: Homer, in Samuel Butler's translation
+status: DRAFT
+
+event:
+  opens_at_rank: 3
+  duration_days: 5
+  asked_by: Someone who saw a film of it last night
+  question: What's actually in Homer's Odyssey?
+  through: >-
+    The AI goes in through the poem itself, in Samuel Butler's prose translation of 1900. Butler calls him Ulysses
+    and the goddess Minerva; the story is the same.
+  reward:
+    subagent:
+      id: eurycleia
+      name: Eurycleia, the old nurse
+      rarity: legendary
+      effect: {type: bonus_chance, per_level: 0.02}
+      pages:
+        - {level: 1, title: The nurse, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 1"}],
+           text: "[DRAFT] Laertes bought her when she was young, for the worth of twenty oxen, and honoured her like his own wife. She nursed Odysseus, and then his son."}
+        - {level: 2, title: The scar, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 19"}],
+           text: "[DRAFT] Washing the old beggar's feet, she felt the scar a boar gave him when he was young, and knew him, and let his foot fall into the basin."}
+        - {level: 3, title: The secret, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 19"}],
+           text: "[DRAFT] He caught her by the throat before she could cry out. She promised to keep his secret, and kept it."}
+
+currency:
+  id: gifts
+  name: guest-gifts
+
+attention_per_second: 0.8
+
+look: >-
+  [DRAFT] Golden youths hold torches over the feast. {listeners:listener leans:listeners lean} in, {songs:song has:songs have}
+  been sung, and the stranger has not yet said his name.
+
+start:
+  gifts: 10
+  attention: 5
+  generators: {listeners: 1}
+
+generators:
+  - id: listeners
+    tier: 1
+    name: Listeners
+    base_cost: 5
+    attention_cost: 1
+    cost_growth: 1.08
+    cycle_seconds: 1.0
+    output_per_unit: 1
+    people: [nausicaa, arete, demodocus, euryalus, alcinous]
+
+  - id: songs
+    tier: 2
+    name: Songs
+    base_cost: 60
+    attention_cost: 3
+    cost_growth: 1.10
+    cycle_seconds: 3.0
+    output_per_unit: 1
+    unlock_at: 10
+    people: [elpenor, polites, eurylochus, rower, anticlea]
+
+  - id: feasts
+    tier: 3
+    name: Feasts
+    base_cost: 4000
+    attention_cost: 8
+    cost_growth: 1.12
+    cycle_seconds: 8.0
+    output_per_unit: 1
+    unlock_at: 10
+    people: []
+
+  - id: the-hall
+    tier: 4
+    name: The hall of Alcinous
+    base_cost: 2.5e5
+    attention_cost: 20
+    cost_growth: 1.15
+    cycle_seconds: 20.0
+    output_per_unit: 1
+    unlock_at: 25
+    people: []
+
+max_active_missions: 3
+
+timed_chest:
+  every_minutes: 45
+  holds: 3
+  first_after_seconds: 45
+  first_guarantees: [eumaeus]
+  contents: {clarity: [20, 40], attention: [10, 20], cards: 3, card_chance: 1.0}
+
+milestones:
+  counts: [10, 25, 50, 100, 250, 500, 1000, 2500]
+  clarity: 5
+  growth: 1.6
+
+attention_upgrades:
+  base_cost: 200
+  cost_growth: 4
+  per_level: 0.5
+
+zoom:
+  clarity: 2
+
+capsules:
+  rank_scale: 1.6
+  rarity_weights: {common: 80, rare: 20}
+  favour_needed: 6
+  small: {clarity: [5, 15], attention: [3, 8], cards: 1, card_chance: 0.5}
+  large: {clarity: [40, 80], attention: [20, 40], cards: 2, card_chance: 1.0}
+
+# Five chapters (spec v2 §9). The chain is the telling; the chapters follow the whole poem.
+ranks:
+  - rank: 1
+    title: Ithaca without him
+    required: 3
+    guarantees: [eumaeus]
+    story: >-
+      [DRAFT] The poem begins not with him but with his son. Telemachus sits among the suitors eating his father's
+      cattle, and a stranger at the door turns out to be a goddess.
+    teaches:
+      title: It starts with his son
+      text: >-
+        The Odyssey opens with Telemachus, not Odysseus. For its first four books Odysseus is only talked about,
+        while his son sails to Pylos and Sparta for news of him.
+      status: DRAFT
+      sources: [{source: butler-odyssey, locator: "[VERIFY] Books 1 to 4"}]
+    missions:
+      - {id: od1-own-listeners, type: own, generator: listeners, amount: 10}
+      - {id: od1-collect, type: collect, amount: 6000}
+      - {id: od1-zoom, type: zoom, amount: 1}
+
+  - rank: 2
+    title: Calypso's island
+    required: 4
+    story: >-
+      [DRAFT] Seven years on an island with a goddess who offers to make him immortal. He sits on the shore each day
+      and looks at the sea. Hermes brings the order to let him go, and he builds a raft.
+    teaches:
+      title: Where we meet him
+      text: >-
+        We first meet Odysseus himself in Book 5, weeping on Calypso's shore. She offers him a life that never ends,
+        and he chooses home, and Penelope, instead.
+      status: DRAFT
+      sources: [{source: butler-odyssey, locator: "[VERIFY] Book 5"}]
+    missions:
+      - {id: od2-own-songs, type: own, generator: songs, amount: 25}
+      - {id: od2-collect, type: collect, amount: 6.0e5}
+      - {id: od2-level, type: level_subagent, subagent: any, amount: 2}
+      - {id: od2-zoom, type: zoom, amount: 3}
+
+  - rank: 3
+    title: The telling
+    required: 4
+    guarantees: [medon]
+    story: >-
+      [DRAFT] In the hall of Alcinous the stranger says his name at last, and tells it all: the Cyclops, the bag of
+      winds, Circe, the dead, the Sirens. By the end of his telling, every man who sailed with him is lost.
+    teaches:
+      title: He tells it himself
+      text: >-
+        The famous adventures, the Cyclops, Circe and the Sirens, are told by Odysseus himself, at a feast, in Books 9
+        to 12. The poem lets its hero narrate his own legend, to people who have no way to check it.
+      status: DRAFT
+      sources: [{source: butler-odyssey, locator: "[VERIFY] Books 9 to 12"}]
+    missions:
+      - {id: od3-own-feasts, type: own, generator: feasts, amount: 25}
+      - {id: od3-collect, type: collect, amount: 2.0e7}
+      - {id: od3-glitch, type: spot_glitch, amount: 1}
+      - {id: od3-capsules, type: open_capsules, amount: 3}
+
+  - rank: 4
+    title: Home in disguise
+    required: 5
+    # A spare card for Medon, so chapter 5's "level Medon to 3" never waits hours on rare draws.
+    guarantees: [medon]
+    story: >-
+      [DRAFT] Home, but as a beggar. The swineherd Eumaeus feeds him without knowing him. At the palace an old dog,
+      lying neglected on a dung heap, knows him at once, lowers his ears, and dies.
+    teaches:
+      title: Argos
+      text: >-
+        Athena disguises Odysseus as an old beggar, and he is recognised one by one. The first to know him is not a
+        person but his old dog Argos, who has waited twenty years.
+      status: DRAFT
+      sources: [{source: butler-odyssey, locator: "[VERIFY] Books 13 to 17 (Argos: Book 17)"}]
+    missions:
+      - {id: od4-own-hall, type: own, generator: the-hall, amount: 15}
+      - {id: od4-collect, type: collect, amount: 2.0e10}
+      - {id: od4-zoom, type: zoom, amount: 8}
+      - {id: od4-level, type: level_subagent, subagent: any, amount: 4}
+      - {id: od4-own-songs, type: own, generator: songs, amount: 1500}
+      - {id: od4-own-feasts, type: own, generator: feasts, amount: 600}
+      - {id: od4-glitch, type: spot_glitch, amount: 2}
+      - {id: od4-capsules, type: open_capsules, amount: 8}
+
+  - rank: 5
+    title: The bow and the bed
+    required: 6
+    story: >-
+      [DRAFT] Only he can string the old bow. And when it is over, Penelope tests him not with the bow but with their
+      bed: one post of it is a living olive tree, and only the two of them know.
+    teaches:
+      title: The bed
+      text: >-
+        Penelope sets the suitors the contest of the bow. Afterwards she tests the stranger herself, asking for their
+        bed to be moved; he protests that it can't be, because he built it around an olive tree.
+      status: DRAFT
+      sources: [{source: butler-odyssey, locator: "[VERIFY] Book 21 (the bow), Book 23 (the bed)"}]
+    missions:
+      - {id: od5-own-feasts, type: own, generator: feasts, amount: 1.2e4}
+      - {id: od5-collect, type: collect, amount: 1.0e13}
+      - {id: od5-glitch, type: spot_glitch, amount: 4}
+      - {id: od5-level-medon, type: level_subagent, subagent: medon, amount: 3}
+      - {id: od5-zoom, type: zoom, amount: 12}
+      - {id: od5-own-hall, type: own, generator: the-hall, amount: 200}
+      - {id: od5-own-listeners, type: own, generator: listeners, amount: 8.0e7}
+      - {id: od5-capsules, type: open_capsules, amount: 18}
+      - {id: od5-level-any, type: level_subagent, subagent: any, amount: 4}
+
+migrations: []

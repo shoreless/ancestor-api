@@ -1,0 +1,164 @@
+# People: characters from the poem, never invented ones presented as real (spec v2 §7, §10). ALL DRAFT.
+# In a book, each occupation is one character: their name applies to them only, and so do their lines. Ages are
+# left out (age: [0, 0]) because the poem rarely gives them. The rower is a composite of the crew, unnamed.
+# Every line cites its book in Samuel Butler's translation; check each against the text before VERIFIED.
+
+occupations:
+  - {id: nausicaa, name: Princess of the Phaeacians, age: [0, 0]}
+  - {id: arete, name: Queen of the Phaeacians, age: [0, 0]}
+  - {id: demodocus, name: The blind bard, age: [0, 0]}
+  - {id: euryalus, name: A young Phaeacian athlete, age: [0, 0]}
+  - {id: alcinous, name: King of the Phaeacians, age: [0, 0]}
+  - {id: elpenor, name: The youngest of the crew, age: [0, 0]}
+  - {id: polites, name: The most trusted of the crew, age: [0, 0]}
+  - {id: eurylochus, name: Odysseus's kinsman and second, age: [0, 0]}
+  - {id: rower, name: One of the crew, age: [0, 0]}
+  - {id: anticlea, name: Odysseus's mother, among the dead, age: [0, 0]}
+
+fragments:
+  # Nausicaa
+  - {id: od.name.nausicaa, kind: name, applies_to: [nausicaa], text: Nausicaa, status: DRAFT}
+  - {id: od.today.nausicaa.1, kind: today, applies_to: [nausicaa], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 6"}],
+     text: "Went down to the washing-pools with her maids, and found a shipwrecked man hiding in the bushes."}
+  - {id: od.today.nausicaa.2, kind: today, applies_to: [nausicaa], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 6"}],
+     text: "Told the stranger to follow her cart only as far as the city walls, so that people wouldn't talk."}
+  - {id: od.pleasure.nausicaa.1, kind: pleasure, applies_to: [nausicaa], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 6"}],
+     text: "Played ball with her maids on the shore while the washing dried."}
+  - {id: od.worry.nausicaa.2, kind: worry, applies_to: [nausicaa], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 6"}],
+     text: "Asked her father for the mule cart to go washing, too shy to mention marriage. He understood anyway."}
+  # Arete
+  - {id: od.name.arete, kind: name, applies_to: [arete], text: Arete, status: DRAFT}
+  - {id: od.today.arete.1, kind: today, applies_to: [arete], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 7"}],
+     text: "Noticed that the stranger was wearing clothes she had made, and asked him who he was."}
+  - {id: od.today.arete.2, kind: today, applies_to: [arete], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 6"}],
+     text: "Is the one Nausicaa told the stranger to kneel to first, before the king."}
+  - {id: od.pleasure.arete.1, kind: pleasure, applies_to: [arete], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 7"}],
+     text: "Is honoured by her people as few women are, and settles their quarrels."}
+  - {id: od.worry.arete.2, kind: worry, applies_to: [arete], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}],
+     text: "Wants the stranger to stay one more night, so the gifts can all be gathered."}
+  # Demodocus
+  - {id: od.name.demodocus, kind: name, applies_to: [demodocus], text: Demodocus, status: DRAFT}
+  - {id: od.today.demodocus.1, kind: today, applies_to: [demodocus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Sang of the quarrel between Odysseus and Achilles, and the stranger hid his face in his cloak and wept."}
+  - {id: od.today.demodocus.2, kind: today, applies_to: [demodocus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Was asked by the stranger for the song of the wooden horse, and sang it."}
+  - {id: od.worry.demodocus.1, kind: worry, applies_to: [demodocus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "The Muse took away his sight, and gave him sweet song in its place."}
+  - {id: od.pleasure.demodocus.2, kind: pleasure, applies_to: [demodocus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "The herald hangs his lyre on a peg above his head, and guides his hand to it."}
+  # Euryalus
+  - {id: od.name.euryalus, kind: name, applies_to: [euryalus], text: Euryalus, status: DRAFT}
+  - {id: od.today.euryalus.1, kind: today, applies_to: [euryalus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Mocked the stranger for looking more like a merchant than an athlete."}
+  - {id: od.today.euryalus.2, kind: today, applies_to: [euryalus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Gave the stranger a bronze sword with a silver hilt, to make amends."}
+  - {id: od.pleasure.euryalus.1, kind: pleasure, applies_to: [euryalus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Won the wrestling at the games."}
+  - {id: od.worry.euryalus.2, kind: worry, applies_to: [euryalus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Was told by the king to apologise, with words and a gift."}
+  # Alcinous
+  - {id: od.name.alcinous, kind: name, applies_to: [alcinous], text: Alcinous, status: DRAFT}
+  - {id: od.today.alcinous.1, kind: today, applies_to: [alcinous], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Asked the stranger at last to tell them his name, his country, and why he wept at the songs."}
+  - {id: od.today.alcinous.2, kind: today, applies_to: [alcinous], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Promised the stranger a ship home. Phaeacian ships need no helmsman: they know where men mean to go."}
+  - {id: od.food.alcinous.1, kind: food, applies_to: [alcinous], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 7"}],
+     text: "Has an orchard where pears, apples and figs ripen all year round."}
+  - {id: od.worry.alcinous.2, kind: worry, applies_to: [alcinous], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Remembers a prophecy that Poseidon would one day punish them for carrying strangers home."}
+  # Elpenor
+  - {id: od.name.elpenor, kind: name, applies_to: [elpenor], text: Elpenor, status: DRAFT}
+  - {id: od.today.elpenor.1, kind: today, applies_to: [elpenor], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Slept on Circe's roof after too much wine, forgot the ladder when he woke, and fell."}
+  - {id: od.today.elpenor.2, kind: today, applies_to: [elpenor], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}],
+     text: "Was the first of the dead to speak to Odysseus, and asked to be buried with his oar."}
+  - {id: od.worry.elpenor.1, kind: worry, applies_to: [elpenor], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Was not much of a fighter, the poem says, and not very clever."}
+  - {id: od.worry.elpenor.2, kind: worry, applies_to: [elpenor], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}],
+     text: "Lay unburied on Circe's island while the others hurried to the ships."}
+  # Polites
+  - {id: od.name.polites, kind: name, applies_to: [polites], text: Polites, status: DRAFT}
+  - {id: od.today.polites.1, kind: today, applies_to: [polites], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Heard someone singing at a loom inside Circe's house, and urged the others to call out."}
+  - {id: od.today.polites.2, kind: today, applies_to: [polites], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Was among the men Circe turned into pigs, though their minds stayed their own."}
+  - {id: od.pleasure.polites.1, kind: pleasure, applies_to: [polites], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Is the man Odysseus calls the dearest and most trusted of his crew."}
+  - {id: od.food.polites.2, kind: food, applies_to: [polites], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Was given cheese, barley and honey in wine by Circe, with her drug in it."}
+  # Eurylochus
+  - {id: od.name.eurylochus, kind: name, applies_to: [eurylochus], text: Eurylochus, status: DRAFT}
+  - {id: od.today.eurylochus.1, kind: today, applies_to: [eurylochus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Would not go into Circe's house, and ran back alone to tell what had happened."}
+  - {id: od.today.eurylochus.2, kind: today, applies_to: [eurylochus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 12"}],
+     text: "Talked the starving crew into killing the Sun-god's cattle."}
+  - {id: od.worry.eurylochus.1, kind: worry, applies_to: [eurylochus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Warns that Odysseus will lead them all to ruin, as he did in the Cyclops's cave."}
+  - {id: od.weather.eurylochus.2, kind: weather, applies_to: [eurylochus], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 12"}],
+     text: "Waited out a month of contrary winds on the Sun-god's island."}
+  # A rower of Ithaca
+  - {id: od.name.rower, kind: name, applies_to: [rower], text: A rower of Ithaca, status: DRAFT}
+  - {id: od.today.rower.1, kind: today, applies_to: [rower], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 12"}],
+     text: "Rowed past the Sirens with beeswax in his ears, and never heard a note."}
+  - {id: od.today.rower.2, kind: today, applies_to: [rower], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "Was one of the men who opened the bag of winds while their captain slept."}
+  - {id: od.today.rower.3, kind: today, applies_to: [rower], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 9"}],
+     text: "Ate the lotus, and wept when he was dragged back to the ship."}
+  - {id: od.weather.rower.1, kind: weather, applies_to: [rower], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 10"}],
+     text: "The winds from the bag blew them all the way back to Aeolus's island."}
+  - {id: od.food.rower.2, kind: food, applies_to: [rower], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 9"}],
+     text: "Feasted on the Cyclops's sheep on the shore, after the escape."}
+  - {id: od.worry.rower.3, kind: worry, applies_to: [rower], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 12"}],
+     text: "Six of his shipmates were taken by Scylla as they passed."}
+  # Anticlea
+  - {id: od.name.anticlea, kind: name, applies_to: [anticlea], text: Anticlea, status: DRAFT}
+  - {id: od.today.anticlea.1, kind: today, applies_to: [anticlea], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}],
+     text: "Came to her son among the dead, and did not know him until she had drunk the blood."}
+  - {id: od.today.anticlea.2, kind: today, applies_to: [anticlea], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}],
+     text: "Told her son that she died of missing him."}
+  - {id: od.worry.anticlea.1, kind: worry, applies_to: [anticlea], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}],
+     text: "Three times he tried to hold her, and three times she passed through his arms like a shadow."}
+  - {id: od.pleasure.anticlea.2, kind: pleasure, applies_to: [anticlea], status: DRAFT,
+     sources: [{source: butler-odyssey, locator: "[VERIFY] Book 11"}],
+     text: "Told him Penelope still waited for him, and Telemachus still kept his lands."}

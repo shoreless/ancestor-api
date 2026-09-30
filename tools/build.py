@@ -283,7 +283,8 @@ def cited_sources(c: Checker, before: set[str]) -> dict:
 
 def build_world(c: Checker, folder: Path, raw: dict) -> dict:
     pid = raw["id"]
-    before = set(c.cited)
+    c.cited = set()  # each pack carries every source it cites, even ones another pack cites too
+    before: set[str] = set()
     people = load_yaml(folder / "people.yaml") or {}
     subs = load_yaml(folder / "subagents.yaml") or {}
     occupations = people.get("occupations", [])
@@ -337,6 +338,8 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
             "sources": c.sourced(where, f, exempt=f["kind"] == "name" and naming is not None),
         })
     for o in occupations:
+        if not any(f["kind"] == "name" and (not f["appliesTo"] or o["id"] in f["appliesTo"]) for f in fragments):
+            c.err(f"{pid} occupation {o['id']}", "has no name that fits it, so zoom can't resolve anyone")
         if not any(f["kind"] == "today" and o["id"] in f["appliesTo"] for f in fragments):
             c.err(f"{pid} occupation {o['id']}", "has no 'today' fragment, so zoom can't resolve anyone")
 
@@ -437,7 +440,8 @@ def build_event_info(c: Checker, pid: str, raw: dict | None, gen_ids: set[str]) 
 
 def build_core(c: Checker, raw: dict, world_ids: set[str]) -> dict:
     pid = raw["id"]
-    before = set(c.cited)
+    c.cited = set()  # each pack carries every source it cites, even ones another pack cites too
+    before: set[str] = set()
     glitches = []
     for g in raw.get("glitches", []):
         where = f"{pid} {g['id']}"
