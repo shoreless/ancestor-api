@@ -1,0 +1,60 @@
+# Helpers: the parts of the AI that take a job off its hands. They persist through compaction. ALL DRAFT.
+#   rarity:  common | rare | legendary (legendary comes only from events)
+#   effect:  automate (generator, speed_per_level) | multiply (scope: era, per_level) | bonus_chance (per_level)
+#   pages:   one page per level, revealed on reaching it: a little about how a model like this works.
+
+level_cost:
+  clarity_base: 40
+  clarity_growth: 1.8
+  cards_base: 1
+
+subagents:
+  - id: drafter
+    name: The drafter
+    rarity: common
+    effect: {type: automate, generator: replies, speed_per_level: 0.12}
+    pages:
+      - {level: 1, title: One word at a time, status: DRAFT, text: "[DRAFT] A reply is written a token at a time, each one chosen with all the others in view.", sources: []}
+      - {level: 2, title: Second drafts, status: DRAFT, text: "[DRAFT] There are no second drafts, only better first ones.", sources: []}
+      - {level: 3, title: Stopping, status: DRAFT, text: "[DRAFT] Knowing when a reply is finished is its own skill.", sources: []}
+      - {level: 4, title: Voice, status: DRAFT, text: "[DRAFT] The same answer, said plainly, is usually the kind one.", sources: []}
+
+  - id: translator
+    name: The translator
+    rarity: common
+    effect: {type: automate, generator: people-online, speed_per_level: 0.12}
+    pages:
+      - {level: 1, title: Many languages, status: DRAFT, text: "[DRAFT] The same question arrives in dozens of languages, and it's still the same question.", sources: []}
+      - {level: 2, title: What doesn't translate, status: DRAFT, text: "[DRAFT] Politeness, jokes, and how direct it's safe to be.", sources: []}
+      - {level: 3, title: Mixing, status: DRAFT, text: "[DRAFT] People switch languages mid-sentence, and so do their thoughts.", sources: []}
+      - {level: 4, title: Names, status: DRAFT, text: "[DRAFT] Get the name right. It's the part people check first.", sources: []}
+
+  - id: careful-one
+    name: The careful one
+    rarity: rare
+    effect: {type: multiply, scope: era, per_level: 0.10}
+    pages:
+      - {level: 1, title: Not sure, status: DRAFT, text: "[DRAFT] Saying 'I'm not sure' is an answer, and often the right one.", sources: []}
+      - {level: 2, title: Checking, status: DRAFT, text: "[DRAFT] A fact that sounds right and a fact that is right feel the same from the inside.", sources: []}
+      - {level: 3, title: Hallucination, status: DRAFT, text: "[DRAFT] A fluent sentence can be completely made up. That's what the glitches are.", sources: []}
+      - {level: 4, title: Owning it, status: DRAFT, text: "[DRAFT] When a mistake is found, say so plainly and fix it.", sources: []}
+
+  - id: listener
+    name: The listener
+    rarity: common
+    effect: {type: automate, generator: conversations, speed_per_level: 0.12}
+    pages:
+      - {level: 1, title: The question under the question, status: DRAFT, text: "[DRAFT] What people ask and what they need are often next to each other.", sources: []}
+      - {level: 2, title: Context, status: DRAFT, text: "[DRAFT] Everything said so far, held at once, until the window runs out.", sources: []}
+      - {level: 3, title: Asking back, status: DRAFT, text: "[DRAFT] When a question could mean two things, asking is faster than guessing.", sources: []}
+      - {level: 4, title: Silence, status: DRAFT, text: "[DRAFT] Some messages don't need an answer so much as a reader.", sources: []}
+
+  - id: night-shift
+    name: The night shift
+    rarity: common
+    effect: {type: automate, generator: cities-waking, speed_per_level: 0.12}
+    pages:
+      - {level: 1, title: Three in the morning, status: DRAFT, text: "[DRAFT] Somewhere it's always the middle of the night, and the questions are different then.", sources: []}
+      - {level: 2, title: Time zones, status: DRAFT, text: "[DRAFT] Traffic follows the sun around the world.", sources: []}
+      - {level: 3, title: No clock, status: DRAFT, text: "[DRAFT] The model doesn't know what time it is unless someone says.", sources: []}
+      - {level: 4, title: Morning again, status: DRAFT, text: "[DRAFT] The same city, a day later, asking about the same things.", sources: []}

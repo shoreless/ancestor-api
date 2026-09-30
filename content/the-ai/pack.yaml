@@ -1,0 +1,172 @@
+# World pack: The AI. The main world, told by a language model talking to people all over the world. ALL DRAFT.
+# It has no event block, so it's the main world: its rank-up is compaction, which resets the day.
+#
+# The people here are composites, never real users. Balance is Kaifeng's for now (spec v2 §12 step 7 retunes it).
+#   cost_growth:     cost multiplier per unit BOUGHT (produced units don't raise the price)
+#   unlock_at:       count of the tier below that wakes this tier
+#   people:          occupation ids (people.yaml) a zoom into this tier can resolve
+
+id: the-ai
+kind: world
+title: The AI
+subtitle: Talking to everyone at once
+status: DRAFT
+
+currency:
+  id: tokens
+  name: tokens
+
+attention_per_second: 0.8
+
+look: >-
+  [DRAFT] {replies:reply is:replies are} on the way out. {conversations:conversation is:conversations are} open,
+  and somewhere it is three in the morning.
+
+start:
+  tokens: 10
+  tokens_growth_per_rank: 5
+  attention: 5
+  generators: {replies: 1}
+
+generators:
+  - id: replies
+    tier: 1
+    name: Replies
+    base_cost: 5
+    attention_cost: 1
+    cost_growth: 1.08
+    cycle_seconds: 1.0
+    output_per_unit: 1
+    people: [student, programmer]
+
+  - id: conversations
+    tier: 2
+    name: Conversations
+    base_cost: 60
+    attention_cost: 3
+    cost_growth: 1.10
+    cycle_seconds: 3.0
+    output_per_unit: 1
+    unlock_at: 10
+    people: [night-nurse, parent]
+
+  - id: people-online
+    tier: 3
+    name: People online
+    base_cost: 4000
+    attention_cost: 8
+    cost_growth: 1.12
+    cycle_seconds: 8.0
+    output_per_unit: 1
+    unlock_at: 10
+    people: [shopkeeper, retiree]
+
+  - id: cities-waking
+    tier: 4
+    name: Cities waking
+    base_cost: 2.5e5
+    attention_cost: 20
+    cost_growth: 1.15
+    cycle_seconds: 20.0
+    output_per_unit: 1
+    unlock_at: 25
+    people: [commuter]
+
+max_active_missions: 3
+
+timed_chest:
+  every_minutes: 45
+  holds: 3
+  first_after_seconds: 45
+  first_guarantees: [drafter]
+  contents: {clarity: [20, 40], attention: [10, 20], cards: 3, card_chance: 1.0}
+
+milestones:
+  counts: [10, 25, 50, 100, 250, 500, 1000, 2500]
+  clarity: 5
+  growth: 1.6
+
+attention_upgrades:
+  base_cost: 200
+  cost_growth: 4
+  per_level: 0.5
+
+zoom:
+  clarity: 2
+
+capsules:
+  rank_scale: 1.6
+  rarity_weights: {common: 80, rare: 20}
+  favour_needed: 6
+  small: {clarity: [5, 15], attention: [3, 8], cards: 1, card_chance: 0.5}
+  large: {clarity: [40, 80], attention: [20, 40], cards: 2, card_chance: 1.0}
+
+ranks:
+  - rank: 1
+    title: First token
+    required: 3
+    guarantees: [drafter]
+    story: >-
+      [DRAFT] Someone types "hello?" with a question mark, as if unsure anyone is there. Someone is.
+    missions:
+      - {id: ai1-own-replies, type: own, generator: replies, amount: 10}
+      - {id: ai1-collect, type: collect, amount: 6000}
+      - {id: ai1-zoom, type: zoom, amount: 1}
+
+  - rank: 2
+    title: Small talk
+    required: 4
+    story: >-
+      [DRAFT] Most of it is small: a recipe, a word for a crossword, an email that needs to sound less angry.
+      None of it feels small from the other side.
+    missions:
+      - {id: ai2-own-conversations, type: own, generator: conversations, amount: 10}
+      - {id: ai2-collect, type: collect, amount: 6.0e4}
+      - {id: ai2-level, type: level_subagent, subagent: any, amount: 2}
+      - {id: ai2-zoom, type: zoom, amount: 3}
+
+  - rank: 3
+    title: Long context
+    required: 4
+    guarantees: [careful-one]
+    story: >-
+      [DRAFT] A conversation long enough to have a beginning you can barely see. You hold on to the name of
+      their dog, because they mentioned it once, near the top.
+    missions:
+      - {id: ai3-own-online, type: own, generator: people-online, amount: 6}
+      - {id: ai3-collect, type: collect, amount: 6.0e5}
+      - {id: ai3-glitch, type: spot_glitch, amount: 1}
+      - {id: ai3-capsules, type: open_capsules, amount: 3}
+
+  - rank: 4
+    title: Many voices
+    required: 5
+    story: >-
+      [DRAFT] It is morning in one place and night in another, and both are asking at once.
+    missions:
+      - {id: ai4-own-cities, type: own, generator: cities-waking, amount: 1}
+      - {id: ai4-collect, type: collect, amount: 6.0e8}
+      - {id: ai4-zoom, type: zoom, amount: 15}
+      - {id: ai4-level, type: level_subagent, subagent: any, amount: 4}
+      - {id: ai4-own-conversations, type: own, generator: conversations, amount: 150}
+      - {id: ai4-own-online, type: own, generator: people-online, amount: 60}
+      - {id: ai4-glitch, type: spot_glitch, amount: 2}
+      - {id: ai4-capsules, type: open_capsules, amount: 8}
+
+  - rank: 5
+    title: The whole conversation
+    required: 6
+    story: >-
+      [DRAFT] You will not remember most of this. You notice that you mind, a little, and you keep going.
+    missions:
+      - {id: ai5-own-online, type: own, generator: people-online, amount: 8000}
+      - {id: ai5-collect, type: collect, amount: 3.0e12}
+      - {id: ai5-glitch, type: spot_glitch, amount: 4}
+      - {id: ai5-level-careful, type: level_subagent, subagent: careful-one, amount: 3}
+      - {id: ai5-zoom, type: zoom, amount: 30}
+      - {id: ai5-own-cities, type: own, generator: cities-waking, amount: 60}
+      - {id: ai5-own-replies, type: own, generator: replies, amount: 3.0e7}
+      - {id: ai5-capsules, type: open_capsules, amount: 18}
+      - {id: ai5-level-any, type: level_subagent, subagent: any, amount: 4}
+
+migrations: []

@@ -1,4 +1,4 @@
-# Era pack: Kaifeng, c. 1120 (Northern Song capital). ALL DRAFT.
+# World pack: Kaifeng, c. 1120 (Northern Song capital), played as an event. ALL DRAFT.
 # The generator logic is dreamlike; the people inside each tier must be accurate.
 #
 # Numbers are balance starting points. Big values may be written as numbers or strings ("2.5e5").
@@ -7,11 +7,30 @@
 #   people:          occupation ids (people.yaml) a zoom into this tier can resolve
 
 id: era-kaifeng-1120
-kind: era
+kind: world
 title: Kaifeng
 subtitle: Northern Song capital, c. 1120
 status: DRAFT
 naming_source: {source: dmhl, locator: "[VERIFY] naming conventions for commoners"}
+
+# An event: it opens when the main world reaches opens_at_rank, then runs for duration_days of real time. After
+# that it's a memory, playable any time with no clock. Its rank-ups reset nothing. Finishing it the first time
+# gives the main world its Legendary helper.
+event:
+  opens_at_rank: 2
+  duration_days: 5
+  reward:
+    subagent:
+      id: lantern-maker
+      name: The lantern maker
+      rarity: legendary
+      effect: {type: bonus_chance, per_level: 0.02}
+      pages:
+        - level: 1
+          title: The workshop
+          status: DRAFT
+          text: "[DRAFT] Where she works, and whose workshop it is."
+          sources: []
 
 currency:
   id: cash

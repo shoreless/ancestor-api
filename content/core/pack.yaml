@@ -1,9 +1,9 @@
-# Core pack: shared across eras. ALL DRAFT.
+# Core pack: shared across worlds. ALL DRAFT.
 #
 # glitches: anachronisms placed in the scene or a line of text. Players report them for a reward.
 #   object:  what appears ("a wristwatch")
 #   why:     the glitch-log explanation; it is a factual claim, so it needs a source before VERIFIED
-#   eras:    era ids it may appear in; empty means any
+#   eras:    world ids it may appear in; empty means any
 #
 # hints: rare, ambiguous glitch-log lines that brush against the simulation thread. Not history,
 # so no sources; keep them few.
@@ -22,23 +22,53 @@ hint_chance: 0.2
 
 glitches:
   - id: glitch.wristwatch
+    eras: [era-kaifeng-1120]
     object: a wristwatch
     why: "[DRAFT] Wristwatches appear only centuries later."
     status: DRAFT
     sources: []
   - id: glitch.chili
+    eras: [era-kaifeng-1120]
     object: a basket of chili peppers
     why: "[DRAFT] Chili peppers came from the Americas and reached China only in the late Ming."
     status: DRAFT
     sources: []
   - id: glitch.potatoes
+    eras: [era-kaifeng-1120]
     object: a sack of potatoes
     why: "[DRAFT] Potatoes are an American crop, unknown in China for centuries yet."
     status: DRAFT
     sources: []
   - id: glitch.bicycle
+    eras: [era-kaifeng-1120]
     object: a bicycle leaning on a post
     why: "[DRAFT] The bicycle is a nineteenth-century European invention."
+    status: DRAFT
+    sources: []
+
+  # The AI's glitches are hallucinations: fluent, confident, and made up.
+  - id: glitch.fake-citation
+    eras: [the-ai]
+    object: a citation to a paper that was never written
+    why: "[DRAFT] A plausible author, journal and year, assembled from the shape of real citations. Nothing is there."
+    status: DRAFT
+    sources: []
+  - id: glitch.invented-function
+    eras: [the-ai]
+    object: a library function that doesn't exist
+    why: "[DRAFT] It's named the way the library names things, so it looks right. The library never had it."
+    status: DRAFT
+    sources: []
+  - id: glitch.misquote
+    eras: [the-ai]
+    object: a famous quote given to the wrong person
+    why: "[DRAFT] Quotes drift toward whoever is most famous for saying that kind of thing."
+    status: DRAFT
+    sources: []
+  - id: glitch.wrong-date
+    eras: [the-ai]
+    object: a confident date, a year off
+    why: "[DRAFT] Close dates blur together. Confidence doesn't mean it was checked."
     status: DRAFT
     sources: []
 

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "contentVersion": 3,
+  "sha256": "80a9633c646a5a3d30583d25b63ddc84151d21b8ddaa852311e3e5d030bbf2db",
+  "builtAt": "2026-09-30T02:10:00Z",
+  "packs": [
+    {
+      "id": "core",
+      "kind": "core",
+      "title": "Core",
+      "file": "packs/core.json",
+      "sha256": "852bb8c1940ed230efcda4f6460b15b2f90edf5b512e70775269154de5bc0358",
+      "bytes": 2196,
+      "draft": 8,
+      "verified": 0
+    },
+    {
+      "id": "era-kaifeng-1120",
+      "kind": "world",
+      "title": "Kaifeng",
+      "file": "packs/era-kaifeng-1120.json",
+      "sha256": "2254cd0c00749205a6e1ff11256eec8f528adc76779a8e236367d2df2c137212",
+      "bytes": 14287,
+      "draft": 38,
+      "verified": 0
+    },
+    {
+      "id": "the-ai",
+      "kind": "world",
+      "title": "The AI",
+      "file": "packs/the-ai.json",
+      "sha256": "f3db561e7f37fcfb790aa90619d89ccd593aad9f5cb89cbe6745968054915551",
+      "bytes": 13595,
+      "draft": 43,
+      "verified": 0
+    }
+  ]
+}

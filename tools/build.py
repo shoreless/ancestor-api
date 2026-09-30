@@ -23,8 +23,8 @@ import yaml
 
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "content"
-OUT = ROOT / "docs" / "v1"
-SCHEMA_VERSION = 1
+OUT = ROOT / "docs" / "v2"
+SCHEMA_VERSION = 2
 
 STATUSES = {"DRAFT", "VERIFIED"}
 MISSION_TYPES = {"own", "collect", "zoom", "level_subagent", "spot_glitch", "open_capsules", "automate"}
@@ -160,6 +160,10 @@ def build_start(c: Checker, pid: str, raw: dict, currency_id: str, gen_ids: set[
     for gid in raw.get("generators", {}):
         if gid not in gen_ids:
             c.err(pid, f"start lists unknown generator {gid!r}")
+    known = {currency_id, f"{currency_id}_growth_per_rank", "attention", "generators"}
+    for key in raw:
+        if key not in known:
+            c.err(pid, f"start has unknown key {key!r} (expected one of {sorted(known)})")
     growth = float(raw.get(f"{currency_id}_growth_per_rank", 1.0))
     if growth < 1:
         c.err(pid, f"start.{currency_id}_growth_per_rank must be at least 1")
@@ -266,7 +270,7 @@ def cited_sources(c: Checker, before: set[str]) -> dict:
     return {sid: fields(c.sources[sid]) for sid in sorted(ids)}
 
 
-def build_era(c: Checker, folder: Path, raw: dict) -> dict:
+def build_world(c: Checker, folder: Path, raw: dict) -> dict:
     pid = raw["id"]
     before = set(c.cited)
     people = load_yaml(folder / "people.yaml") or {}
@@ -279,6 +283,9 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
     gen_ids = {g["id"] for g in generators}
     subagent_list = [build_subagent(c, pid, s, gen_ids) for s in subs.get("subagents", [])]
     subagent_ids = {s["id"] for s in subagent_list}
+    event = build_event_info(c, pid, raw.get("event"), gen_ids)
+    if event:
+        subagent_ids.add(event["reward"]["id"])
 
     fragments = []
     frag_ids = set()
@@ -342,7 +349,7 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
     return {
         "schemaVersion": SCHEMA_VERSION,
         "id": pid,
-        "kind": "era",
+        "kind": "world",
         "title": raw["title"],
         "subtitle": raw.get("subtitle", ""),
         "status": raw.get("status", "DRAFT"),
@@ -368,64 +375,34 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
         "occupations": [{"id": o["id"], "name": o["name"], "age": o["age"]} for o in occupations],
         "fragments": fragments,
         "sources": cited_sources(c, before),
+        "event": event,
         "migrations": raw.get("migrations", []),
     }
 
 
-def build_event(c: Checker, raw: dict, era_ids: set[str]) -> dict:
-    pid = raw["id"]
-    before = set(c.cited)
-    if raw.get("era") not in era_ids:
-        c.err(pid, f"era {raw.get('era')!r} is not an era pack")
-    naming = c.naming_source(pid, raw.get("naming_source"))
-    generators = build_generators(c, pid, raw["generators"], set())
-    gen_ids = {g["id"] for g in generators}
+def build_event_info(c: Checker, pid: str, raw: dict | None, gen_ids: set[str]) -> dict | None:
+    """A world with an event block is an event: it opens at a main-world rank and runs for a few real days."""
+    if not raw:
+        return None
+    where = f"{pid} event"
+    days = int(raw.get("duration_days", 5))
+    if not 4 <= days <= 7:
+        c.err(where, "duration_days should be 4–7")
     reward = build_subagent(c, pid, raw["reward"]["subagent"], gen_ids)
-    helpers = [build_subagent(c, pid, s, gen_ids) for s in raw.get("subagents", [])]
-    lc = raw.get("level_cost", {})
-    if not 4 <= raw.get("duration_days", 5) <= 7:
-        c.err(pid, "duration_days should be 4–7 (spec §6.3)")
     if reward["rarity"] != "legendary":
-        c.err(pid, "the event reward must be a legendary subagent")
-    return {
-        "schemaVersion": SCHEMA_VERSION,
-        "id": pid,
-        "kind": "event",
-        "title": raw["title"],
-        "subtitle": raw.get("subtitle", ""),
-        "status": raw.get("status", "DRAFT"),
-        "era": raw["era"],
-        "durationDays": raw.get("duration_days", 5),
-        "startsAtRank": raw.get("starts_at_rank", 1),
-        "maxActiveMissions": raw.get("max_active_missions", 2),
-        "namingSource": naming,
-        "currency": {"id": raw["currency"]["id"], "name": raw["currency"]["name"]},
-        "attentionPerSecond": float(raw["attention_per_second"]),
-        "start": build_start(c, pid, raw.get("start", {}), raw["currency"]["id"], gen_ids),
-        "generators": generators,
-        "ranks": build_ranks(c, pid, raw["ranks"], gen_ids, {reward["id"]} | {h["id"] for h in helpers}, skip_slack=False),
-        "reward": reward,
-        "subagents": helpers,
-        "capsules": build_capsules(c, pid, raw.get("capsules", {})),
-        "levelCost": {
-            "clarityBase": big(lc.get("clarity_base", 20)),
-            "clarityGrowth": float(lc.get("clarity_growth", 1.8)),
-            "cardsBase": int(lc.get("cards_base", 1)),
-        },
-        "sources": cited_sources(c, before),
-        "migrations": raw.get("migrations", []),
-    }
+        c.err(where, "the event reward must be a legendary subagent")
+    return {"opensAtRank": int(raw.get("opens_at_rank", 1)), "durationDays": days, "reward": reward}
 
 
-def build_core(c: Checker, raw: dict, era_ids: set[str]) -> dict:
+def build_core(c: Checker, raw: dict, world_ids: set[str]) -> dict:
     pid = raw["id"]
     before = set(c.cited)
     glitches = []
     for g in raw.get("glitches", []):
         where = f"{pid} {g['id']}"
         for e in g.get("eras", []):
-            if e not in era_ids:
-                c.err(where, f"unknown era {e!r}")
+            if e not in world_ids:
+                c.err(where, f"unknown world {e!r}")
         glitches.append({
             "id": g["id"],
             "object": g["object"],
@@ -486,21 +463,22 @@ def build(report: bool) -> int:
             c.err(folder.name, f"pack id {raw.get('id')!r} must match its folder name")
         raws[folder.name] = (folder, raw)
 
-    era_ids = {pid for pid, (_, raw) in raws.items() if raw.get("kind") == "era"}
+    world_ids = {pid for pid, (_, raw) in raws.items() if raw.get("kind") == "world"}
     packs = []
     for pid, (folder, raw) in raws.items():
         kind = raw.get("kind")
-        if kind == "era":
-            packs.append(build_era(c, folder, raw))
-        elif kind == "event":
-            packs.append(build_event(c, raw, era_ids))
+        if kind == "world":
+            packs.append(build_world(c, folder, raw))
         elif kind == "core":
-            packs.append(build_core(c, raw, era_ids))
+            packs.append(build_core(c, raw, world_ids))
         else:
             c.err(pid, f"unknown kind {kind!r}")
 
+    mains = [p["id"] for p in packs if p["kind"] == "world" and not p["event"]]
+    if len(mains) != 1:
+        c.err("worlds", f"exactly one world must have no event block (the main world), found {mains}")
     all_subagents = [s["id"] for p in packs for s in (p.get("subagents") or [])] + \
-                    [p["reward"]["id"] for p in packs if p["kind"] == "event"]
+                    [p["event"]["reward"]["id"] for p in packs if p.get("event")]
     for sid in {s for s in all_subagents if all_subagents.count(s) > 1}:
         c.err("subagents", f"id {sid!r} is used by more than one pack")
 

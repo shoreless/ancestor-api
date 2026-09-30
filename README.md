@@ -10,20 +10,21 @@ content shows shape and tone only.
 | Path | What |
 | --- | --- |
 | `content/sources.yaml` | Every source a fragment may cite, keyed by id |
-| `content/core/pack.yaml` | Shared across eras: the glitch pool and simulation-hint log lines |
-| `content/era-kaifeng-1120/pack.yaml` | Era: currency, generator chain, ranks, missions, story fragments |
-| `content/era-kaifeng-1120/subagents.yaml` | Subagents and their life pages |
-| `content/era-kaifeng-1120/people.yaml` | Occupations and the fragments zoom-in assembles people from |
-| `content/event-lantern-night/pack.yaml` | Event: its own chain, non-resetting ranks, story, Legendary reward |
-| `tools/build.py` | Validates content and writes `docs/v1/` |
-| `docs/v1/manifest.json` | Schema version, content version, one entry per pack with its sha256 |
-| `docs/v1/packs/<id>.json` | One pack, consumed by the app |
+| `content/core/pack.yaml` | Shared across worlds: the glitch pool (anachronisms, hallucinations) and hint log lines |
+| `content/<world>/pack.yaml` | A world: currency, generator chain, ranks, missions. With an `event:` block it's an event |
+| `content/<world>/subagents.yaml` | Helpers and their pages |
+| `content/<world>/people.yaml` | Occupations and the fragments zoom-in assembles people from |
+| `content/the-ai/` | The main world: the AI talking to people everywhere (the one world with no `event:` block) |
+| `content/era-kaifeng-1120/` | Kaifeng, c. 1120, as an event |
+| `tools/build.py` | Validates content and writes `docs/v2/` |
+| `docs/v2/manifest.json` | Schema version, content version, one entry per pack with its sha256 |
+| `docs/v2/packs/<id>.json` | One pack, consumed by the app (`docs/v1/` is frozen for 0.3.0 and older) |
 | `docs/index.html` | A readable view of every pack for review: people, sources, DRAFT/VERIFIED |
 
 ## Build
 
 ```sh
-uv run tools/build.py            # validate + write docs/v1/
+uv run tools/build.py            # validate + write docs/v2/
 uv run tools/build.py --report   # also list every draft item and what it still needs
 ```
 
@@ -39,11 +40,11 @@ debug builds, where they show a DRAFT badge. A fragment cites sources as
 
 ## Serving
 
-GitHub Pages serves `docs/` from `main`. The app bundles a snapshot of `docs/v1/` in its APK (see
+GitHub Pages serves `docs/` from `main`. The app bundles a snapshot of `docs/v2/` in its APK (see
 `scripts/sync-content.sh` in ancestor-app) and plays fully offline. Fetching newer packs from
-`https://shoreless.github.io/ancestor-api/v1/` is additive and comes after the vertical slice.
+`https://shoreless.github.io/ancestor-api/v2/` is additive and comes after the vertical slice.
 
-`v1` is the schema version: a breaking change to the JSON shape goes to `v2/`, and `v1/` keeps serving
+`v2` is the schema version: a breaking change to the JSON shape goes to a new folder, and older ones keep serving
 older app installs.
 
 ## IDs

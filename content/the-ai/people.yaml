@@ -1,0 +1,48 @@
+# People: the ones the AI talks to. Composites, never real users or real conversations. ALL DRAFT.
+# A zoomed person = one name + an age in the occupation's range + one "today" line + one detail.
+
+occupations:
+  - {id: student, name: Student, age: [13, 30]}
+  - {id: programmer, name: Programmer, age: [18, 65]}
+  - {id: night-nurse, name: Nurse on nights, age: [22, 64]}
+  - {id: parent, name: Parent, age: [20, 60]}
+  - {id: shopkeeper, name: Shopkeeper, age: [20, 75]}
+  - {id: retiree, name: Retiree, age: [60, 92]}
+  - {id: commuter, name: Commuter, age: [18, 66]}
+
+fragments:
+  - {id: ai.name.amara, kind: name, text: Amara, status: DRAFT}
+  - {id: ai.name.tomasz, kind: name, text: Tomasz, status: DRAFT}
+  - {id: ai.name.priya, kind: name, text: Priya, status: DRAFT}
+  - {id: ai.name.kenji, kind: name, text: Kenji, status: DRAFT}
+  - {id: ai.name.lucia, kind: name, text: Lucía, status: DRAFT}
+  - {id: ai.name.samir, kind: name, text: Samir, status: DRAFT}
+  - {id: ai.name.grace, kind: name, text: Grace, status: DRAFT}
+  - {id: ai.name.oluwaseun, kind: name, text: Oluwaseun, status: DRAFT}
+
+  - {id: ai.today.student.essay, kind: today, applies_to: [student], status: DRAFT,
+     text: "Pasted in an essay and asked if it was good. Meant: is it good enough, and am I."}
+  - {id: ai.today.student.war, kind: today, applies_to: [student], status: DRAFT,
+     text: "Asked for the causes of the First World War, then, an hour later, whether it's normal to be this tired."}
+  - {id: ai.today.programmer.typo, kind: today, applies_to: [programmer], status: DRAFT,
+     text: "Has been chasing the same error since lunch. It was a typo in the end. Said thank you twice."}
+  - {id: ai.today.programmer.regex, kind: today, applies_to: [programmer], status: DRAFT,
+     text: "Wanted a regular expression, and then, reading it, wanted to understand it too."}
+  - {id: ai.today.nurse.plain-words, kind: today, applies_to: [night-nurse], status: DRAFT,
+     text: "On a break at three in the morning, asking how to explain a result to a frightened family in plain words."}
+  - {id: ai.today.parent.dragon, kind: today, applies_to: [parent], status: DRAFT,
+     text: "Wants a bedtime story about a dragon who's afraid of the dark, with the child's name in it."}
+  - {id: ai.today.parent.fractions, kind: today, applies_to: [parent], status: DRAFT,
+     text: "Trying to remember how to divide fractions before their daughter asks again."}
+  - {id: ai.today.shopkeeper.sign, kind: today, applies_to: [shopkeeper], status: DRAFT,
+     text: "Writing a sign about new opening hours. Wants it to sound friendly, not sorry."}
+  - {id: ai.today.retiree.camera, kind: today, applies_to: [retiree], status: DRAFT,
+     text: "Learning to video-call a grandson. Asked what the little camera with a line through it means."}
+  - {id: ai.today.commuter.late, kind: today, applies_to: [commuter], status: DRAFT,
+     text: "Typing with one thumb on a train: a message to a manager about being late, again."}
+
+  - {id: ai.worry.job, kind: worry, status: DRAFT, text: "Hasn't heard back about the job, and keeps rereading the email they sent."}
+  - {id: ai.worry.rent, kind: worry, status: DRAFT, text: "The rent went up this month, and they're working out what to cut."}
+  - {id: ai.food.eggs, kind: food, status: DRAFT, text: "Asked what to cook with rice, two eggs and half an onion."}
+  - {id: ai.pleasure.song, kind: pleasure, status: DRAFT, text: "Wanted the name of a song from a film they half remember."}
+  - {id: ai.weather.rain, kind: weather, status: DRAFT, text: "It's raining where they are. They mentioned it twice, as if it mattered to the answer. It did, a little."}

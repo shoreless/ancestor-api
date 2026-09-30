@@ -40,7 +40,7 @@ th{color:var(--dim);font-weight:400}
 <main>
 <p class="prompt">&gt; EXAMINE CONTENT</p>
 <p>Every pack the Ancestor app loads, laid out for review. Nothing ships as fact until it is marked
-<span class="badge VERIFIED">VERIFIED</span> with a source. Raw JSON: <a href="v1/manifest.json">v1/manifest.json</a>.</p>
+<span class="badge VERIFIED">VERIFIED</span> with a source. Raw JSON: <a href="v2/manifest.json">v2/manifest.json</a>.</p>
 <div class="filters" role="group" aria-label="Show">
 <button type="button" data-f="all" aria-pressed="true">ALL</button>
 <button type="button" data-f="DRAFT" aria-pressed="false">DRAFT ONLY</button>
@@ -85,10 +85,9 @@ function render() {
   for (const p of packs) {
     out.push(`<h2>${esc(p.title)}${p.subtitle ? ` <span class="dim">· ${esc(p.subtitle)}</span>` : ""}</h2><p class="dim">${esc(p.id)} · ${p.kind}</p>`);
     if (p.look) out.push(`<p class="story">${esc(p.look)}</p>`);
-    if (p.kind === "era" || p.kind === "event") {
+    if (p.kind === "world") {
+      out.push(`<p class="dim">${p.event ? `Event · opens at main rank ${p.event.opensAtRank} · ${p.event.durationDays} days` : "Main world"}</p>`);
       out.push(generators(p), ranks(p));
-    }
-    if (p.kind === "era") {
       out.push(`<h3>Subagents</h3>`, subagents(p.subagents, p));
       out.push(`<h3>People</h3>`);
       for (const o of p.occupations) {
@@ -97,7 +96,7 @@ function render() {
       }
       out.push(`<p><b>Any occupation</b></p>`, p.fragments.filter(f => !f.appliesTo.length).map(f => statused(f, p, `<span class="dim">${f.kind}</span> ${esc(f.text)}`)).join(""));
     }
-    if (p.kind === "event") out.push(`<h3>Reward</h3>`, subagents([p.reward], p));
+    if (p.event) out.push(`<h3>Reward</h3>`, subagents([p.event.reward], p));
     if (p.kind === "core") {
       out.push(`<h3>Glitches</h3>`, p.glitches.map(g => statused(g, p, `<b>${esc(g.object)}</b><p>${esc(g.why)}</p>`)).join(""));
       if (filter === "all") out.push(`<h3>Hints</h3>`, p.hints.map(h => `<p class="hint">${esc(h.text)}</p>`).join(""));
@@ -114,12 +113,12 @@ document.querySelectorAll(".filters button").forEach(b => b.addEventListener("cl
 
 (async () => {
   try {
-    const m = await (await fetch("v1/manifest.json", {cache: "no-cache"})).json();
+    const m = await (await fetch("v2/manifest.json", {cache: "no-cache"})).json();
     const draft = m.packs.reduce((n, p) => n + p.draft, 0), verified = m.packs.reduce((n, p) => n + p.verified, 0);
     document.getElementById("ver").textContent = `V${m.contentVersion} · ${verified} VERIFIED · ${draft} DRAFT`;
-    packs = await Promise.all(m.packs.map(async e => (await fetch("v1/" + e.file)).json()));
-    const order = {era: 0, event: 1, core: 2};
-    packs.sort((a, b) => order[a.kind] - order[b.kind]);
+    packs = await Promise.all(m.packs.map(async e => (await fetch("v2/" + e.file)).json()));
+    const order = p => p.kind === "core" ? 2 : p.event ? 1 : 0;
+    packs.sort((a, b) => order(a) - order(b));
     render();
   } catch (e) {
     document.getElementById("out").innerHTML = `<p>It is too dark to see. (${esc(e.message)})</p>`;
