@@ -97,6 +97,30 @@ class Checker:
         return {"source": raw["source"], "locator": str(raw.get("locator", ""))}
 
 
+def capsule_contents(c: "Checker", where: str, cfg: dict) -> dict:
+    for key in ("clarity", "attention"):
+        lo, hi = cfg[key]
+        if not 0 <= lo <= hi:
+            c.err(where, f"{key} must be [low, high] with 0 <= low <= high")
+    if not 0 <= cfg.get("card_chance", 1.0) <= 1:
+        c.err(where, "card_chance must be between 0 and 1")
+    return {"clarity": cfg["clarity"], "attention": cfg["attention"],
+            "cards": int(cfg.get("cards", 0)), "cardChance": float(cfg.get("card_chance", 1.0))}
+
+
+def build_capsules(c: "Checker", pid: str, caps: dict) -> dict | None:
+    if not caps:
+        return None
+    weights = caps.get("rarity_weights", {})
+    for rarity in weights:
+        if rarity not in RARITIES - {"legendary"}:
+            c.err(f"{pid} capsules", f"rarity_weights can't include {rarity!r}")
+    return {"rankScale": float(caps.get("rank_scale", 1.0)), "rarityWeights": weights,
+            "favourNeeded": float(caps.get("favour_needed", 1.0)),
+            "small": capsule_contents(c, f"{pid} capsules.small", caps["small"]),
+            "large": capsule_contents(c, f"{pid} capsules.large", caps["large"])}
+
+
 def build_generators(c: Checker, pid: str, raw: list, occupations: set[str]) -> list[dict]:
     gens = []
     ids = set()
@@ -288,27 +312,31 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
         if len(parts) not in (1, 3):
             c.err(f"{pid} look", f"{{{token}}} must be {{id}} or {{id:singular:plural}}")
 
-    caps = raw.get("capsules", {})
-    capsules = None
-    if caps:
-        def capsule(name: str) -> dict:
-            cfg = caps[name]
-            for key in ("clarity", "attention"):
-                lo, hi = cfg[key]
-                if not 0 <= lo <= hi:
-                    c.err(f"{pid} capsules.{name}", f"{key} must be [low, high] with 0 <= low <= high")
-            if not 0 <= cfg.get("card_chance", 1.0) <= 1:
-                c.err(f"{pid} capsules.{name}", "card_chance must be between 0 and 1")
-            return {"clarity": cfg["clarity"], "attention": cfg["attention"],
-                    "cards": int(cfg.get("cards", 0)), "cardChance": float(cfg.get("card_chance", 1.0))}
-        weights = caps.get("rarity_weights", {})
-        for rarity in weights:
-            if rarity not in RARITIES - {"legendary"}:
-                c.err(f"{pid} capsules", f"rarity_weights can't include {rarity!r}")
-        capsules = {"rankScale": float(caps.get("rank_scale", 1.0)), "rarityWeights": weights,
-                    "small": capsule("small"), "large": capsule("large")}
-    else:
+    capsules = build_capsules(c, pid, raw.get("capsules", {}))
+    if capsules is None:
         c.err(pid, "needs capsules")
+    chest = raw.get("timed_chest")
+    timed_chest = None
+    if chest:
+        for g in chest.get("first_guarantees", []):
+            if g not in subagent_ids:
+                c.err(f"{pid} timed_chest", f"first_guarantees unknown subagent {g!r}")
+        timed_chest = {
+            "everyMinutes": float(chest["every_minutes"]),
+            "holds": int(chest["holds"]),
+            "firstAfterSeconds": float(chest.get("first_after_seconds", 0)),
+            "firstGuarantees": chest.get("first_guarantees", []),
+            "contents": capsule_contents(c, f"{pid} timed_chest", chest["contents"]),
+        }
+    ms = raw.get("milestones")
+    milestones = None
+    if ms:
+        if ms["counts"] != sorted(ms["counts"]):
+            c.err(f"{pid} milestones", "counts must rise")
+        milestones = {"counts": ms["counts"], "clarity": big(ms["clarity"]), "growth": float(ms.get("growth", 1.0))}
+    au = raw.get("attention_upgrades")
+    attention_upgrades = {"baseCost": big(au["base_cost"]), "costGrowth": float(au["cost_growth"]),
+                          "perLevel": float(au["per_level"])} if au else None
 
     lc = subs.get("level_cost", {})
     return {
@@ -326,6 +354,9 @@ def build_era(c: Checker, folder: Path, raw: dict) -> dict:
         "generators": generators,
         "maxActiveMissions": raw.get("max_active_missions", 3),
         "capsules": capsules,
+        "timedChest": timed_chest,
+        "milestones": milestones,
+        "attentionUpgrades": attention_upgrades,
         "zoom": {"clarity": big(raw.get("zoom", {}).get("clarity", 0))},
         "ranks": build_ranks(c, pid, raw["ranks"], gen_ids, subagent_ids, skip_slack=True),
         "levelCost": {
@@ -350,6 +381,8 @@ def build_event(c: Checker, raw: dict, era_ids: set[str]) -> dict:
     generators = build_generators(c, pid, raw["generators"], set())
     gen_ids = {g["id"] for g in generators}
     reward = build_subagent(c, pid, raw["reward"]["subagent"], gen_ids)
+    helpers = [build_subagent(c, pid, s, gen_ids) for s in raw.get("subagents", [])]
+    lc = raw.get("level_cost", {})
     if not 4 <= raw.get("duration_days", 5) <= 7:
         c.err(pid, "duration_days should be 4–7 (spec §6.3)")
     if reward["rarity"] != "legendary":
@@ -370,8 +403,15 @@ def build_event(c: Checker, raw: dict, era_ids: set[str]) -> dict:
         "attentionPerSecond": float(raw["attention_per_second"]),
         "start": build_start(c, pid, raw.get("start", {}), raw["currency"]["id"], gen_ids),
         "generators": generators,
-        "ranks": build_ranks(c, pid, raw["ranks"], gen_ids, {reward["id"]}, skip_slack=False),
+        "ranks": build_ranks(c, pid, raw["ranks"], gen_ids, {reward["id"]} | {h["id"] for h in helpers}, skip_slack=False),
         "reward": reward,
+        "subagents": helpers,
+        "capsules": build_capsules(c, pid, raw.get("capsules", {})),
+        "levelCost": {
+            "clarityBase": big(lc.get("clarity_base", 20)),
+            "clarityGrowth": float(lc.get("clarity_growth", 1.8)),
+            "cardsBase": int(lc.get("cards_base", 1)),
+        },
         "sources": cited_sources(c, before),
         "migrations": raw.get("migrations", []),
     }
@@ -459,7 +499,7 @@ def build(report: bool) -> int:
         else:
             c.err(pid, f"unknown kind {kind!r}")
 
-    all_subagents = [s["id"] for p in packs for s in p.get("subagents", [])] + \
+    all_subagents = [s["id"] for p in packs for s in (p.get("subagents") or [])] + \
                     [p["reward"]["id"] for p in packs if p["kind"] == "event"]
     for sid in {s for s in all_subagents if all_subagents.count(s) > 1}:
         c.err("subagents", f"id {sid!r} is used by more than one pack")

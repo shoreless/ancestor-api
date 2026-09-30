@@ -91,6 +91,43 @@ ranks:
       - {id: ln5-own-apprentices, type: own, generator: workshop-apprentices, amount: 25}
       - {id: ln5-collect, type: collect, amount: 5.0e7}
 
+# Event chests: each finished task leaves one, and each rank-up a larger one. They hold the event's own helpers.
+capsules:
+  rank_scale: 1.0
+  rarity_weights: {common: 100}
+  favour_needed: 6
+  small: {clarity: [5, 10], attention: [3, 6], cards: 2, card_chance: 1.0}
+  large: {clarity: [20, 30], attention: [10, 15], cards: 2, card_chance: 1.0}
+
+level_cost:
+  clarity_base: 20
+  clarity_growth: 1.8
+  cards_base: 1
+
+# Event-only helpers that run the event's tiers. They stay found if the event is relived.
+subagents:
+  - id: frame-binder
+    name: The frame binder
+    rarity: common
+    effect: {type: automate, generator: lantern-frames, speed_per_level: 0.15}
+    pages:
+      - {level: 1, title: Bamboo, status: DRAFT, text: "[DRAFT] Where the bamboo comes from, and how it's split.", sources: []}
+      - {level: 2, title: Knots, status: DRAFT, text: "[DRAFT] How a frame is tied so it holds its shape.", sources: []}
+  - id: paste-mixer
+    name: The paste mixer
+    rarity: common
+    effect: {type: automate, generator: paper-and-paste, speed_per_level: 0.15}
+    pages:
+      - {level: 1, title: The pot, status: DRAFT, text: "[DRAFT] What the paste is made from.", sources: []}
+      - {level: 2, title: Paper, status: DRAFT, text: "[DRAFT] Which paper takes the light best.", sources: []}
+  - id: workshop-foreman
+    name: The workshop foreman
+    rarity: common
+    effect: {type: automate, generator: workshop-apprentices, speed_per_level: 0.15}
+    pages:
+      - {level: 1, title: Apprentices, status: DRAFT, text: "[DRAFT] Who the apprentices are, and how they came here.", sources: []}
+      - {level: 2, title: Deadlines, status: DRAFT, text: "[DRAFT] How many lanterns must be ready by the first night.", sources: []}
+
 reward:
   subagent:
     id: lantern-maker
