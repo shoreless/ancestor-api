@@ -4,7 +4,8 @@
 # A zoomed person = a place + a name common there + an age + one "today" line (what they're asking, with The AI's
 # first line back) + one detail. Their local time comes from the place's UTC offset at the moment of the zoom.
 #
-#   places:      real cities; utc_offset_minutes is standard time (daylight saving is ignored for now)
+#   places:      real cities; utc_offset_minutes is standard time (daylight saving is ignored for now);
+#                lat/lon place their light on the world map
 #   name:        needs `place`: a first name common there. [VERIFY] against national name statistics
 #   today:       applies_to occupations; `reply` is The AI's first line back, plain and kind
 #   details:     worry | food | pleasure | weather, for anyone
@@ -13,23 +14,23 @@
 # spectacle; nothing that reads as advice to a real person in danger. The AI can be warm, never claims feelings.
 
 places:
-  - {id: accra, city: Accra, country: Ghana, utc_offset_minutes: 0}
-  - {id: lagos, city: Lagos, country: Nigeria, utc_offset_minutes: 60}
-  - {id: nairobi, city: Nairobi, country: Kenya, utc_offset_minutes: 180}
-  - {id: cairo, city: Cairo, country: Egypt, utc_offset_minutes: 120}
-  - {id: istanbul, city: Istanbul, country: Türkiye, utc_offset_minutes: 180}
-  - {id: warsaw, city: Warsaw, country: Poland, utc_offset_minutes: 60}
-  - {id: london, city: London, country: the UK, utc_offset_minutes: 0}
-  - {id: mumbai, city: Mumbai, country: India, utc_offset_minutes: 330}
-  - {id: jakarta, city: Jakarta, country: Indonesia, utc_offset_minutes: 420}
-  - {id: manila, city: Manila, country: the Philippines, utc_offset_minutes: 480}
-  - {id: chengdu, city: Chengdu, country: China, utc_offset_minutes: 480}
-  - {id: seoul, city: Seoul, country: South Korea, utc_offset_minutes: 540}
-  - {id: osaka, city: Osaka, country: Japan, utc_offset_minutes: 540}
-  - {id: auckland, city: Auckland, country: New Zealand, utc_offset_minutes: 720}
-  - {id: sao-paulo, city: São Paulo, country: Brazil, utc_offset_minutes: -180}
-  - {id: mexico-city, city: Mexico City, country: Mexico, utc_offset_minutes: -360}
-  - {id: chicago, city: Chicago, country: the US, utc_offset_minutes: -360}
+  - {id: accra, city: Accra, country: Ghana, utc_offset_minutes: 0, lat: 5.6, lon: -0.2}
+  - {id: lagos, city: Lagos, country: Nigeria, utc_offset_minutes: 60, lat: 6.5, lon: 3.4}
+  - {id: nairobi, city: Nairobi, country: Kenya, utc_offset_minutes: 180, lat: -1.3, lon: 36.8}
+  - {id: cairo, city: Cairo, country: Egypt, utc_offset_minutes: 120, lat: 30.0, lon: 31.2}
+  - {id: istanbul, city: Istanbul, country: Türkiye, utc_offset_minutes: 180, lat: 41.0, lon: 29.0}
+  - {id: warsaw, city: Warsaw, country: Poland, utc_offset_minutes: 60, lat: 52.2, lon: 21.0}
+  - {id: london, city: London, country: the UK, utc_offset_minutes: 0, lat: 51.5, lon: -0.1}
+  - {id: mumbai, city: Mumbai, country: India, utc_offset_minutes: 330, lat: 19.1, lon: 72.9}
+  - {id: jakarta, city: Jakarta, country: Indonesia, utc_offset_minutes: 420, lat: -6.2, lon: 106.8}
+  - {id: manila, city: Manila, country: the Philippines, utc_offset_minutes: 480, lat: 14.6, lon: 121.0}
+  - {id: chengdu, city: Chengdu, country: China, utc_offset_minutes: 480, lat: 30.7, lon: 104.1}
+  - {id: seoul, city: Seoul, country: South Korea, utc_offset_minutes: 540, lat: 37.6, lon: 127.0}
+  - {id: osaka, city: Osaka, country: Japan, utc_offset_minutes: 540, lat: 34.7, lon: 135.5}
+  - {id: auckland, city: Auckland, country: New Zealand, utc_offset_minutes: 720, lat: -36.8, lon: 174.8}
+  - {id: sao-paulo, city: São Paulo, country: Brazil, utc_offset_minutes: -180, lat: -23.6, lon: -46.6}
+  - {id: mexico-city, city: Mexico City, country: Mexico, utc_offset_minutes: -360, lat: 19.4, lon: -99.1}
+  - {id: chicago, city: Chicago, country: the US, utc_offset_minutes: -360, lat: 41.9, lon: -87.6}
 
 # Conversations: one person and what they're asking. People online: one person and where they are.
 occupations:

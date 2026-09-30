@@ -1,8 +1,8 @@
 {
   "schemaVersion": 2,
-  "contentVersion": 6,
-  "sha256": "cbd31c44cb55dc11a0e9d6a9ae69a2798749c7f4e53ea3586ce1cfafd9207416",
-  "builtAt": "2026-09-30T02:48:29Z",
+  "contentVersion": 7,
+  "sha256": "a419ed0cf1b8863eb69c696ec2bb48412ef81146255f41b39037ad76af32afa8",
+  "builtAt": "2026-09-30T02:57:27Z",
   "packs": [
     {
       "id": "core",
@@ -29,8 +29,8 @@
       "kind": "world",
       "title": "The AI",
       "file": "packs/the-ai.json",
-      "sha256": "74efbbae960564918c942f8223c81cd9bd72a00dc91d2b0a320685784a683f56",
-      "bytes": 36165,
+      "sha256": "4a8fabd1d20d3110ea027c95507fe9c410517bccf1d010d132ba017442bd21e2",
+      "bytes": 36547,
       "draft": 158,
       "verified": 0
     }

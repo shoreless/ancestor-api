@@ -292,7 +292,11 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
         off = int(pl.get("utc_offset_minutes", 0))
         if not -12 * 60 <= off <= 14 * 60:
             c.err(f"{pid} place {pl.get('id')}", "utc_offset_minutes must be within -720..840")
-        places.append({"id": pl["id"], "city": pl["city"], "country": pl["country"], "utcOffsetMinutes": off})
+        lat, lon = float(pl.get("lat", 0)), float(pl.get("lon", 0))
+        if not (-90 <= lat <= 90 and -180 <= lon <= 180):
+            c.err(f"{pid} place {pl.get('id')}", "lat/lon out of range")
+        places.append({"id": pl["id"], "city": pl["city"], "country": pl["country"], "utcOffsetMinutes": off,
+                       "lat": lat, "lon": lon})
     place_ids = {pl["id"] for pl in places}
 
     fragments = []
