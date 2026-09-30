@@ -148,6 +148,17 @@ follow_ups: {first_after_minutes: 60, every_minutes: [120, 360], clarity: 15}
 # The world's one active ability (spec v2 §14.6): a burst with a long recharge, never needed for a task.
 ability: {name: Market day, blurb: "The whole city turns out: everything runs twice as fast for 10 minutes.", minutes: 10, recharge_minutes: 240, factor: 2}
 
+# Story beats (spec v2 §14.7): a line of story the first time a tier reaches a count; once ever, per world.
+beats:
+  - {id: hawkers-100, generator: street-hawkers, count: 100, status: DRAFT, sources: [{source: dmhl, locator: "[VERIFY] street cries"}],
+     text: "A hundred hawkers calling at once. The memoir remembers the city by its sounds as much as its sights."}
+  - {id: stalls-50, generator: market-stalls, count: 50, status: DRAFT, sources: [{source: dmhl, locator: "[VERIFY] the food lists"}],
+     text: "Fifty stalls. The memoir lists food by the dozen: soups, pastries, meats, fruit in season."}
+  - {id: wharves-10, generator: canal-wharves, count: 10, status: DRAFT, sources: [{source: dmhl, locator: "[VERIFY] the canals and grain barges"}],
+     text: "Ten wharves. Grain barges queue on the Bian, and the porters work until the light goes."}
+  - {id: night-5, generator: night-markets, count: 5, status: DRAFT, sources: [{source: dmhl, locator: "[VERIFY] night markets closing at the third watch"}],
+     text: "Five night markets. The memoir says trading ran until the third watch, and began again at the fifth."}
+
 zoom:
   clarity: 2
 

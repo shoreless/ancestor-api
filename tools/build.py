@@ -419,6 +419,7 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
         "attentionUpgrades": attention_upgrades,
         "zoom": {"clarity": big(raw.get("zoom", {}).get("clarity", 0))},
         "followUps": follow_ups(c, pid, raw.get("follow_ups")),
+        "beats": build_beats(c, pid, raw.get("beats", []), gen_ids),
         "ability": ({"name": raw["ability"]["name"], "blurb": " ".join(str(raw["ability"]["blurb"]).split()),
                      "minutes": float(raw["ability"]["minutes"]), "rechargeMinutes": float(raw["ability"]["recharge_minutes"]),
                      "factor": float(raw["ability"].get("factor", 2))} if raw.get("ability") else None),
@@ -436,6 +437,21 @@ def build_world(c: Checker, folder: Path, raw: dict) -> dict:
         "event": event,
         "migrations": raw.get("migrations", []),
     }
+
+
+def build_beats(c: Checker, pid: str, raw: list, gen_ids: set[str]) -> list[dict]:
+    """Story beats (spec v2 §14.7): a line of story the first time a tier reaches a count, per world, once ever."""
+    beats, ids = [], set()
+    for b in raw:
+        where = f"{pid} beat {b.get('id')}"
+        if b["id"] in ids:
+            c.err(where, "duplicate id")
+        ids.add(b["id"])
+        if b.get("generator") not in gen_ids:
+            c.err(where, f"unknown generator {b.get('generator')!r}")
+        beats.append({"id": b["id"], "generator": b["generator"], "count": big(b["count"]),
+                      "text": " ".join(str(b["text"]).split()), "status": c.status(where, b), "sources": c.sourced(where, b)})
+    return beats
 
 
 def follow_ups(c: Checker, pid: str, raw: dict | None) -> dict | None:

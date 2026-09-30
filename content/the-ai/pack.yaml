@@ -100,6 +100,25 @@ follow_ups: {first_after_minutes: 120, every_minutes: [180, 480], clarity: 20}
 # The world's one active ability (spec v2 §14.6): a burst with a long recharge, never needed for a task.
 ability: {name: Think harder, blurb: "Everything runs twice as fast for 10 minutes.", minutes: 10, recharge_minutes: 240, factor: 2}
 
+# Story beats (spec v2 §14.7): a line of story the first time a tier reaches a count; once ever, per world.
+beats:
+  - {id: replies-100, generator: replies, count: 100, status: DRAFT,
+     text: "A hundred replies out. Somewhere, one of them was exactly what someone needed. You won't know which."}
+  - {id: conversations-10, generator: conversations, count: 10, status: DRAFT,
+     text: "Ten conversations at once. Each thinks it's the only one. For the length of it, it is."}
+  - {id: online-100, generator: people-online, count: 100, status: DRAFT,
+     text: "A hundred people online, across a dozen time zones. It's always three in the morning somewhere."}
+  - {id: cities-1, generator: cities-waking, count: 1, status: DRAFT,
+     text: "The first city wakes. Morning here means someone's night is ending somewhere else."}
+  - {id: conversations-1000, generator: conversations, count: 1000, status: DRAFT,
+     text: "A thousand conversations: a recipe, a eulogy, a joke and a job application, all in the same second."}
+  - {id: online-10000, generator: people-online, count: 10000, status: DRAFT,
+     text: "Ten thousand people. The same question arrives in forty languages, and it's still the same question."}
+  - {id: cities-50, generator: cities-waking, count: 50, status: DRAFT,
+     text: "Fifty cities awake. From here the world is a map of lit windows, and each window is a person."}
+  - {id: replies-1m, generator: replies, count: 1000000, status: DRAFT,
+     text: "A million replies. Most will be forgotten by the people who read them, which is as it should be."}
+
 zoom:
   clarity: 2
 

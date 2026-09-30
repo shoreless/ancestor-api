@@ -118,6 +118,17 @@ follow_ups: {first_after_minutes: 60, every_minutes: [120, 360], clarity: 15}
 # The world's one active ability (spec v2 §14.6): a burst with a long recharge, never needed for a task.
 ability: {name: "Tell me, O Muse", blurb: "The hall hangs on every word: everything runs twice as fast for 10 minutes. (The poem's first words, in Butler.)", minutes: 10, recharge_minutes: 240, factor: 2}
 
+# Story beats (spec v2 §14.7): a line of story the first time a tier reaches a count; once ever, per world.
+beats:
+  - {id: listeners-100, generator: listeners, count: 100, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "A hundred listeners. Alcinous says what his people love: feasts, the lyre, dancing, fresh clothes, warm baths and bed."}
+  - {id: songs-50, generator: songs, count: 50, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 8"}],
+     text: "Fifty songs. When Demodocus sings of Troy, the stranger weeps and hides it, and only the king notices."}
+  - {id: feasts-10, generator: feasts, count: 10, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Books 1, 3 and 7"}],
+     text: "Ten feasts. A guest is fed before anyone asks his name: the poem keeps that rule, and punishes those who break it."}
+  - {id: hall-1, generator: the-hall, count: 1, status: DRAFT, sources: [{source: butler-odyssey, locator: "[VERIFY] Book 7"}],
+     text: "The hall of Alcinous: bronze walls, silver doorposts, and dogs of gold and silver made by Hephaestus to guard it."}
+
 zoom:
   clarity: 2
 
