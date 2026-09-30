@@ -157,6 +157,8 @@ capsules:
 ranks:
   - rank: 1
     title: Fog and a market
+    look: >-
+      [DRAFT] Fog, and then a street. {street-hawkers:hawker calls:hawkers call} out of the grey, and {market-stalls:stall takes:stalls take} shape one awning at a time.
     required: 3
     guarantees: [sesame-cake-seller]
     story: >-
@@ -174,6 +176,8 @@ ranks:
 
   - rank: 2
     title: Before dawn
+    look: >-
+      [DRAFT] Before light. An iron plate rings at the corner for the hour. {street-hawkers:hawker is:hawkers are} already out, and {market-stalls:stall has:stalls have} lamps lit.
     required: 4
     story: >-
       [DRAFT] Before dawn, a voice calls the price of cakes. Someone beats an iron plate at a street corner to tell the hour and the weather.
@@ -191,6 +195,8 @@ ranks:
 
   - rank: 3
     title: The canal
+    look: >-
+      [DRAFT] The Bian canal, brown and slow. {canal-wharves:wharf unloads:wharves unload} grain, {market-stalls:stall lines:stalls line} the bank, and a barge noses under the Rainbow Bridge.
     required: 4
     guarantees: [tea-house-server]
     story: >-
@@ -209,6 +215,8 @@ ranks:
 
   - rank: 4
     title: Lanterns
+    look: >-
+      [DRAFT] Lanterns come on down the street. {night-markets:night market is:night markets are} opening, and {street-hawkers:hawker works:hawkers work} the crowd.
     required: 5
     # A spare card for the rare helper, so rank 5's "level it to 3" never waits hours on rare draws.
     guarantees: [tea-house-server]
@@ -232,6 +240,8 @@ ranks:
 
   - rank: 5
     title: Lantern Night
+    look: >-
+      [DRAFT] The fifteenth night, and the city is lit end to end. {night-markets:night market roars:night markets roar}, and a rabbit lantern bobs above the crowd.
     required: 6
     story: >-
       [DRAFT] The fifteenth night of the first month, and the city is lit end to end. The lantern maker sells her last rabbit lantern. Her brother is in the crowd after all, carrying one she made. She does not call out.

@@ -123,6 +123,8 @@ capsules:
 ranks:
   - rank: 1
     title: Ithaca without him
+    look: >-
+      [DRAFT] In the hall of Alcinous, {listeners:listener waits:listeners wait}. The story will begin in Ithaca, where suitors eat his cattle in his own hall and his son watches.
     required: 3
     guarantees: [eumaeus]
     story: >-
@@ -142,6 +144,8 @@ ranks:
 
   - rank: 2
     title: Calypso's island
+    look: >-
+      [DRAFT] {listeners:listener leans:listeners lean} in as the tale reaches Calypso's island: seven years on a shore, looking at the sea.
     required: 4
     story: >-
       [DRAFT] Seven years on an island with a goddess who offers to make him immortal. He sits on the shore each day
@@ -161,6 +165,8 @@ ranks:
 
   - rank: 3
     title: The telling
+    look: >-
+      [DRAFT] Golden youths hold torches over the feast. {listeners:listener leans:listeners lean} in, {songs:song has:songs have} been sung, and the stranger has said his name.
     required: 4
     guarantees: [medon]
     story: >-
@@ -181,6 +187,8 @@ ranks:
 
   - rank: 4
     title: Home in disguise
+    look: >-
+      [DRAFT] {songs:song:songs} sung, and the Phaeacian ship has gone. On Ithaca an old beggar sits by the swineherd's fire, and a dog lifts its head.
     required: 5
     # A spare card for Medon, so chapter 5's "level Medon to 3" never waits hours on rare draws.
     guarantees: [medon]
@@ -206,6 +214,8 @@ ranks:
 
   - rank: 5
     title: The bow and the bed
+    look: >-
+      [DRAFT] {feasts:feast:feasts} laid in the hall. The old bow comes down from the storeroom, and twelve axes stand in a line.
     required: 6
     story: >-
       [DRAFT] Only he can string the old bow. And when it is over, Penelope tests him not with the bow but with their

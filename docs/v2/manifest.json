@@ -1,16 +1,16 @@
 {
   "schemaVersion": 2,
-  "contentVersion": 15,
-  "sha256": "1f202fdd6f40e5833a39b3a89270e26cf305f83a73bb1cf7a15d5f9bfc5d992c",
-  "builtAt": "2026-09-30T03:49:33Z",
+  "contentVersion": 16,
+  "sha256": "5c37112bda85f43aa0a88d0951e387310e180f40a7322ef27411aa6ed2b2cdbd",
+  "builtAt": "2026-09-30T09:04:18Z",
   "packs": [
     {
       "id": "book-odyssey",
       "kind": "world",
       "title": "The Odyssey",
       "file": "packs/book-odyssey.json",
-      "sha256": "8aa98145c896bbbb05f15f97e6f145a3210f60c7878e3ef2df19e7bd9f15fc92",
-      "bytes": 26607,
+      "sha256": "060e94911c1ca0c01f4ba13621a9f1a7ad8c604d3be553d91810747650125b7e",
+      "bytes": 27403,
       "draft": 80,
       "verified": 0
     },
@@ -29,8 +29,8 @@
       "kind": "world",
       "title": "Kaifeng",
       "file": "packs/era-kaifeng-1120.json",
-      "sha256": "4f14ed7e6afa1469aeee2fed2ace6536f47dfd32b23430c2fdb50ed8579f5ed1",
-      "bytes": 16747,
+      "sha256": "6f7d9790693f8350de6a30784385499694907ed9c25e6d1e2d5b194b569bd3fd",
+      "bytes": 17635,
       "draft": 43,
       "verified": 0
     },
@@ -39,8 +39,8 @@
       "kind": "world",
       "title": "The AI",
       "file": "packs/the-ai.json",
-      "sha256": "705baefff56f3a049ee13dcae100fa1d32065d1d8239a53ca074ad346544ec46",
-      "bytes": 36560,
+      "sha256": "a8e30f549a1012f209bde0da72e4052d6a9ff1a4501d2e8b5abfe915087bfd79",
+      "bytes": 37521,
       "draft": 158,
       "verified": 0
     }

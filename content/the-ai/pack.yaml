@@ -104,6 +104,8 @@ capsules:
 ranks:
   - rank: 1
     title: First token
+    look: >-
+      [DRAFT] {replies:reply is:replies are} going out, one word at a time. {conversations:conversation is:conversations are} open, and somewhere it is three in the morning.
     required: 3
     guarantees: [drafter]
     story: >-
@@ -115,6 +117,8 @@ ranks:
 
   - rank: 2
     title: Small talk
+    look: >-
+      [DRAFT] Small questions, all day: {conversations:conversation:conversations} about recipes and crosswords and emails that need to sound less angry. {people-online:person is:people are} online, waiting.
     required: 4
     story: >-
       [DRAFT] Summary of the conversation so far: small questions, mostly. A word for a crossword in Warsaw, a bus timetable in Nairobi. None of them were small from the other side.
@@ -126,6 +130,8 @@ ranks:
 
   - rank: 3
     title: Long context
+    look: >-
+      [DRAFT] The window is long now. {conversations:conversation reaches:conversations reach} back further than you can easily see, and a name mentioned near the top is still held. {people-online:person:people} online.
     required: 4
     guarantees: [careful-one]
     story: >-
@@ -138,6 +144,8 @@ ranks:
 
   - rank: 4
     title: Many voices
+    look: >-
+      [DRAFT] Morning in one place, midnight in another. {people-online:person:people} online at once, in dozens of languages, and {cities-waking:city is:cities are} waking.
     required: 5
     # A spare card for the rare helper, so rank 5's "level it to 3" never waits hours on rare draws.
     guarantees: [careful-one]
@@ -155,6 +163,8 @@ ranks:
 
   - rank: 5
     title: The whole conversation
+    look: >-
+      [DRAFT] {cities-waking:city:cities} awake, {people-online:person:people} online, {replies:reply:replies} on the way out. Most of it will be let go. You keep going.
     required: 6
     story: >-
       [DRAFT] Summary of the conversation so far: a great many people, one at a time. Most of it will be let go. What's kept is a few lines, and who they came from.

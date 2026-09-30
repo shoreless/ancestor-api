@@ -219,6 +219,11 @@ def build_ranks(c: Checker, pid: str, raw: list, gen_ids: set[str], subagent_ids
         for s in r.get("guarantees", []):
             if s not in subagent_ids:
                 c.err(where, f"guarantees unknown subagent {s!r}")
+        look = " ".join(str(r.get("look", "")).split())
+        for token in re.findall(r"\{([^}]*)\}", look):
+            parts = token.split(":")
+            if parts[0] not in gen_ids or len(parts) not in (1, 3):
+                c.err(f"{where} look", f"bad token {{{token}}}")
         teaches = None
         if r.get("teaches"):
             tw = f"{where} teaches"
@@ -237,6 +242,7 @@ def build_ranks(c: Checker, pid: str, raw: list, gen_ids: set[str], subagent_ids
             "story": str(r["story"]).strip(),
             "missions": missions,
             **({"teaches": teaches} if teaches else {}),
+            **({"look": look} if look else {}),
         })
     return ranks
 
